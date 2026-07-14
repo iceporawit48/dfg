@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BON ODORI 2026 - Complete System</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/tabler-icons.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&family=Bebas+Neue&display=swap');
+* { font-family: 'Noto Sans Thai', sans-serif; }
+:root { --neon-pink: #E8457A; --neon-purple: #7B5CF0; --neon-cyan: #06B6D4; --neon-green: #1CC8A0; --neon-yellow: #F5C842; --dark-bg: #0a0e27; --card-bg: #1a1f3a; }
+html, body { margin: 0; padding: 0; height: 100%; overflow-x: hidden; background: #0a0e27; color: #e0e0e0; }
+body { background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1629 100%); background-attachment: fixed; }
+.neon-glow { box-shadow: 0 0 20px rgba(232, 69, 122, 0.3), 0 0 40px rgba(123, 92, 240, 0.2); border: 1px solid rgba(232, 69, 122, 0.2); }
+.glass { background: rgba(26, 31, 58, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+.header-gradient { background: linear-gradient(135deg, rgba(232, 69, 122, 0.15) 0%, rgba(123, 92, 240, 0.15) 100%); border-bottom: 2px solid rgba(232, 69, 122, 0.3); }
+.logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; letter-spacing: 3px; background: linear-gradient(135deg, #E8457A, #7B5CF0, #06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.logo-sub { font-size: 0.75rem; letter-spacing: 2px; color: #06B6D4; text-transform: uppercase; font-weight: 600; }
+.nav-container { background: rgba(10, 14, 39, 0.5); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+.nav-btn { padding: 12px 20px; font-size: 0.9rem; font-weight: 600; color: #b0b0b0; border: none; background: transparent; cursor: pointer; transition: 0.3s; white-space: nowrap; }
+.nav-btn.active { color: #E8457A; border-bottom: 2px solid #E8457A; }
+.search-input { background: rgba(26, 31, 58, 0.6); border: 1px solid rgba(232, 69, 122, 0.2); color: #e0e0e0; outline: none; }
+.btn-primary { background: linear-gradient(135deg, #E8457A, #7B5CF0); color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 700; cursor: pointer; }
+.btn-klab { background: linear-gradient(135deg, #F5C842, #E8457A); color: white; padding: 15px 30px; border-radius: 30px; font-weight: 900; cursor: pointer; box-shadow: 0 0 20px rgba(245, 200, 66, 0.4); }
+.member-chip { background: rgba(26, 31, 58, 0.5); border: 1px solid rgba(123, 92, 240, 0.3); color: #b0b0b0; padding: 10px 12px; border-radius: 12px; cursor: pointer; text-align: center; }
+.member-chip.selected { background: linear-gradient(135deg, #7B5CF0, #06B6D4); color: white; }
+.result-card { background: rgba(26, 31, 58, 0.6); border: 1px solid rgba(123, 92, 240, 0.2); border-radius: 16px; padding: 20px; margin-bottom: 16px; }
+.result-name { font-size: 1.3rem; font-weight: 700; color: #06B6D4; margin-bottom: 12px; }
+.slot-item { background: rgba(26, 31, 58, 0.6); border: 1px solid rgba(6, 182, 212, 0.2); border-radius: 12px; padding: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.slot-item.zero-round { opacity: 0.4; background: rgba(239, 68, 68, 0.05); }
+.round-btn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid rgba(123, 92, 240, 0.4); background: rgba(123, 92, 240, 0.1); color: #c4b5fd; cursor: pointer; font-weight: bold; }
+.btn-set-zero { width: 34px; height: 34px; border-radius: 8px; background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.price-bar { background: linear-gradient(135deg, rgba(28, 200, 160, 0.2), rgba(6, 182, 212, 0.2)); border: 2px solid rgba(28, 200, 160, 0.4); border-radius: 12px; padding: 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+.price-bar-value { font-size: 1.8rem; font-weight: 900; color: #1CC8A0; }
+.selected-bar { background: rgba(26, 31, 58, 0.8); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.selected-chip { background: linear-gradient(135deg, #7B5CF0, #06B6D4); color: white; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #E8457A; border-radius: 10px; }
+
+/* KLAB MODAL */
+#klabModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px); }
+.klab-content { background: #1a1f3a; color: #fff; width: 100%; max-width: 500px; border-radius: 24px; padding: 40px; border: 2px solid #F5C842; box-shadow: 0 0 50px rgba(245, 200, 66, 0.3); text-align: center; position: relative; }
+.klab-title { font-size: 2.5rem; font-weight: 900; color: #F5C842; margin-bottom: 10px; }
+.klab-total-value { font-size: 2.5rem; font-weight: 900; color: #E8457A; }
+
+/* SUMMARY PAGE */
+.summary-banner { background: linear-gradient(135deg, rgba(232,69,122,0.15), rgba(123,92,240,0.15)); border: 1px solid rgba(232,69,122,0.3); border-radius: 20px; padding: 32px; text-align: center; margin-bottom: 24px; }
+.summary-number { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; background: linear-gradient(135deg,#E8457A,#7B5CF0,#06B6D4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; }
+.stat-row { background: rgba(26,31,58,0.6); border: 1px solid rgba(123,92,240,0.2); border-radius: 14px; margin-bottom: 8px; overflow: hidden; transition: border-color 0.2s; cursor: pointer; }
+.stat-row:hover { border-color: rgba(6,182,212,0.5); }
+.stat-row.open { border-color: rgba(6,182,212,0.6); }
+.stat-row-header { display: flex; align-items: center; gap: 12px; padding: 14px 16px; user-select: none; }
+.stat-row-detail { display: none; padding: 0 16px 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+.stat-row.open .stat-row-detail { display: block; }
+.stat-row.open .stat-chevron { transform: rotate(180deg); }
+.stat-chevron { transition: transform 0.2s; color: #7B5CF0; flex-shrink: 0; }
+.rank-badge { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 900; flex-shrink: 0; }
+.rank-1 { background: linear-gradient(135deg,#F5C842,#E8457A); color: #000; }
+.rank-2 { background: rgba(200,200,220,0.3); color: #ccc; }
+.rank-3 { background: linear-gradient(135deg,#cd7f32,#a0522d); color: #fff; }
+.rank-other { background: rgba(100,100,130,0.25); color: #888; }
+.detail-activity-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.72rem; }
+.detail-activity-row:last-child { border-bottom: none; }
+.detail-day-label { font-size: 0.65rem; font-weight: 800; color: #F5C842; text-transform: uppercase; letter-spacing: 1px; margin: 10px 0 4px; }
+.bar-wrap { flex: 1; background: rgba(255,255,255,0.07); border-radius: 999px; height: 6px; margin: 0 10px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg,#E8457A,#7B5CF0); }
+
+/* BOD SYSTEM STYLES */
+.conflict-item { background: rgba(232, 69, 122, 0.1); border: 1px solid rgba(232, 69, 122, 0.2); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.animate-spin { display: inline-block; animation: spin 0.8s linear infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+.animate-pulse { animation: pulse 1.5s ease-in-out infinite; }
+#klabModal { overflow-y: auto; }
+.klab-content { max-height: 90vh; overflow-y: auto; }
+</style>
+</head>
+<body>
+
+<div class="header-gradient">
+  <div class="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
+    <div><div class="logo-text">BON ODORI 2026</div><div class="logo-sub">BNK48 × CGM48 × FASHION ISLAND</div></div>
+    <div class="text-right hidden md:block"><p class="text-sm font-bold text-yellow-400">24 – 26 JULY 2026 @ISLAND HALL 3FL.</p></div>
+  </div>
+</div>
+
+<div class="nav-container sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 flex gap-2 overflow-x-auto py-2">
+    <button onclick="showPage('calc',this)" class="nav-btn active">คำนวณบัตร</button>
+    <button onclick="showPage('bod',this)" class="nav-btn">บด System</button>
+    <button onclick="showPage('activities',this)" class="nav-btn">รายละเอียด</button>
+    <button onclick="showPage('summary',this)" class="nav-btn">สถิติรวม</button>
+  </div>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 py-8">
+  <!-- Page: Calc -->
+  <div id="page-calc" class="page-content">
+    <div class="space-y-6">
+      <input type="text" id="searchInput" placeholder="ค้นหาชื่อเมมเบอร์..." oninput="filterMembers()" class="w-full search-input rounded-xl px-4 py-3">
+      <div class="flex flex-wrap gap-3">
+        <button id="day-all" onclick="setDay('all',this)" class="btn-primary">ทุกวัน</button>
+        <button id="day-24jul" onclick="setDay('24 July',this)" class="btn-secondary bg-gray-800 p-2 rounded-xl">24 July</button>
+        <button id="day-25jul" onclick="setDay('25 July',this)" class="btn-secondary bg-gray-800 p-2 rounded-xl">25 July</button>
+        <button id="day-26jul" onclick="setDay('26 July',this)" class="btn-secondary bg-gray-800 p-2 rounded-xl">26 July</button>
+      </div>
+      <div id="selectedBar" class="selected-bar hidden"><div id="selChips" class="flex flex-wrap gap-2 flex-1"></div><button onclick="clearAll()" class="text-pink-400 font-bold text-sm">ล้างทั้งหมด</button></div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div id="totalPriceBar" class="price-bar hidden">
+          <div><span class="text-gray-400 text-sm block">ยอดเงินรวม</span><span id="totalPriceValue" class="price-bar-value">0 บาท</span></div>
+        </div>
+        <div id="totalTicketBar" class="price-bar hidden !bg-blue-900/20 !border-blue-500/40">
+          <div><span class="text-gray-400 text-sm block">จำนวนตั๋วรวมที่ต้องใช้</span><span id="totalTicketValue" class="price-bar-value !text-cyan-400">0 ใบ</span></div>
+        </div>
+      </div>
+
+      <div id="memberGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3"></div>
+      <div id="calcResults" class="space-y-4"></div>
+      <div id="klabBtnContainer" class="flex justify-center py-10 hidden"><button onclick="openKlab()" class="btn-klab">สรุปยอด (แกลบ MODE)</button></div>
+    </div>
+  </div>
+
+  <!-- Page: BOD (Conflict Checker) -->
+  <div id="page-bod" class="page-content hidden">
+    <div class="space-y-6">
+      <div class="glass p-6 rounded-2xl mb-6 border-l-4 border-pink-500">
+        <h2 class="text-xl font-bold text-pink-500 mb-2">บด System (Booth Matching)</h2>
+        <p class="text-sm text-gray-400">ระบบจะแจ้งเตือนเมื่อเมมเบอร์ที่คุณเลือกมีกิจกรรม **บูธเดียวกันและเวลาตรงกัน** เท่านั้น</p>
+      </div>
+      
+      <div class="space-y-4">
+        <input type="text" id="bodSearchInput" placeholder="ค้นหาชื่อเมมเบอร์..." oninput="renderBodMemberGrid()" class="w-full search-input rounded-xl px-4 py-3 text-sm">
+        <div id="bodMemberGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 max-h-48 overflow-y-auto p-2 custom-scrollbar"></div>
+        <div id="bodSelectedBar" class="selected-bar hidden !mb-0"><div id="bodSelChips" class="flex flex-wrap gap-2 flex-1"></div></div>
+      </div>
+
+      <div id="bodResults" class="space-y-4"></div>
+    </div>
+  </div>
+
+  <div id="page-activities" class="page-content hidden"><div id="activitiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div></div>
+  <div id="page-summary" class="page-content hidden"><div id="summaryContent" class="space-y-6"></div></div>
+</div>
+
+<!-- Modal: KLAB -->
+<div id="klabModal">
+  <div id="klabCaptureArea" class="klab-content">
+  <div id="klabSharedBanner" class="hidden mb-4 bg-yellow-500/15 border border-yellow-500/40 rounded-xl px-4 py-2 text-yellow-400 text-xs font-bold flex items-center gap-2">
+    <i class="ti ti-share"></i> ลิงค์แชร์ — กำลังดูผลสรุปของคนอื่น
+  </div>
+  <div class="klab-title">แกลบ MODE</div>
+    <div class="klab-total-value" id="klabTotalValue">0฿</div>
+    <div id="klabItemList" class="text-left space-y-2 max-h-[30vh] overflow-y-auto my-4 pr-2 custom-scrollbar"></div>
+    <div class="grid grid-cols-2 gap-4 mb-4">
+      <div class="bg-gray-800 p-3 rounded-xl"><div id="klabMamaCount" class="text-xl font-bold text-cyan-400">0</div><div class="text-[10px]">มาม่า (ซอง)</div></div>
+      <div class="bg-gray-800 p-3 rounded-xl"><div id="klabTicketCount" class="text-xl font-bold text-cyan-400">0</div><div class="text-[10px]">ตั๋วรวม (ใบ)</div></div>
+    </div>
+    <div id="klabMessage" class="italic text-yellow-400 text-sm mb-6"></div>
+    <div class="flex flex-col gap-2 no-capture">
+      <div class="flex gap-2">
+        <button onclick="downloadKlabImage()" id="btnDownload" class="flex-1 bg-cyan-600 hover:bg-cyan-500 active:scale-95 p-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+          <i class="ti ti-download"></i> บันทึกรูป
+        </button>
+        <button onclick="copyKlabLink()" id="btnCopyLink" class="flex-1 bg-purple-700 hover:bg-purple-600 active:scale-95 p-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+          <i class="ti ti-link"></i> คัดลอกลิงค์
+        </button>
+      </div>
+      <button onclick="closeKlab()" class="bg-gray-700 hover:bg-gray-600 p-3 rounded-xl font-bold transition-all">ปิด</button>
+    </div>
+    <div id="klabToast" class="hidden mt-3 text-center text-sm font-bold text-green-400 animate-pulse"></div>
+  </div>
+</div>
+
+<script>
+const TICKET_PRICE = 50; // บาทต่อคูปอง 1 ใบ
+const BOOTHS = [
+  { k: "OfficialMerch", s: "Official Merchandise", t: 0, price: 0 },
+  { k: "CenterStage", s: "Bon Odori Center Stage", t: 0, price: 0 },
+  { k: "HachiCha", s: "はちCHA (Hachi Cha)", t: 5, price: 5 * TICKET_PRICE },
+  { k: "LuckyRoulette", s: "ラッキールーレット (Lucky Roulette)", t: 5, price: 5 * TICKET_PRICE },
+  { k: "CorkShateki", s: "コルク射的 3発 (Cork Shateki)", t: 5, price: 5 * TICKET_PRICE },
+  { k: "Plinko", s: "プリンコ (Plinko)", t: 5, price: 5 * TICKET_PRICE },
+  { k: "OmikujiSuuji", s: "おみくじ数字バトル (Omikuji Suuji Battle)", t: 5, price: 5 * TICKET_PRICE },
+  { k: "Wanage", s: "輪投げ (Wanage)", t: 5, price: 5 * TICKET_PRICE }
+];
+const DAYS = ["24 July", "25 July", "26 July"];
+const DATA = {
+  "OfficialMerch":{
+    "24 July":{"13:00-14:00":["Mirin","Cartoon","Mayji"],"15:00-16:00":["Niya","Praifa","Khowjow"],"17:00-18:00":["Wawa","Praew","Mayji"]},
+    "25 July":{"13:00-14:00":["Monet","Jingjing","Janry"],"15:00-16:00":["Luksorn","Satangpound","Lewlew"],"17:00-18:00":["Lewlew","Chifa","Grape"]},
+    "26 July":{"12:00-13:00":["Sindy","Hongyok","Jew"],"14:00-15:00":["Neen","Mail","Inkcha"],"16:00-17:00":["Nammonn","Else","Grape"]}
+  },
+  "CenterStage":{
+    "24 July":{"13:00-14:00":["Hoop","Sindy","Punpon","Fame","Berry"],"15:00-16:00":["Galeya","Satangpound","Nana","Kwan","Prae","Mail"],"17:00-18:00":["Nall","Else","Grape","Nammonn","Lewlew","Praifa"]},
+    "25 July":{"13:00-14:00":["Pancake","Lookked","L","Arlee","Chifa","Yoghurt"],"15:00-16:00":["Lingling","Rose","Valentine","Mint","Tara","Ploen","Emma"],"17:00-18:00":["Patt","Namphet","Janry","Jew","Niya","Ginna"]},
+    "26 July":{"12:00-13:00":["Khaimook","Nisha","Shenae","Wawa","Mayji","Cartoon","Monet"],"14:00-15:00":["Marine","Blythe","Jingjing","Saonoi","Mirin","Praew"],"16:00-17:00":["Neen","Hongyok","Inkcha","Proud","Palmmy","Khowjow","Luksorn"]}
+  },
+  "HachiCha":{
+    "24 July":{"11:00-12:00":["Niya","Saonoi","Khowjow"],"12:00-13:00":["Mayji","Hoop","Cartoon"],"13:00-14:00":["Saonoi","Valentine","L"],"14:00-15:00":["Palmmy","Niya","Galeya"],"15:00-16:00":["Neen","Nisha","Grape"],"16:00-17:00":["Yoghurt","Ginna","Janry"],"17:00-18:00":["Sindy","Ploen","Khaimook"],"18:00-19:00":["Mail","Pancake","Punpon"],"19:00-20:00":["Shenae","Hongyok","Arlee"]},
+    "25 July":{"11:00-12:00":["Neen","Inkcha","Mint"],"12:00-13:00":["Niya","Satangpound","Luksorn"],"13:00-14:00":["Hoop","Lewlew","Blythe"],"14:00-15:00":["Wawa","Prae","Nammonn"],"15:00-16:00":["Mirin","Else","Praew"],"16:00-17:00":["Berry","Kwan","Jew"],"17:00-18:00":["Marine","Lingling","Proud"],"18:00-19:00":["Monet","Jingjing","L"],"19:00-20:00":["Chifa","Lookked","Nall"]},
+    "26 July":{"11:00-12:00":["Hoop","Mail","Praifa"],"12:00-13:00":["Khowjow","Nana","Fame"],"13:00-14:00":["Patt","Emma","Inkcha"],"14:00-15:00":["Rose","Tara","Emmy"],"15:00-16:00":["Namphet","Mint","Niya"],"16:00-17:00":["Blythe","Prae","Nall"]}
+  },
+  "LuckyRoulette":{
+    "24 July":{"11:00-12:00":["Chifa","Tara","Marine"],"12:00-13:00":["Wawa","Chifa","Blythe"],"13:00-14:00":["Praew","Lewlew","Mail"],"14:00-15:00":["Saonoi","Punpon","Arlee"],"15:00-16:00":["Nammonn","Hongyok","Cartoon"],"16:00-17:00":["Hoop","Emma","L"],"17:00-18:00":["Khowjow","Lingling","Jew"],"18:00-19:00":["Luksorn","Valentine","Namphet"],"19:00-20:00":["Else","Lookked","Janry"]},
+    "25 July":{"11:00-12:00":["Sindy","Rose","Khaimook"],"12:00-13:00":["Neen","Praifa","Khowjow"],"13:00-14:00":["Fame","Ginna","Berry"],"14:00-15:00":["Nall","Else","Grape"],"15:00-16:00":["Saonoi","Nisha","Monet"],"16:00-17:00":["L","Jingjing","Mint"],"17:00-18:00":["Palmmy","Ploen","Praew"],"18:00-19:00":["Pancake","Satangpound","Niya"],"19:00-20:00":["Kwan","Lewlew","Mirin"]},
+    "26 July":{"11:00-12:00":["Praew","Nana","Prae"],"12:00-13:00":["Inkcha","Patt","Proud"],"13:00-14:00":["Emmy","Hongyok","Jew"],"14:00-15:00":["Wawa","Galeya","Grape"],"15:00-16:00":["Yoghurt","Jingjing","Janry"],"16:00-17:00":["Fame","Shenae","Mayji"]}
+  },
+  "CorkShateki":{
+    "24 July":{"11:00-12:00":["Pancake","Praew","L"],"12:00-13:00":["Sindy","Namphet","Saonoi"],"13:00-14:00":["Niya","Satangpound","Luksorn"],"14:00-15:00":["Yoghurt","Praifa","Marine"],"15:00-16:00":["Nall","Else","Blythe"],"16:00-17:00":["Tara","Fame","Berry"],"17:00-18:00":["Hoop","Kwan","Galeya"],"18:00-19:00":["Khowjow","Jingjing","Lewlew"],"19:00-20:00":["Wawa","Nisha","Punpon"]},
+    "25 July":{"11:00-12:00":["Lookked","Ploen","Mayji"],"12:00-13:00":["Nammonn","Nisha","Inkcha"],"13:00-14:00":["Rose","Emma","Punpon"],"14:00-15:00":["Patt","Lingling","Jew"],"15:00-16:00":["Proud","Shenae","Mail"],"16:00-17:00":["Wawa","Nana","Neen"],"17:00-18:00":["Saonoi","Hongyok","Cartoon"],"18:00-19:00":["Mirin","Valentine","Praew"],"19:00-20:00":["Monet","Prae","Janry"]},
+    "26 July":{"11:00-12:00":["Arlee","Rose","Grape"],"12:00-13:00":["Mint","Ploen","Palmmy"],"13:00-14:00":["Janry","Chifa","Nammonn"],"14:00-15:00":["Sindy","Nana","Cartoon"],"15:00-16:00":["Pancake","Ginna","Emmy"],"16:00-17:00":["Patt","Satangpound","Khaimook"]}
+  },
+  "Plinko":{
+    "24 July":{"11:00-12:00":["Arlee","Lewlew","Janry"],"12:00-13:00":["Patt","Tara","Jew"],"13:00-14:00":["Neen","Praifa","Khowjow"],"14:00-15:00":["Pancake","Valentine","L"],"15:00-16:00":["Wawa","Yoghurt","Mayji"],"16:00-17:00":["Luksorn","Namphet","Punpon"],"17:00-18:00":["Satangpound","Nana","Arlee"],"18:00-19:00":["Mirin","Else","Chifa"],"19:00-20:00":["Fame","Emma","Berry"]},
+    "25 July":{"11:00-12:00":["Palmmy","Lingling","Mail"],"12:00-13:00":["Nall","Lookked","Grape"],"13:00-14:00":["Inkcha","Else","Praew"],"14:00-15:00":["Marine","Kwan","Khaimook"],"15:00-16:00":["Niya","Hongyok","Cartoon"],"16:00-17:00":["Yoghurt","Ginna","Fame"],"17:00-18:00":["Sindy","Jingjing","Luksorn"],"18:00-19:00":["Mint","Nisha","Shenae"],"19:00-20:00":["Hoop","Ploen","Nammonn"]},
+    "26 July":{"11:00-12:00":["Emmy","Blythe","Else"],"12:00-13:00":["Saonoi","Galeya","Lingling"],"13:00-14:00":["Proud","Lookked","Arlee"],"14:00-15:00":["Palmmy","Prae","Nall"],"15:00-16:00":["Monet","Emma","Rose"],"16:00-17:00":["Mirin","Kwan","Jew"]}
+  },
+  "OmikujiSuuji":{
+    "24 July":{"11:00-12:00":["Hoop","Ginna","Satangpound"],"12:00-13:00":["Palmmy","Mirin","Galeya"],"13:00-14:00":["Nammonn","Jew","Chifa"],"14:00-15:00":["Nall","Tara","Janry"],"15:00-16:00":["Sindy","Ploen","Khaimook"],"16:00-17:00":["Praew","Valentine","Lewlew"],"17:00-18:00":["Prae","Nisha","Marine"],"18:00-19:00":["Saonoi","Hongyok","Grape"],"19:00-20:00":["Hoop","Prae","Jingjing"]},
+    "25 July":{"11:00-12:00":["L","Kwan","Jew"],"12:00-13:00":["Patt","Else","Cartoon"],"13:00-14:00":["Proud","Shenae","Mint"],"14:00-15:00":["Rose","Nana","Mayji"],"15:00-16:00":["Neen","Praifa","Khowjow"],"16:00-17:00":["Pancake","Inkcha","Arlee"],"17:00-18:00":["Monet","Lookked","Blythe"],"18:00-19:00":["Emma","Fame","Berry"],"19:00-20:00":["Wawa","Lingling","Mail"]},
+    "26 July":{"11:00-12:00":["Namphet","Punpon","Luksorn"],"12:00-13:00":["Marine","Kwan","Blythe"],"13:00-14:00":["Niya","Jingjing","Ploen"],"14:00-15:00":["Nammonn","Yoghurt","Mayji"],"15:00-16:00":["Shenae","Valentine","Hoop"],"16:00-17:00":["Emmy","Nana","Galeya"]}
+  },
+  "Wanage":{
+    "24 July":{"11:00-12:00":["Fame","Punpon","Berry"],"12:00-13:00":["Ginna","Praifa","Arlee"],"13:00-14:00":["Nall","Pancake","Grape"],"14:00-15:00":["Hoop","Ginna","Namphet"],"15:00-16:00":["Patt","Lingling","Jew"],"16:00-17:00":["Mirin","Shenae","Chifa"],"17:00-18:00":["Pancake","Jingjing","L"],"18:00-19:00":["Galeya","Nisha","Cartoon"],"19:00-20:00":["Khaimook","Tara","Praew"]},
+    "25 July":{"11:00-12:00":["Khowjow","Proud","Marine"],"12:00-13:00":["Wawa","Lewlew","Blythe"],"13:00-14:00":["Saonoi","Valentine","Mail"],"14:00-15:00":["Palmmy","Ploen","Tara"],"15:00-16:00":["Sindy","Namphet","Inkcha"],"16:00-17:00":["Monet","Lookked","Janry"],"17:00-18:00":["Khaimook","Prae","Yoghurt"],"18:00-19:00":["Rose","Kwan","Hongyok"],"19:00-20:00":["Mayji","Emma","Luksorn"]},
+    "26 July":{"11:00-12:00":["Neen","Satangpound","Nammonn"],"12:00-13:00":["Niya","Else","Emmy"],"13:00-14:00":["Pancake","Nana","Berry"],"14:00-15:00":["Luksorn","Lingling","Mint"],"15:00-16:00":["Nisha","Praifa","Proud"],"16:00-17:00":["Marine","Lookked","Arlee"]}
+  }
+};
+
+let ALL_MEMBERS = [];
+let selected = new Set();
+let currentDay = 'all';
+let slotRounds = {};
+// Fanmeet zone selection: Map of "memberName" -> Set of boothKeys they chose
+// e.g. { "Emma": new Set(["FM_CGM25_ONLYYOU"]) }
+let selectedFanmeetZones = {};
+
+function initializeApp() {
+  ALL_MEMBERS = Array.from(new Set(Object.values(DATA).flatMap(b => Object.values(b).flatMap(d => Object.values(d).flat())))).sort();
+  renderMemberGrid();
+  renderActivities();
+  loadStateFromURL();
+}
+
+function showPage(p, btn) {
+  document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+  document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('page-' + p).classList.remove('hidden');
+  if (btn) btn.classList.add('active');
+  if (p === 'bod') {
+    renderBodMemberGrid();
+    renderBodSelectedBar();
+    renderBod();
+  }
+  if (p === 'summary') renderSummary();
+}
+
+function setDay(d, el) {
+  currentDay = d;
+  document.querySelectorAll('#day-all, #day-24jul, #day-25jul, #day-26jul').forEach(b => {
+    b.classList.remove('btn-primary');
+    b.classList.add('btn-secondary', 'bg-gray-800', 'p-2', 'rounded-xl');
+  });
+  el.classList.remove('btn-secondary');
+  el.classList.add('btn-primary');
+  renderCalc();
+}
+
+function filterMembers() { renderMemberGrid(); }
+
+function toggleMember(m) {
+  if (selected.has(m)) selected.delete(m); else selected.add(m);
+  renderMemberGrid(); 
+  renderCalc(); 
+  renderSelectedBar(); 
+  updateTotalPrice();
+  if (!document.getElementById('page-bod').classList.contains('hidden')) {
+    renderBodMemberGrid();
+    renderBodSelectedBar();
+    renderBod();
+  }
+}
+
+function clearAll() { 
+  selected.clear(); 
+  slotRounds = {};
+  selectedFanmeetZones = {};
+  renderMemberGrid(); 
+  renderCalc(); 
+  renderSelectedBar(); 
+  updateTotalPrice();
+  if (!document.getElementById('page-bod').classList.contains('hidden')) {
+    renderBodMemberGrid();
+    renderBodSelectedBar();
+    renderBod();
+  }
+}
+
+function setSlotRound(slotId, delta) {
+  const current = (slotRounds[slotId] !== undefined) ? slotRounds[slotId] : 1;
+  const next = Math.max(0, Math.min(10, current + delta));
+  slotRounds[slotId] = next;
+  renderCalc(); 
+  updateTotalPrice();
+  if (!document.getElementById('page-bod').classList.contains('hidden')) renderBod();
+}
+
+function setSlotZero(slotId) { 
+  slotRounds[slotId] = 0; 
+  renderCalc(); 
+  updateTotalPrice();
+  if (!document.getElementById('page-bod').classList.contains('hidden')) renderBod();
+}
+
+function updateTotalPrice() {
+  const priceBar = document.getElementById('totalPriceBar');
+  const ticketBar = document.getElementById('totalTicketBar');
+  const klab = document.getElementById('klabBtnContainer');
+  if (selected.size === 0) { priceBar.classList.add('hidden'); ticketBar.classList.add('hidden'); klab.classList.add('hidden'); return; }
+  priceBar.classList.remove('hidden'); ticketBar.classList.remove('hidden'); klab.classList.remove('hidden');
+
+  let totalMoney = 0, totalTickets = 0;
+  selected.forEach(m => {
+    BOOTHS.forEach(b => {
+      if (b.isFanmeet) return;
+      DAYS.forEach(d => {
+        const dayData = DATA[b.k] && DATA[b.k][d];
+        if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
+          if (arr.includes(m)) {
+            const sid = `${m}|${b.k}|${d}|${t}`;
+            const r = slotRounds[sid] !== undefined ? slotRounds[sid] : 1;
+            totalMoney += b.price * r; totalTickets += b.t * r;
+          }
+        });
+      });
+    });
+    // Fanmeet: evIdx-based
+    const mzMap = selectedFanmeetZones[m] || {};
+    Object.entries(mzMap).forEach(([evIdx, zk]) => {
+      const ev = FANMEET_EVENTS[evIdx]; if (!ev) return;
+      const z = ev.zones.find(z => z.k === zk); if (!z) return;
+      totalMoney += z.price; totalTickets += 1;
+    });
+  });
+  document.getElementById('totalPriceValue').textContent = totalMoney.toLocaleString() + ' บาท';
+  document.getElementById('totalTicketValue').textContent = totalTickets.toLocaleString() + ' ใบ';
+}
+
+function renderMemberGrid() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = ALL_MEMBERS.filter(m => m.toLowerCase().includes(q));
+  document.getElementById('memberGrid').innerHTML = filtered.map(m =>
+    `<div class="member-chip ${selected.has(m) ? 'selected' : ''}" onclick="toggleMember('${m}')">${m}</div>`
+  ).join('');
+}
+
+function renderSelectedBar() {
+  const bar = document.getElementById('selectedBar');
+  if (selected.size === 0) { bar.classList.add('hidden'); return; }
+  bar.classList.remove('hidden');
+  document.getElementById('selChips').innerHTML = Array.from(selected).sort().map(m =>
+    `<span class="selected-chip">${m}<span onclick="toggleMember('${m}')" class="cursor-pointer ml-1 opacity-70">×</span></span>`
+  ).join('');
+}
+
+// BOD SYSTEM - MATCH ONLY SAME ACTIVITY AND SAME TIME
+function renderBodMemberGrid() {
+  const q = document.getElementById('bodSearchInput').value.toLowerCase();
+  const filtered = ALL_MEMBERS.filter(m => m.toLowerCase().includes(q));
+  document.getElementById('bodMemberGrid').innerHTML = filtered.map(m =>
+    `<div class="member-chip !py-1 !px-2 !text-[10px] ${selected.has(m) ? 'selected' : ''}" onclick="toggleMember('${m}')">${m}</div>`
+  ).join('');
+}
+
+function renderBodSelectedBar() {
+  const bar = document.getElementById('bodSelectedBar');
+  if (selected.size === 0) { bar.classList.add('hidden'); return; }
+  bar.classList.remove('hidden');
+  document.getElementById('bodSelChips').innerHTML = Array.from(selected).sort().map(m =>
+    `<span class="selected-chip !py-1 !px-2 !text-[10px]">${m}<span onclick="toggleMember('${m}')" class="cursor-pointer ml-1 opacity-70">×</span></span>`
+  ).join('');
+}
+
+function renderBod() {
+  const el = document.getElementById('bodResults');
+  if (selected.size === 0) { 
+    el.innerHTML = '<div class="empty-state text-center py-10 opacity-50">เลือกเมมเบอร์เพื่อตรวจสอบการชนกันในบูธเดียวกัน (Booth Match Checker)</div>'; 
+    return; 
+  }
+
+  let html = '';
+  DAYS.forEach(d => {
+    // Key: "Time @ BoothName" -> value: [Members]
+    const activitySlots = {}; 
+    
+    selected.forEach(m => {
+      BOOTHS.forEach(b => {
+        const dayData = DATA[b.k] && DATA[b.k][d];
+        if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
+          if (arr.includes(m)) {
+            const sid = `${m}|${b.k}|${d}|${t}`;
+            const rounds = (slotRounds[sid] !== undefined ? slotRounds[sid] : 1);
+            if (rounds > 0) {
+              const key = `${t} @ ${b.s}`;
+              if (!activitySlots[key]) activitySlots[key] = [];
+              activitySlots[key].push(m);
+            }
+          }
+        });
+      });
+    });
+
+    // กรองเฉพาะที่มีเมมเบอร์มากกว่า 1 คนในกิจกรรมเดียวกัน/เวลาเดียวกัน
+    const conflicts = Object.entries(activitySlots).filter(([key, members]) => members.length > 1);
+    
+    if (conflicts.length > 0) {
+      html += `<div class="result-card border-pink-500/50">
+        <div class="text-pink-400 font-bold mb-3 flex items-center gap-2">
+          <i class="ti ti-users"></i> วันที่ ${d} 
+          <span class="text-[10px] bg-pink-500/20 px-2 py-0.5 rounded">พบบูธเดียวกัน-เวลาเดียวกัน</span>
+        </div>`;
+      
+      conflicts.forEach(([key, members]) => {
+        const [time, boothName] = key.split(' @ ');
+        html += `<div class="conflict-item !bg-pink-500/5 !border-pink-500/20">
+          <div class="flex items-center justify-between mb-3 border-b border-white/5 pb-2">
+            <span class="text-sm font-bold text-white"><i class="ti ti-clock"></i> ${time}</span>
+            <span class="text-xs font-bold text-pink-400 uppercase">${boothName}</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            ${members.map(name => `
+              <div class="bg-gray-800/80 px-3 py-1.5 rounded-lg border border-pink-500/30 text-xs font-bold text-cyan-400">
+                ${name}
+              </div>
+            `).join('')}
+          </div>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+  });
+
+  el.innerHTML = html || '<div class="text-center py-10 text-green-400 font-bold"><i class="ti ti-circle-check"></i> ไม่พบเมมเบอร์ที่ "ชนกันในกิจกรรมเดียวกัน" (Safe!)</div>';
+}
+
+// Fanmeet zone definitions (for picker UI) — not used in this event, kept empty for compatibility
+const FANMEET_EVENTS = [];
+
+function getFanmeetEventsForMember(m) {
+  return FANMEET_EVENTS.filter(ev => ev.members.includes(m));
+}
+
+// selectedFanmeetZones[member][eventIdx] = zoneKey or null
+function setFanmeetZone(memberName, evIdx, zoneKey) {
+  if (!selectedFanmeetZones[memberName]) selectedFanmeetZones[memberName] = {};
+  if (selectedFanmeetZones[memberName][evIdx] === zoneKey) {
+    delete selectedFanmeetZones[memberName][evIdx]; // deselect same
+  } else {
+    selectedFanmeetZones[memberName][evIdx] = zoneKey;
+  }
+  renderCalc();
+  updateTotalPrice();
+}
+
+function removeFanmeetZone(memberName, evIdx) {
+  if (selectedFanmeetZones[memberName]) delete selectedFanmeetZones[memberName][evIdx];
+  renderCalc();
+  updateTotalPrice();
+}
+
+// Get selected zone for member+event
+function getSelectedZone(memberName, evIdx) {
+  return (selectedFanmeetZones[memberName] || {})[evIdx] || null;
+}
+
+function renderCalc() {
+  const el = document.getElementById('calcResults');
+  if (selected.size === 0) { el.innerHTML = ''; return; }
+  let html = '';
+
+  Array.from(selected).sort().forEach(m => {
+    // Regular slots
+    const regularSlots = [];
+    BOOTHS.forEach(b => {
+      if (b.isFanmeet) return;
+      (currentDay === 'all' ? DAYS : [currentDay]).forEach(d => {
+        const dayData = DATA[b.k] && DATA[b.k][d];
+        if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
+          if (arr.includes(m)) regularSlots.push({ b, d, t, id:`${m}|${b.k}|${d}|${t}` });
+        });
+      });
+    });
+
+    // Fanmeet events for this member, filtered by day
+    const memberFmEvents = getFanmeetEventsForMember(m).map((ev, globalIdx) => {
+      const evIdx = FANMEET_EVENTS.indexOf(ev);
+      return { ev, evIdx };
+    }).filter(({ ev }) => currentDay === 'all' || ev.day === currentDay);
+
+    // Compute totals
+    let mTotalMoney = 0, mTotalTickets = 0;
+    regularSlots.forEach(s => {
+      const r = slotRounds[s.id] !== undefined ? slotRounds[s.id] : 1;
+      mTotalMoney += s.b.price * r; mTotalTickets += s.b.t * r;
+    });
+    memberFmEvents.forEach(({ ev, evIdx }) => {
+      const zk = getSelectedZone(m, evIdx);
+      if (zk) {
+        const z = ev.zones.find(z => z.k === zk);
+        if (z) { mTotalMoney += z.price; mTotalTickets += 1; }
+      }
+    });
+
+    html += `<div class="result-card neon-glow">
+      <div class="flex justify-between items-center mb-4">
+        <div>
+          <div class="result-name">${m}</div>
+          <div class="text-[10px] text-cyan-400 font-bold uppercase tracking-tight">คูปองรวม: ${mTotalTickets} ใบ</div>
+        </div>
+        <div class="text-green-400 font-bold text-xl">${mTotalMoney.toLocaleString()}฿</div>
+      </div>`;
+
+    // Build merged timeline per day (regular + fanmeet together)
+    const daysToShow = currentDay === 'all' ? DAYS : [currentDay];
+    let hasAnything = false;
+
+    daysToShow.forEach(d => {
+      const dRegular = regularSlots.filter(s => s.d === d);
+      const dFm = memberFmEvents.filter(({ ev }) => ev.day === d);
+      if (dRegular.length === 0 && dFm.length === 0) return;
+      hasAnything = true;
+
+      // Sort regular by start time, interleave fanmeet by its time
+      const allItems = [
+        ...dRegular.map(s => ({ type:'regular', s, sortKey: s.t.split('-')[0] })),
+        ...dFm.map(({ ev, evIdx }) => ({ type:'fanmeet', ev, evIdx, sortKey: ev.time }))
+      ].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+
+      html += `<div class="mb-4"><div class="text-[10px] font-bold text-yellow-500 uppercase mb-2 border-b border-yellow-500/20 pb-1">${d}</div>`;
+
+      allItems.forEach(item => {
+        if (item.type === 'regular') {
+          const s = item.s;
+          const r = slotRounds[s.id] !== undefined ? slotRounds[s.id] : 1;
+          html += `<div class="slot-item ${r===0?'zero-round':''}">
+            <div class="slot-info">
+              <div class="text-sm font-bold flex items-center gap-2">
+                ${s.t} — ${s.b.s}
+              </div>
+              <div class="text-[10px] text-gray-400">
+                <span class="text-white">${(s.b.price*r).toLocaleString()}฿</span> | <span class="text-cyan-400">${s.b.t*r} ตั๋ว</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="round-btn" onclick="setSlotRound('${s.id}',-1)">-</button>
+              <div class="flex flex-col items-center min-w-[20px]"><span class="text-xs font-bold text-white">${r}</span><span class="text-[8px] text-gray-500">ครั้ง</span></div>
+              <button class="round-btn" onclick="setSlotRound('${s.id}',1)">+</button>
+              <button class="btn-set-zero" onclick="setSlotZero('${s.id}')"><i class="ti ti-trash"></i></button>
+            </div>
+          </div>`;
+
+        } else {
+          // Fanmeet row with dropdown
+          const { ev, evIdx } = item;
+          const selectedZk = getSelectedZone(m, evIdx);
+          const selectedZone = selectedZk ? ev.zones.find(z => z.k === selectedZk) : null;
+
+          html += `<div class="slot-item" style="border-color:rgba(245,200,66,${selectedZone?'0.5':'0.2'});background:rgba(245,200,66,${selectedZone?'0.08':'0.03'})">
+            <div class="slot-info flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+                <span class="text-[9px] font-black bg-yellow-600/40 text-yellow-300 px-2 py-0.5 rounded-full whitespace-nowrap">🎪 FANMEET</span>
+                <span class="text-xs font-bold text-yellow-200 truncate">${ev.name}</span>
+              </div>
+              <div class="text-[10px] text-gray-500 mb-2">${ev.time} น. — เลือก Zone / ราคาที่ซื้อ</div>
+              <div class="relative">
+                <select onchange="setFanmeetZone('${m}',${evIdx},this.value)"
+                  class="w-full text-[11px] font-bold rounded-lg px-3 py-2 pr-7 appearance-none cursor-pointer"
+                  style="background:rgba(20,24,50,0.95);border:1.5px solid rgba(245,200,66,${selectedZone?'0.6':'0.25'});color:${selectedZone?'#fde68a':'#888'};outline:none">
+                  <option value="">— ไม่ได้ซื้อ —</option>
+                  ${ev.zones.map(z => `<option value="${z.k}" ${selectedZk===z.k?'selected':''}>${z.label} — ${z.price.toLocaleString()}฿</option>`).join('')}
+                </select>
+                <i class="ti ti-chevron-down" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:#888;pointer-events:none"></i>
+              </div>
+              ${selectedZone ? `<div class="mt-1.5 text-[10px] font-bold text-yellow-400">${selectedZone.label} — ${selectedZone.price.toLocaleString()}฿</div>` : ''}
+            </div>
+          </div>`;
+        }
+      });
+
+      html += `</div>`;
+    });
+
+    if (!hasAnything) html += `<p class="text-xs italic opacity-50">ไม่มีกิจกรรมในวันที่เลือก</p>`;
+    html += `</div>`;
+  });
+
+  el.innerHTML = html;
+}
+
+function openKlab() {
+  let totalMoney = 0, totalTickets = 0, items = '';
+  selected.forEach(m => {
+    // Regular booth slots
+    BOOTHS.forEach(b => {
+      if (b.isFanmeet) return;
+      DAYS.forEach(d => {
+        const dayData = DATA[b.k] && DATA[b.k][d];
+        if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
+          if (arr.includes(m)) {
+            const sid = `${m}|${b.k}|${d}|${t}`, r = slotRounds[sid] !== undefined ? slotRounds[sid] : 1;
+            if (r > 0) {
+              const cost = b.price * r, tix = b.t * r;
+              totalMoney += cost; totalTickets += tix;
+              items += `<div class="flex justify-between text-[10px] border-b border-white/5 pb-1"><span>${m} - ${b.s} (x${r})</span><span class="font-bold text-cyan-400">${tix} ใบ / ${cost}฿</span></div>`;
+            }
+          }
+        });
+      });
+    });
+    // Fanmeet selected zones
+    const mzMap = selectedFanmeetZones[m] || {};
+    Object.entries(mzMap).forEach(([evIdx, zk]) => {
+      const ev = FANMEET_EVENTS[evIdx]; if (!ev) return;
+      const z = ev.zones.find(z => z.k === zk); if (!z) return;
+      totalMoney += z.price; totalTickets += 1;
+      items += `<div class="flex justify-between text-[10px] border-b border-white/5 pb-1"><span class="text-yellow-300">🎪 ${m} — ${ev.name} ${z.label}</span><span class="font-bold text-yellow-400">${z.price.toLocaleString()}฿</span></div>`;
+    });
+  });
+  document.getElementById('klabTotalValue').textContent = totalMoney.toLocaleString() + '฿';
+  document.getElementById('klabMamaCount').textContent = Math.ceil(totalMoney / 7).toLocaleString();
+  document.getElementById('klabTicketCount').textContent = totalTickets.toLocaleString();
+  document.getElementById('klabItemList').innerHTML = items;
+  // Show banner if opened from shared link
+  const isSharedLink = new URLSearchParams(location.search).get('share') === '1';
+  const banner = document.getElementById('klabSharedBanner');
+  if (banner) banner.classList.toggle('hidden', !isSharedLink);
+  document.getElementById('klabModal').style.display = 'flex';
+}
+
+function closeKlab() { document.getElementById('klabModal').style.display = 'none'; }
+
+function showKlabToast(msg, color = 'text-green-400') {
+  const t = document.getElementById('klabToast');
+  t.textContent = msg;
+  t.className = `mt-3 text-center text-sm font-bold ${color}`;
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), 2800);
+}
+
+async function downloadKlabImage() {
+  const btn = document.getElementById('btnDownload');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ti ti-loader animate-spin"></i> กำลังสร้างรูป...';
+
+  try {
+    // Clone capture area, remove no-capture elements, render off-screen
+    const area = document.getElementById('klabCaptureArea');
+    const clone = area.cloneNode(true);
+    clone.style.cssText = `
+      position: fixed; left: -9999px; top: 0;
+      width: 480px; max-height: none; overflow: visible;
+      border-radius: 24px; padding: 40px;
+      background: #1a1f3a;
+    `;
+    // Remove the scrollable limit on item list in clone
+    const itemList = clone.querySelector('#klabItemList');
+    if (itemList) { itemList.style.maxHeight = 'none'; itemList.style.overflow = 'visible'; }
+    // Remove buttons
+    const noCap = clone.querySelector('.no-capture');
+    if (noCap) noCap.remove();
+    const toast = clone.querySelector('#klabToast');
+    if (toast) toast.remove();
+
+    document.body.appendChild(clone);
+    await new Promise(r => setTimeout(r, 80)); // allow paint
+
+    const canvas = await html2canvas(clone, {
+      backgroundColor: '#1a1f3a',
+      scale: 2,
+      useCORS: true,
+      logging: false,
+      windowWidth: 560,
+    });
+    document.body.removeChild(clone);
+
+    const link = document.createElement('a');
+    link.download = 'klab-summary-bonodori2026.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    showKlabToast('✅ บันทึกรูปสำเร็จ!');
+  } catch(e) {
+    showKlabToast('❌ เกิดข้อผิดพลาด: ' + e.message, 'text-red-400');
+    console.error('Download error:', e);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="ti ti-download"></i> บันทึกรูป';
+  }
+}
+
+function copyKlabLink() {
+  try {
+    const params = new URLSearchParams();
+    params.set('members', Array.from(selected).sort().join(','));
+    params.set('day', currentDay);
+    params.set('share', '1'); // triggers auto-open modal for recipient
+
+    // Collect ALL rounds for selected members (including default=1)
+    // so recipient sees the exact same state
+    const allRounds = {};
+    selected.forEach(m => {
+      BOOTHS.forEach(b => DAYS.forEach(d => {
+        const dayData = DATA[b.k] && DATA[b.k][d];
+        if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
+          if (arr.includes(m)) {
+            const sid = `${m}|${b.k}|${d}|${t}`;
+            const r = (slotRounds[sid] !== undefined) ? slotRounds[sid] : 1;
+            if (r !== 1) allRounds[sid] = r; // only store non-default to keep URL short
+          }
+        });
+      }));
+    });
+
+    if (Object.keys(allRounds).length > 0) {
+      params.set('rounds', JSON.stringify(allRounds));
+    }
+
+    const url = `${location.origin}${location.pathname}?${params.toString()}`;
+
+    const doShare = (url) => {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url)
+          .then(() => showKlabToast('✅ คัดลอกลิงค์แล้ว! ส่งให้เพื่อนได้เลย'))
+          .catch(() => fallbackCopy(url));
+      } else {
+        fallbackCopy(url);
+      }
+    };
+    doShare(url);
+  } catch(e) {
+    showKlabToast('❌ ไม่สามารถคัดลอกลิงค์ได้', 'text-red-400');
+    console.error('copyKlabLink error:', e);
+  }
+}
+
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0';
+  document.body.appendChild(ta);
+  ta.focus(); ta.select();
+  try {
+    document.execCommand('copy');
+    showKlabToast('✅ คัดลอกลิงค์แล้ว! วางในแชทเพื่อแชร์ได้เลย');
+  } catch(e) {
+    showKlabToast('❌ ไม่สามารถคัดลอกได้ กรุณาใช้ browser ที่รองรับ', 'text-red-400');
+  }
+  document.body.removeChild(ta);
+}
+
+function loadStateFromURL() {
+  try {
+    const params = new URLSearchParams(location.search);
+    const membersParam = params.get('members');
+    const dayParam = params.get('day');
+    const roundsParam = params.get('rounds');
+    const isShare = params.get('share') === '1';
+
+    if (membersParam) {
+      membersParam.split(',').forEach(m => {
+        const trimmed = m.trim();
+        if (trimmed && ALL_MEMBERS.includes(trimmed)) selected.add(trimmed);
+      });
+    }
+
+    if (roundsParam) {
+      const parsed = JSON.parse(roundsParam);
+      Object.assign(slotRounds, parsed);
+    }
+
+    if (dayParam && ['all','24 July','25 July','26 July'].includes(dayParam)) {
+      currentDay = dayParam;
+      const dayBtnMap = { 'all':'day-all', '24 July':'day-24jul', '25 July':'day-25jul', '26 July':'day-26jul' };
+      document.querySelectorAll('#day-all, #day-24jul, #day-25jul, #day-26jul').forEach(b => {
+        b.classList.remove('btn-primary');
+        b.classList.add('btn-secondary', 'bg-gray-800', 'p-2', 'rounded-xl');
+      });
+      const activeBtn = document.getElementById(dayBtnMap[dayParam]);
+      if (activeBtn) {
+        activeBtn.classList.remove('btn-secondary');
+        activeBtn.classList.add('btn-primary');
+      }
+    }
+
+    if (selected.size > 0) {
+      renderMemberGrid();
+      renderCalc();
+      renderSelectedBar();
+      updateTotalPrice();
+      if (isShare) {
+        setTimeout(() => openKlab(), 300);
+      }
+    }
+  } catch(e) { console.warn('Could not load URL state:', e); }
+}
+
+function renderActivities() {
+  const regularBooths = BOOTHS;
+
+  const regularHtml = regularBooths.map(b => `
+    <div class="glass p-4 rounded-xl border-l-4 border-cyan-500">
+      <div class="flex justify-between mb-2">
+        <div class="font-bold text-cyan-400">${b.s}</div>
+        <div class="text-white font-bold">${b.price > 0 ? b.price.toLocaleString() + '฿' : 'ฟรี'}</div>
+      </div>
+      <p class="text-[10px] text-gray-400">${b.t > 0 ? `ใช้ตั๋วคูปอง: <span class="text-yellow-400">${b.t} ใบ</span>/รอบ` : 'ไม่ใช้คูปอง'}</p>
+    </div>`).join('');
+
+  document.getElementById('activitiesGrid').innerHTML = `
+    <div class="col-span-full text-xs font-bold text-cyan-400 uppercase tracking-widest mb-1 mt-2">📍 บูธกิจกรรมในงาน BON ODORI 2026</div>
+    ${regularHtml}
+  `;
+}
+
+function renderSummary() {
+  const el = document.getElementById('summaryContent');
+
+  // Build per-member stats: totalTickets, totalActivities, detail by day
+  const statsMap = {};
+  ALL_MEMBERS.forEach(m => {
+    const detail = {}; // day -> [{booth, time, tickets}]
+    let totalTickets = 0, totalActivities = 0;
+    DAYS.forEach(d => {
+      BOOTHS.forEach(b => {
+        const dayData = DATA[b.k] && DATA[b.k][d];
+        if (!dayData) return;
+        Object.entries(dayData).forEach(([t, arr]) => {
+          if (arr.includes(m)) {
+            if (!detail[d]) detail[d] = [];
+            detail[d].push({ booth: b.s, time: t, tickets: b.t });
+            totalTickets += b.t;
+            totalActivities++;
+          }
+        });
+      });
+    });
+    statsMap[m] = { totalTickets, totalActivities, detail };
+  });
+
+  const sorted = Object.entries(statsMap).sort((a, b) => b[1].totalTickets - a[1].totalTickets);
+  const grandTotal = sorted.reduce((sum, [, v]) => sum + v.totalTickets, 0);
+  const maxTickets = sorted[0][1].totalTickets;
+
+  const rankClass = i => i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : 'rank-other';
+  const rankLabel = i => i === 0 ? '👑' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1;
+
+  const rows = sorted.map(([m, v], i) => {
+    const pct = Math.round((v.totalTickets / maxTickets) * 100);
+    const detailHtml = DAYS.map(d => {
+      if (!v.detail[d] || v.detail[d].length === 0) return '';
+      const acts = v.detail[d].map(a => `
+        <div class="detail-activity-row">
+          <span class="text-gray-300 font-semibold" style="min-width:90px">${a.time}</span>
+          <span class="text-cyan-400" style="flex:1">${a.booth}</span>
+          <span class="text-yellow-400 font-bold whitespace-nowrap">${a.tickets} ใบ</span>
+        </div>`).join('');
+      return `<div class="detail-day-label">${d}</div>${acts}`;
+    }).join('');
+
+    return `
+    <div class="stat-row" id="srow-${i}" onclick="toggleStatRow(${i})">
+      <div class="stat-row-header">
+        <div class="rank-badge ${rankClass(i)}">${rankLabel(i)}</div>
+        <div style="flex:1;min-width:0">
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-bold text-sm text-white truncate">${m}</span>
+            <span class="text-cyan-400 font-black text-sm ml-2 whitespace-nowrap">${v.totalTickets} ใบ</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="bar-wrap"><div class="bar-fill" style="width:${pct}%"></div></div>
+            <span class="text-gray-500 text-[10px] whitespace-nowrap">${v.totalActivities} รอบ</span>
+          </div>
+        </div>
+        <i class="ti ti-chevron-down stat-chevron text-sm"></i>
+      </div>
+      <div class="stat-row-detail">
+        <div class="flex gap-4 mb-3 pt-2 flex-wrap">
+          <div class="text-center"><div class="text-lg font-black text-cyan-400">${v.totalActivities}</div><div class="text-[9px] text-gray-500 uppercase">รอบกิจกรรม</div></div>
+          <div class="text-center"><div class="text-lg font-black text-pink-400">${v.totalTickets}</div><div class="text-[9px] text-gray-500 uppercase">ตั๋วรวม</div></div>
+          <div class="text-center"><div class="text-lg font-black text-yellow-400">${DAYS.filter(d => v.detail[d]?.length).length}</div><div class="text-[9px] text-gray-500 uppercase">วันที่มีกิจกรรม</div></div>
+        </div>
+        ${detailHtml}
+      </div>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="summary-banner">
+      <div class="summary-number">${grandTotal.toLocaleString()}</div>
+      <div class="text-xs opacity-70 mt-1 uppercase tracking-widest">Total Tickets Across All Members</div>
+      <div class="flex justify-center gap-6 mt-4 flex-wrap">
+        <div class="text-center"><div class="text-xl font-black text-cyan-400">${ALL_MEMBERS.length}</div><div class="text-[10px] text-gray-400 uppercase">เมมเบอร์ทั้งหมด</div></div>
+        <div class="text-center"><div class="text-xl font-black text-pink-400">${BOOTHS.length}</div><div class="text-[10px] text-gray-400 uppercase">บูธ</div></div>
+        <div class="text-center"><div class="text-xl font-black text-yellow-400">${DAYS.length}</div><div class="text-[10px] text-gray-400 uppercase">วัน</div></div>
+      </div>
+    </div>
+    <div class="glass p-4 rounded-2xl mb-3 flex items-center gap-2 text-sm text-gray-400">
+      <i class="ti ti-info-circle text-cyan-400"></i>
+      กดที่ชื่อเมมเบอร์เพื่อดูรายละเอียดกิจกรรมแต่ละรอบ
+    </div>
+    <div id="statRows">${rows}</div>`;
+}
+
+function toggleStatRow(i) {
+  document.getElementById('srow-' + i).classList.toggle('open');
+}
+
+document.addEventListener('DOMContentLoaded', initializeApp);
+</script>
+</body>
+</html>
