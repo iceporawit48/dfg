@@ -75,14 +75,148 @@ body { background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1629 100%
 .animate-pulse { animation: pulse 1.5s ease-in-out infinite; }
 #klabModal { overflow-y: auto; }
 .klab-content { max-height: 90vh; overflow-y: auto; }
+
+/* Theme: Sakura overrides */
+body.theme-sakura {
+  background: linear-gradient(135deg, #320a18 0%, #4c1122 50%, #20040e 100%);
+  color: #ffeef2;
+}
+body.theme-sakura .header-gradient {
+  background: linear-gradient(135deg, rgba(255, 77, 121, 0.15) 0%, rgba(245, 200, 66, 0.15) 100%);
+  border-bottom: 2px solid rgba(255, 77, 121, 0.3);
+}
+body.theme-sakura .logo-text {
+  background: linear-gradient(135deg, #FF4D79, #FF8F3D, #F5C842);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+body.theme-sakura .logo-sub {
+  color: #FF8F3D;
+}
+body.theme-sakura .neon-glow {
+  box-shadow: 0 0 20px rgba(255, 77, 121, 0.3), 0 0 40px rgba(245, 200, 66, 0.15);
+  border-color: rgba(255, 77, 121, 0.2);
+}
+body.theme-sakura .glass {
+  background: rgba(82, 21, 40, 0.7);
+  border-color: rgba(255, 77, 121, 0.15);
+}
+body.theme-sakura .nav-btn.active {
+  color: #FF4D79;
+  border-color: #FF4D79;
+}
+body.theme-sakura .search-input {
+  background: rgba(82, 21, 40, 0.6);
+  border-color: rgba(255, 77, 121, 0.25);
+  color: #ffeef2;
+}
+body.theme-sakura .btn-primary {
+  background: linear-gradient(135deg, #FF4D79, #FF8F3D);
+}
+body.theme-sakura .member-chip {
+  background: rgba(82, 21, 40, 0.5);
+  border-color: rgba(255, 143, 61, 0.25);
+}
+body.theme-sakura .member-chip.selected {
+  background: linear-gradient(135deg, #FF8F3D, #FF4D79);
+  color: white;
+}
+body.theme-sakura .selected-chip {
+  background: linear-gradient(135deg, #FF8F3D, #FF4D79);
+}
+body.theme-sakura .result-card {
+  background: rgba(82, 21, 40, 0.6);
+  border-color: rgba(255, 143, 61, 0.2);
+}
+body.theme-sakura .slot-item {
+  background: rgba(82, 21, 40, 0.6);
+  border-color: rgba(255, 143, 61, 0.15);
+}
+body.theme-sakura .price-bar-value {
+  color: #FF8F3D;
+}
+body.theme-sakura .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #FF4D79;
+}
+body.theme-sakura .stat-chevron {
+  color: #FF8F3D;
+}
+body.theme-sakura .bar-fill {
+  background: linear-gradient(90deg, #FF4D79, #FF8F3D);
+}
+body.theme-sakura .klab-content {
+  background: #3c0c1b;
+  border-color: #FF8F3D;
+  box-shadow: 0 0 50px rgba(255, 143, 61, 0.3);
+}
+body.theme-sakura .bg-gray-800 {
+  background-color: #521528 !important;
+}
+
+/* Custom CSS for Creative Features */
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-3px, -2px) rotate(-1.5deg); }
+  30% { transform: translate(2px, 3px) rotate(1.5deg); }
+  50% { transform: translate(-2px, 2px) rotate(-1.5deg); }
+  70% { transform: translate(3px, 2px) rotate(1.5deg); }
+  90% { transform: translate(-3px, -3px) rotate(-1.5deg); }
+}
+.shake-anim { animation: shake 0.3s infinite; }
+
+.tier-ur { border: 2.5px solid #FF3366 !important; box-shadow: 0 0 20px rgba(255, 51, 102, 0.7); background: linear-gradient(135deg, rgba(255, 51, 102, 0.2) 0%, rgba(20, 24, 50, 0.95) 100%) !important; }
+.tier-ssr { border: 2.5px solid #FFCC00 !important; box-shadow: 0 0 20px rgba(255, 204, 0, 0.7); background: linear-gradient(135deg, rgba(255, 204, 0, 0.15) 0%, rgba(20, 24, 50, 0.95) 100%) !important; }
+.tier-sr { border: 2.5px solid #A0A0A0 !important; box-shadow: 0 0 15px rgba(160, 160, 160, 0.4); background: linear-gradient(135deg, rgba(160, 160, 160, 0.1) 0%, rgba(20, 24, 50, 0.95) 100%) !important; }
+.tier-r { border: 2.5px solid #00CCFF !important; box-shadow: 0 0 15px rgba(0, 204, 255, 0.4); background: linear-gradient(135deg, rgba(0, 204, 255, 0.1) 0%, rgba(20, 24, 50, 0.95) 100%) !important; }
+
+/* Custom Frames for Sharing */
+.klab-content.frame-gold {
+  border: 5px solid #FFCC00 !important;
+  box-shadow: 0 0 50px rgba(255, 204, 0, 0.6) !important;
+  background: linear-gradient(135deg, #1c150b 0%, #1a1f3a 100%) !important;
+}
+.klab-content.frame-gold::before {
+  content: "★ OFFICIAL VIP SPONSOR ★";
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+  color: #FFCC00;
+  margin-bottom: 12px;
+  text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+.klab-content.frame-noodle {
+  border: 5px solid #FF3366 !important;
+  box-shadow: 0 0 50px rgba(255, 51, 102, 0.5) !important;
+  background: linear-gradient(135deg, #1f0c15 0%, #101428 100%) !important;
+}
+.klab-content.frame-noodle::before {
+  content: "🍜 วิกฤตการณ์การคลัง: โหมดต้มมาม่า 🍜";
+  display: block;
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-weight: 800;
+  font-size: 0.75rem;
+  color: #FF3366;
+  margin-bottom: 12px;
+}
 </style>
 </head>
 <body>
+<canvas id="effectCanvas" class="fixed inset-0 pointer-events-none z-[49]"></canvas>
 
 <div class="header-gradient">
   <div class="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
     <div><div class="logo-text">BON ODORI 2026</div><div class="logo-sub">BNK48 × CGM48 × FASHION ISLAND</div></div>
-    <div class="text-right hidden md:block"><p class="text-sm font-bold text-yellow-400">24 – 26 JULY 2026 @ISLAND HALL 3FL.</p></div>
+    <div class="flex items-center gap-2 sm:gap-4">
+      <button onclick="toggleAudio()" class="text-xs px-3 py-1.5 rounded-xl glass border border-white/10 hover:bg-white/5 active:scale-95 flex items-center gap-1.5 transition-all text-cyan-400 font-bold">
+        <i id="audio-icon" class="ti ti-volume-off text-sm"></i> <span id="audio-text" class="hidden sm:inline">เปิดเสียงเอฟเฟกต์</span>
+      </button>
+      <button onclick="toggleTheme()" class="text-xs px-3 py-1.5 rounded-xl glass border border-white/10 hover:bg-white/5 active:scale-95 flex items-center gap-1.5 transition-all text-yellow-400 font-bold">
+        <i id="theme-icon" class="ti ti-sunset-2 text-sm"></i> <span id="theme-text" class="hidden sm:inline">โหมดเทศกาลซากุระ</span>
+      </button>
+      <div class="text-right hidden lg:block"><p class="text-sm font-bold text-yellow-400">24 – 26 JULY 2026 @ISLAND HALL 3FL.</p></div>
+    </div>
   </div>
 </div>
 
@@ -92,6 +226,8 @@ body { background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1629 100%
     <button onclick="showPage('bod',this)" class="nav-btn">บด System</button>
     <button onclick="showPage('activities',this)" class="nav-btn">รายละเอียด</button>
     <button onclick="showPage('summary',this)" class="nav-btn">สถิติรวม</button>
+    <button onclick="showPage('route',this)" class="nav-btn">แผนเดินงาน</button>
+    <button onclick="showPage('oshi',this)" class="nav-btn">ตารางโอชิ</button>
   </div>
 </div>
 
@@ -143,6 +279,46 @@ body { background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1629 100%
 
   <div id="page-activities" class="page-content hidden"><div id="activitiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div></div>
   <div id="page-summary" class="page-content hidden"><div id="summaryContent" class="space-y-6"></div></div>
+
+  <!-- Page: Route Planner -->
+  <div id="page-route" class="page-content hidden">
+    <div class="space-y-6">
+      <div class="glass p-6 rounded-2xl border-l-4 border-cyan-500">
+        <h2 class="text-xl font-bold text-cyan-400 mb-2 flex items-center gap-2">
+          <i class="ti ti-map-pin"></i> แผนเดินงานรายวัน (Event Route Planner)
+        </h2>
+        <p class="text-sm text-gray-400">สรุปเส้นทางการเดินเที่ยวใน Island Hall ตามลำดับเวลาที่เลือกไว้เพื่อวางแผนล่วงหน้า</p>
+      </div>
+      
+      <div class="flex justify-center gap-3">
+        <button id="route-day-24" onclick="setRouteDay('24 July', this)" class="btn-primary">24 July</button>
+        <button id="route-day-25" onclick="setRouteDay('25 July', this)" class="btn-secondary bg-gray-800 p-2 rounded-xl text-xs font-bold text-gray-400 transition-all">25 July</button>
+        <button id="route-day-26" onclick="setRouteDay('26 July', this)" class="btn-secondary bg-gray-800 p-2 rounded-xl text-xs font-bold text-gray-400 transition-all">26 July</button>
+      </div>
+
+      <div id="routeTimeline" class="max-w-xl mx-auto space-y-4"></div>
+    </div>
+  </div>
+
+  <!-- Page: Oshi Schedule -->
+  <div id="page-oshi" class="page-content hidden">
+    <div class="space-y-6">
+      <div class="glass p-6 rounded-2xl border-l-4 border-purple-500">
+        <h2 class="text-xl font-bold text-purple-400 mb-2 flex items-center gap-2">
+          <i class="ti ti-heart"></i> ตารางโอชิ (Oshi Schedule Finder)
+        </h2>
+        <p class="text-sm text-gray-400">ค้นหาตารางกิจกรรมและช่วงเวลาทั้งหมดของเมมเบอร์ที่คุณรักได้ตลอดงานทั้ง 3 วัน</p>
+      </div>
+
+      <div class="max-w-md mx-auto space-y-4">
+        <select id="oshiSelect" onchange="renderOshiSchedule(this.value)" class="w-full search-input rounded-xl px-4 py-3 font-bold text-white bg-gray-800 border border-white/10 outline-none">
+          <option value="">— เลือกเมมเบอร์เพื่อดูตารางงาน —</option>
+        </select>
+      </div>
+
+      <div id="oshiTimelineResult" class="max-w-xl mx-auto space-y-6"></div>
+    </div>
+  </div>
 </div>
 
 <!-- Modal: KLAB -->
@@ -159,6 +335,14 @@ body { background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1629 100%
       <div class="bg-gray-800 p-3 rounded-xl"><div id="klabTicketCount" class="text-xl font-bold text-cyan-400">0</div><div class="text-[10px]">ตั๋วรวม (ใบ)</div></div>
     </div>
     <div id="klabMessage" class="italic text-yellow-400 text-sm mb-6"></div>
+    <div class="no-capture mb-4 text-left">
+      <label class="block text-[10px] font-bold text-gray-400 mb-1.5 uppercase">เลือกกรอบรูปสำหรับแชร์:</label>
+      <div class="grid grid-cols-3 gap-2">
+        <button onclick="setShareFrame('none')" id="frame-btn-none" class="bg-cyan-600/30 border border-cyan-400/50 text-[10px] py-1.5 px-2 rounded-lg font-bold text-white transition-all text-center">ไม่มีกรอบ</button>
+        <button onclick="setShareFrame('gold')" id="frame-btn-gold" class="bg-gray-800 border border-white/5 text-[10px] py-1.5 px-2 rounded-lg font-bold text-yellow-400 hover:bg-gray-700 transition-all text-center">กรอบสปอนเซอร์</button>
+        <button onclick="setShareFrame('noodle')" id="frame-btn-noodle" class="bg-gray-800 border border-white/5 text-[10px] py-1.5 px-2 rounded-lg font-bold text-pink-400 hover:bg-gray-700 transition-all text-center">กรอบต้มมาม่า</button>
+      </div>
+    </div>
     <div class="flex flex-col gap-2 no-capture">
       <div class="flex gap-2">
         <button onclick="downloadKlabImage()" id="btnDownload" class="flex-1 bg-cyan-600 hover:bg-cyan-500 active:scale-95 p-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
@@ -179,9 +363,9 @@ const TICKET_PRICE = 50; // บาทต่อคูปอง 1 ใบ
 const BOOTHS = [
   { k: "OfficialMerch", s: "Official Merchandise", t: 0, price: 0 },
   { k: "CenterStage", s: "Bon Odori Center Stage", t: 0, price: 0 },
-  { k: "HachiCha", s: "はちCHA (Hachi Cha)", t: 5, price: 5 * TICKET_PRICE },
+  { k: "HachiCha", s: "はちCHA (Hachi Cha)", t: 0, price: 145 },
   { k: "LuckyRoulette", s: "ラッキールーレット (Lucky Roulette)", t: 5, price: 5 * TICKET_PRICE },
-  { k: "CorkShateki", s: "コルク射的 3発 (Cork Shateki)", t: 5, price: 5 * TICKET_PRICE },
+  { k: "CorkShateki", s: "コルก射ที่ 3発 (Cork Shateki)", t: 5, price: 5 * TICKET_PRICE },
   { k: "Plinko", s: "プリンコ (Plinko)", t: 5, price: 5 * TICKET_PRICE },
   { k: "OmikujiSuuji", s: "おみくじ数字バトル (Omikuji Suuji Battle)", t: 5, price: 5 * TICKET_PRICE },
   { k: "Wanage", s: "輪投げ (Wanage)", t: 5, price: 5 * TICKET_PRICE }
@@ -234,8 +418,6 @@ let ALL_MEMBERS = [];
 let selected = new Set();
 let currentDay = 'all';
 let slotRounds = {};
-// Fanmeet zone selection: Map of "memberName" -> Set of boothKeys they chose
-// e.g. { "Emma": new Set(["FM_CGM25_ONLYYOU"]) }
 let selectedFanmeetZones = {};
 
 function initializeApp() {
@@ -243,6 +425,8 @@ function initializeApp() {
   renderMemberGrid();
   renderActivities();
   loadStateFromURL();
+  loadTheme();
+  populateOshiDropdown();
 }
 
 function showPage(p, btn) {
@@ -255,7 +439,13 @@ function showPage(p, btn) {
     renderBodSelectedBar();
     renderBod();
   }
+  if (p === 'route') renderRoutePlanner();
+  if (p === 'oshi') {
+    const oshiSelect = document.getElementById('oshiSelect');
+    renderOshiSchedule(oshiSelect ? oshiSelect.value : '');
+  }
   if (p === 'summary') renderSummary();
+  playSynthSound('ui');
 }
 
 function setDay(d, el) {
@@ -267,6 +457,7 @@ function setDay(d, el) {
   el.classList.remove('btn-secondary');
   el.classList.add('btn-primary');
   renderCalc();
+  playSynthSound('ui');
 }
 
 function filterMembers() { renderMemberGrid(); }
@@ -282,6 +473,7 @@ function toggleMember(m) {
     renderBodSelectedBar();
     renderBod();
   }
+  playSynthSound('ui');
 }
 
 function clearAll() { 
@@ -297,6 +489,7 @@ function clearAll() {
     renderBodSelectedBar();
     renderBod();
   }
+  playSynthSound('ui');
 }
 
 function setSlotRound(slotId, delta) {
@@ -306,6 +499,7 @@ function setSlotRound(slotId, delta) {
   renderCalc(); 
   updateTotalPrice();
   if (!document.getElementById('page-bod').classList.contains('hidden')) renderBod();
+  playSynthSound('ui');
 }
 
 function setSlotZero(slotId) { 
@@ -313,6 +507,7 @@ function setSlotZero(slotId) {
   renderCalc(); 
   updateTotalPrice();
   if (!document.getElementById('page-bod').classList.contains('hidden')) renderBod();
+  playSynthSound('ui');
 }
 
 function updateTotalPrice() {
@@ -375,6 +570,7 @@ function renderBodMemberGrid() {
   ).join('');
 }
 
+// BOD SYSTEM SELECTED BAR
 function renderBodSelectedBar() {
   const bar = document.getElementById('bodSelectedBar');
   if (selected.size === 0) { bar.classList.add('hidden'); return; }
@@ -393,8 +589,8 @@ function renderBod() {
 
   let html = '';
   DAYS.forEach(d => {
-    // Key: "Time @ BoothName" -> value: [Members]
     const activitySlots = {}; 
+    const timeOverlaps = {};
     
     selected.forEach(m => {
       BOOTHS.forEach(b => {
@@ -407,57 +603,85 @@ function renderBod() {
               const key = `${t} @ ${b.s}`;
               if (!activitySlots[key]) activitySlots[key] = [];
               activitySlots[key].push(m);
+
+              if (!timeOverlaps[t]) timeOverlaps[t] = [];
+              timeOverlaps[t].push({ member: m, booth: b.s });
             }
           }
         });
       });
     });
 
-    // กรองเฉพาะที่มีเมมเบอร์มากกว่า 1 คนในกิจกรรมเดียวกัน/เวลาเดียวกัน
     const conflicts = Object.entries(activitySlots).filter(([key, members]) => members.length > 1);
     
-    if (conflicts.length > 0) {
+    const overlaps = Object.entries(timeOverlaps).filter(([time, list]) => {
+      return list.length > 1;
+    });
+    
+    if (conflicts.length > 0 || overlaps.length > 0) {
       html += `<div class="result-card border-pink-500/50">
         <div class="text-pink-400 font-bold mb-3 flex items-center gap-2">
           <i class="ti ti-users"></i> วันที่ ${d} 
-          <span class="text-[10px] bg-pink-500/20 px-2 py-0.5 rounded">พบบูธเดียวกัน-เวลาเดียวกัน</span>
         </div>`;
       
-      conflicts.forEach(([key, members]) => {
-        const [time, boothName] = key.split(' @ ');
-        html += `<div class="conflict-item !bg-pink-500/5 !border-pink-500/20">
-          <div class="flex items-center justify-between mb-3 border-b border-white/5 pb-2">
-            <span class="text-sm font-bold text-white"><i class="ti ti-clock"></i> ${time}</span>
-            <span class="text-xs font-bold text-pink-400 uppercase">${boothName}</span>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            ${members.map(name => `
-              <div class="bg-gray-800/80 px-3 py-1.5 rounded-lg border border-pink-500/30 text-xs font-bold text-cyan-400">
-                ${name}
-              </div>
-            `).join('')}
-          </div>
-        </div>`;
-      });
+      if (conflicts.length > 0) {
+        html += `<div class="mb-4"><div class="text-[10px] text-pink-400 font-bold uppercase tracking-wider mb-2">📌 เมมเบอร์เจอกัน บูธเดียวกัน-เวลาเดียวกัน</div>`;
+        conflicts.forEach(([key, members]) => {
+          const [time, boothName] = key.split(' @ ');
+          html += `<div class="conflict-item !bg-pink-500/5 !border-pink-500/20 mb-2">
+            <div class="flex items-center justify-between mb-2 border-b border-white/5 pb-1">
+              <span class="text-xs font-bold text-white"><i class="ti ti-clock"></i> ${time}</span>
+              <span class="text-[10px] font-bold text-pink-400 uppercase">${boothName}</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              ${members.map(name => `
+                <div class="bg-gray-800/80 px-2 py-1 rounded-lg border border-pink-500/30 text-[10px] font-bold text-cyan-400">
+                   ${name}
+                </div>
+              `).join('')}
+            </div>
+          </div>`;
+        });
+        html += `</div>`;
+      }
+
+      if (overlaps.length > 0) {
+        html += `<div class="mb-2"><div class="text-[10px] text-yellow-400 font-bold uppercase tracking-wider mb-2">🚨 เตือนร่างทอง! กิจกรรมชนเวลากัน (แยกร่างไม่ได้นะ)</div>`;
+        overlaps.forEach(([time, list]) => {
+          html += `<div class="conflict-item !bg-yellow-500/5 !border-yellow-500/20 mb-2">
+            <div class="flex items-center justify-between mb-2 border-b border-white/5 pb-1">
+              <span class="text-xs font-bold text-white"><i class="ti ti-clock"></i> ${time}</span>
+              <span class="text-[10px] font-bold text-yellow-400 uppercase">ทับซ้อนเวลากัน</span>
+            </div>
+            <div class="space-y-1">
+              ${list.map(item => `
+                <div class="text-[10px] text-gray-300">
+                  • <span class="font-bold text-cyan-400">${item.member}</span> ที่บูธ <span class="text-white">${item.booth}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>`;
+        });
+        html += `</div>`;
+      }
+
       html += `</div>`;
     }
   });
 
-  el.innerHTML = html || '<div class="text-center py-10 text-green-400 font-bold"><i class="ti ti-circle-check"></i> ไม่พบเมมเบอร์ที่ "ชนกันในกิจกรรมเดียวกัน" (Safe!)</div>';
+  el.innerHTML = html || '<div class="text-center py-10 text-green-400 font-bold"><i class="ti ti-circle-check"></i> ไม่พบกิจกรรมที่ชนเวลากัน (Safe!)</div>';
 }
 
-// Fanmeet zone definitions (for picker UI) — not used in this event, kept empty for compatibility
 const FANMEET_EVENTS = [];
 
 function getFanmeetEventsForMember(m) {
   return FANMEET_EVENTS.filter(ev => ev.members.includes(m));
 }
 
-// selectedFanmeetZones[member][eventIdx] = zoneKey or null
 function setFanmeetZone(memberName, evIdx, zoneKey) {
   if (!selectedFanmeetZones[memberName]) selectedFanmeetZones[memberName] = {};
   if (selectedFanmeetZones[memberName][evIdx] === zoneKey) {
-    delete selectedFanmeetZones[memberName][evIdx]; // deselect same
+    delete selectedFanmeetZones[memberName][evIdx];
   } else {
     selectedFanmeetZones[memberName][evIdx] = zoneKey;
   }
@@ -471,7 +695,6 @@ function removeFanmeetZone(memberName, evIdx) {
   updateTotalPrice();
 }
 
-// Get selected zone for member+event
 function getSelectedZone(memberName, evIdx) {
   return (selectedFanmeetZones[memberName] || {})[evIdx] || null;
 }
@@ -482,7 +705,6 @@ function renderCalc() {
   let html = '';
 
   Array.from(selected).sort().forEach(m => {
-    // Regular slots
     const regularSlots = [];
     BOOTHS.forEach(b => {
       if (b.isFanmeet) return;
@@ -494,13 +716,11 @@ function renderCalc() {
       });
     });
 
-    // Fanmeet events for this member, filtered by day
     const memberFmEvents = getFanmeetEventsForMember(m).map((ev, globalIdx) => {
       const evIdx = FANMEET_EVENTS.indexOf(ev);
       return { ev, evIdx };
     }).filter(({ ev }) => currentDay === 'all' || ev.day === currentDay);
 
-    // Compute totals
     let mTotalMoney = 0, mTotalTickets = 0;
     regularSlots.forEach(s => {
       const r = slotRounds[s.id] !== undefined ? slotRounds[s.id] : 1;
@@ -508,102 +728,90 @@ function renderCalc() {
     });
     memberFmEvents.forEach(({ ev, evIdx }) => {
       const zk = getSelectedZone(m, evIdx);
-      if (zk) {
-        const z = ev.zones.find(z => z.k === zk);
-        if (z) { mTotalMoney += z.price; mTotalTickets += 1; }
-      }
+      const z = zk ? ev.zones.find(z => z.k === zk) : null;
+      if (z) { mTotalMoney += z.price; mTotalTickets += 1; }
     });
 
-    html += `<div class="result-card neon-glow">
-      <div class="flex justify-between items-center mb-4">
-        <div>
-          <div class="result-name">${m}</div>
-          <div class="text-[10px] text-cyan-400 font-bold uppercase tracking-tight">คูปองรวม: ${mTotalTickets} ใบ</div>
+    if (regularSlots.length === 0 && memberFmEvents.length === 0) return;
+
+    html += `
+      <div class="result-card">
+        <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
+          <div>
+            <div class="result-name">${m}</div>
+            <div class="text-[10px] text-gray-400">สรุปยอดเมมเบอร์: ใช้ตั๋วรวม <span class="text-cyan-400 font-bold">${mTotalTickets} ใบ</span> | ค่าใช้จ่าย <span class="text-yellow-400 font-bold">${mTotalMoney.toLocaleString()}฿</span></div>
+          </div>
         </div>
-        <div class="text-green-400 font-bold text-xl">${mTotalMoney.toLocaleString()}฿</div>
-      </div>`;
+        <div class="space-y-3">
+    `;
 
-    // Build merged timeline per day (regular + fanmeet together)
-    const daysToShow = currentDay === 'all' ? DAYS : [currentDay];
-    let hasAnything = false;
-
-    daysToShow.forEach(d => {
-      const dRegular = regularSlots.filter(s => s.d === d);
-      const dFm = memberFmEvents.filter(({ ev }) => ev.day === d);
-      if (dRegular.length === 0 && dFm.length === 0) return;
-      hasAnything = true;
-
-      // Sort regular by start time, interleave fanmeet by its time
-      const allItems = [
-        ...dRegular.map(s => ({ type:'regular', s, sortKey: s.t.split('-')[0] })),
-        ...dFm.map(({ ev, evIdx }) => ({ type:'fanmeet', ev, evIdx, sortKey: ev.time }))
-      ].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
-
-      html += `<div class="mb-4"><div class="text-[10px] font-bold text-yellow-500 uppercase mb-2 border-b border-yellow-500/20 pb-1">${d}</div>`;
-
-      allItems.forEach(item => {
-        if (item.type === 'regular') {
-          const s = item.s;
-          const r = slotRounds[s.id] !== undefined ? slotRounds[s.id] : 1;
-          html += `<div class="slot-item ${r===0?'zero-round':''}">
-            <div class="slot-info">
-              <div class="text-sm font-bold flex items-center gap-2">
-                ${s.t} — ${s.b.s}
-              </div>
-              <div class="text-[10px] text-gray-400">
-                <span class="text-white">${(s.b.price*r).toLocaleString()}฿</span> | <span class="text-cyan-400">${s.b.t*r} ตั๋ว</span>
-              </div>
+    regularSlots.forEach(s => {
+      const r = slotRounds[s.id] !== undefined ? slotRounds[s.id] : 1;
+      html += `
+        <div class="slot-item ${r === 0 ? 'zero-round' : ''}">
+          <div class="slot-info flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+              <span class="text-[9px] font-black bg-cyan-900/60 text-cyan-400 px-2 py-0.5 rounded-full whitespace-nowrap">${s.b.s}</span>
+              <span class="text-[10px] font-bold text-yellow-400 whitespace-nowrap">${s.d}</span>
             </div>
-            <div class="flex items-center gap-2">
-              <button class="round-btn" onclick="setSlotRound('${s.id}',-1)">-</button>
-              <div class="flex flex-col items-center min-w-[20px]"><span class="text-xs font-bold text-white">${r}</span><span class="text-[8px] text-gray-500">ครั้ง</span></div>
-              <button class="round-btn" onclick="setSlotRound('${s.id}',1)">+</button>
-              <button class="btn-set-zero" onclick="setSlotZero('${s.id}')"><i class="ti ti-trash"></i></button>
+            <div class="text-sm font-black text-white truncate">${s.t} น.</div>
+            <div class="text-[10px] text-gray-500 mt-1">
+              <span class="text-white">${(s.b.price*r).toLocaleString()}฿</span> | <span class="text-cyan-400">${s.b.t*r} ตั๋ว</span>
             </div>
-          </div>`;
-
-        } else {
-          // Fanmeet row with dropdown
-          const { ev, evIdx } = item;
-          const selectedZk = getSelectedZone(m, evIdx);
-          const selectedZone = selectedZk ? ev.zones.find(z => z.k === selectedZk) : null;
-
-          html += `<div class="slot-item" style="border-color:rgba(245,200,66,${selectedZone?'0.5':'0.2'});background:rgba(245,200,66,${selectedZone?'0.08':'0.03'})">
-            <div class="slot-info flex-1 min-w-0">
-              <div class="flex items-center gap-2 mb-1.5 flex-wrap">
-                <span class="text-[9px] font-black bg-yellow-600/40 text-yellow-300 px-2 py-0.5 rounded-full whitespace-nowrap">🎪 FANMEET</span>
-                <span class="text-xs font-bold text-yellow-200 truncate">${ev.name}</span>
-              </div>
-              <div class="text-[10px] text-gray-500 mb-2">${ev.time} น. — เลือก Zone / ราคาที่ซื้อ</div>
-              <div class="relative">
-                <select onchange="setFanmeetZone('${m}',${evIdx},this.value)"
-                  class="w-full text-[11px] font-bold rounded-lg px-3 py-2 pr-7 appearance-none cursor-pointer"
-                  style="background:rgba(20,24,50,0.95);border:1.5px solid rgba(245,200,66,${selectedZone?'0.6':'0.25'});color:${selectedZone?'#fde68a':'#888'};outline:none">
-                  <option value="">— ไม่ได้ซื้อ —</option>
-                  ${ev.zones.map(z => `<option value="${z.k}" ${selectedZk===z.k?'selected':''}>${z.label} — ${z.price.toLocaleString()}฿</option>`).join('')}
-                </select>
-                <i class="ti ti-chevron-down" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:#888;pointer-events:none"></i>
-              </div>
-              ${selectedZone ? `<div class="mt-1.5 text-[10px] font-bold text-yellow-400">${selectedZone.label} — ${selectedZone.price.toLocaleString()}฿</div>` : ''}
-            </div>
-          </div>`;
-        }
-      });
-
-      html += `</div>`;
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="round-btn" onclick="setSlotRound('${s.id}',-1)">-</button>
+            <div class="flex flex-col items-center min-w-[20px]"><span class="text-xs font-bold text-white">${r}</span><span class="text-[8px] text-gray-500">ครั้ง</span></div>
+            <button class="round-btn" onclick="setSlotRound('${s.id}',1)">+</button>
+            <button class="btn-set-zero" onclick="setSlotZero('${s.id}')"><i class="ti ti-trash"></i></button>
+          </div>
+        </div>`;
     });
 
-    if (!hasAnything) html += `<p class="text-xs italic opacity-50">ไม่มีกิจกรรมในวันที่เลือก</p>`;
-    html += `</div>`;
+    memberFmEvents.forEach(({ ev, evIdx }) => {
+      const selectedZk = getSelectedZone(m, evIdx);
+      const selectedZone = selectedZk ? ev.zones.find(z => z.k === selectedZk) : null;
+
+      html += `<div class="slot-item" style="border-color:rgba(245,200,66,${selectedZone?'0.5':'0.2'});background:rgba(245,200,66,${selectedZone?'0.08':'0.03'})">
+        <div class="slot-info flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+            <span class="text-[9px] font-black bg-yellow-600/40 text-yellow-300 px-2 py-0.5 rounded-full whitespace-nowrap">🎪 FANMEET</span>
+            <span class="text-xs font-bold text-yellow-200 truncate">${ev.name}</span>
+          </div>
+          <div class="text-[10px] text-gray-500 mb-2">${ev.time} น. — เลือก Zone / ราคาที่ซื้อ</div>
+          <div class="relative">
+            <select onchange="setFanmeetZone('${m}',${evIdx},this.value)"
+              class="w-full text-[11px] font-bold rounded-lg px-3 py-2 pr-7 appearance-none cursor-pointer"
+              style="background:rgba(20,24,50,0.95);border:1.5px solid rgba(245,200,66,${selectedZone?'0.6':'0.25'});color:${selectedZone?'#fde68a':'#888'};outline:none">
+              <option value="">— ไม่ได้ซื้อ —</option>
+              ${ev.zones.map(z => `<option value="${z.k}" ${selectedZk===z.k?'selected':''}>${z.label} — ${z.price.toLocaleString()}฿</option>`).join('')}
+            </select>
+            <i class="ti ti-chevron-down" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:#888;pointer-events:none"></i>
+          </div>
+          ${selectedZone ? `<div class="mt-1.5 text-[10px] font-bold text-yellow-400">${selectedZone.label} — ${selectedZone.price.toLocaleString()}฿</div>` : ''}
+        </div>
+      </div>`;
+    });
+
+    html += `</div></div>`;
   });
 
+  if (!html) html = `<p class="text-xs italic opacity-50">ไม่มีกิจกรรมในวันที่เลือก</p>`;
   el.innerHTML = html;
+}
+
+function getKlabLevel(price) {
+  if (price === 0) return { label: "กระเป๋าตังค์ยังยิ้มได้ ☕", desc: "ยังไม่ได้เลือกกิจกรรมใดๆ เลย ปลอดภัย 100%", color: "text-green-400" };
+  if (price <= 500) return { label: "ระดับ จิบชาชิลๆ 🍵", desc: "ใช้จ่ายเบาๆ ยังอยู่ดีกินดีในร้านหรูได้สบายๆ", color: "text-cyan-400" };
+  if (price <= 1500) return { label: "ระดับ กะเพราไข่ดาว 🍳", desc: "กระเป๋าตังค์เริ่มตึงตัว งดขนมหวาน แล้วกินข้าวแกงข้างทาง", color: "text-yellow-400" };
+  if (price <= 3000) return { label: "ระดับ มิตรแท้เส้นบะหมี่ 🍜", desc: "เตรียมซื้อบะหมี่กึ่งสำเร็จรูปยกแพ็คกินสามมื้อต่อวัน", color: "text-pink-400" };
+  if (price <= 6000) return { label: "ระดับ ต้มน้ำลวกเกลือ 🧂", desc: "วิกฤตทางการเงินค่อนข้างรุนแรง แค่กินน้ำลวกเกลือก็หรูแล้ว", color: "text-red-400" };
+  return { label: "ระดับ กินลมหายใจเป็นอาหาร 🌬️", desc: "เงินหมดเกลี้ยง นิพพานทางการเงิน อากาศหายใจคืออาหารหลักเท่านั้น!", color: "text-purple-400 animate-pulse" };
 }
 
 function openKlab() {
   let totalMoney = 0, totalTickets = 0, items = '';
   selected.forEach(m => {
-    // Regular booth slots
     BOOTHS.forEach(b => {
       if (b.isFanmeet) return;
       DAYS.forEach(d => {
@@ -620,7 +828,6 @@ function openKlab() {
         });
       });
     });
-    // Fanmeet selected zones
     const mzMap = selectedFanmeetZones[m] || {};
     Object.entries(mzMap).forEach(([evIdx, zk]) => {
       const ev = FANMEET_EVENTS[evIdx]; if (!ev) return;
@@ -633,14 +840,27 @@ function openKlab() {
   document.getElementById('klabMamaCount').textContent = Math.ceil(totalMoney / 7).toLocaleString();
   document.getElementById('klabTicketCount').textContent = totalTickets.toLocaleString();
   document.getElementById('klabItemList').innerHTML = items;
-  // Show banner if opened from shared link
+  
+  const klabLevel = getKlabLevel(totalMoney);
+  const kMsgEl = document.getElementById('klabMessage');
+  kMsgEl.className = "text-center mb-6 px-4 py-2 bg-white/5 border border-white/10 rounded-xl";
+  kMsgEl.innerHTML = `<div class="font-bold text-sm ${klabLevel.color}">${klabLevel.label}</div><div class="text-[10px] text-gray-400 mt-1">${klabLevel.desc}</div>`;
+
+  if (totalMoney > 3000) {
+    playSynthSound('klab_sad');
+  } else {
+    playSynthSound('ui');
+  }
+
+  setShareFrame('none');
+
   const isSharedLink = new URLSearchParams(location.search).get('share') === '1';
   const banner = document.getElementById('klabSharedBanner');
   if (banner) banner.classList.toggle('hidden', !isSharedLink);
   document.getElementById('klabModal').style.display = 'flex';
 }
 
-function closeKlab() { document.getElementById('klabModal').style.display = 'none'; }
+function closeKlab() { document.getElementById('klabModal').style.display = 'none'; playSynthSound('ui'); }
 
 function showKlabToast(msg, color = 'text-green-400') {
   const t = document.getElementById('klabToast');
@@ -656,26 +876,38 @@ async function downloadKlabImage() {
   btn.innerHTML = '<i class="ti ti-loader animate-spin"></i> กำลังสร้างรูป...';
 
   try {
-    // Clone capture area, remove no-capture elements, render off-screen
     const area = document.getElementById('klabCaptureArea');
     const clone = area.cloneNode(true);
+    
+    if (currentShareFrame === 'gold') {
+      const banner = document.createElement('div');
+      banner.style.cssText = "font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 3px; color: #FFCC00; font-weight: bold; margin-bottom: 15px; text-shadow: 0 0 10px rgba(255, 204, 0, 0.5); text-align: center;";
+      banner.textContent = "★ OFFICIAL VIP SPONSOR ★";
+      clone.insertBefore(banner, clone.firstChild);
+    } else if (currentShareFrame === 'noodle') {
+      const banner = document.createElement('div');
+      banner.style.cssText = "font-family: 'Noto Sans Thai', sans-serif; font-weight: 800; font-size: 0.8rem; color: #FF3366; margin-bottom: 15px; text-align: center;";
+      banner.textContent = "🍜 วิกฤตการณ์การคลัง: โหมดต้มมาม่า 🍜";
+      clone.insertBefore(banner, clone.firstChild);
+    }
+
     clone.style.cssText = `
       position: fixed; left: -9999px; top: 0;
       width: 480px; max-height: none; overflow: visible;
       border-radius: 24px; padding: 40px;
-      background: #1a1f3a;
+      background: ${currentShareFrame === 'gold' ? 'linear-gradient(135deg, #1c150b 0%, #1a1f3a 100%)' : currentShareFrame === 'noodle' ? 'linear-gradient(135deg, #1f0c15 0%, #101428 100%)' : '#1a1f3a'};
+      border: ${currentShareFrame === 'gold' ? '5px solid #FFCC00' : currentShareFrame === 'noodle' ? '5px solid #FF3366' : '2px solid #F5C842'};
+      box-shadow: ${currentShareFrame === 'gold' ? '0 0 50px rgba(255, 204, 0, 0.6)' : currentShareFrame === 'noodle' ? '0 0 50px rgba(255, 51, 102, 0.5)' : 'none'};
     `;
-    // Remove the scrollable limit on item list in clone
     const itemList = clone.querySelector('#klabItemList');
     if (itemList) { itemList.style.maxHeight = 'none'; itemList.style.overflow = 'visible'; }
-    // Remove buttons
     const noCap = clone.querySelector('.no-capture');
     if (noCap) noCap.remove();
     const toast = clone.querySelector('#klabToast');
     if (toast) toast.remove();
 
     document.body.appendChild(clone);
-    await new Promise(r => setTimeout(r, 80)); // allow paint
+    await new Promise(r => setTimeout(r, 80));
 
     const canvas = await html2canvas(clone, {
       backgroundColor: '#1a1f3a',
@@ -705,10 +937,8 @@ function copyKlabLink() {
     const params = new URLSearchParams();
     params.set('members', Array.from(selected).sort().join(','));
     params.set('day', currentDay);
-    params.set('share', '1'); // triggers auto-open modal for recipient
+    params.set('share', '1');
 
-    // Collect ALL rounds for selected members (including default=1)
-    // so recipient sees the exact same state
     const allRounds = {};
     selected.forEach(m => {
       BOOTHS.forEach(b => DAYS.forEach(d => {
@@ -717,7 +947,7 @@ function copyKlabLink() {
           if (arr.includes(m)) {
             const sid = `${m}|${b.k}|${d}|${t}`;
             const r = (slotRounds[sid] !== undefined) ? slotRounds[sid] : 1;
-            if (r !== 1) allRounds[sid] = r; // only store non-default to keep URL short
+            if (r !== 1) allRounds[sid] = r;
           }
         });
       }));
@@ -827,10 +1057,9 @@ function renderActivities() {
 function renderSummary() {
   const el = document.getElementById('summaryContent');
 
-  // Build per-member stats: totalTickets, totalActivities, detail by day
   const statsMap = {};
   ALL_MEMBERS.forEach(m => {
-    const detail = {}; // day -> [{booth, time, tickets}]
+    const detail = {};
     let totalTickets = 0, totalActivities = 0;
     DAYS.forEach(d => {
       BOOTHS.forEach(b => {
@@ -851,73 +1080,529 @@ function renderSummary() {
 
   const sorted = Object.entries(statsMap).sort((a, b) => b[1].totalTickets - a[1].totalTickets);
   const grandTotal = sorted.reduce((sum, [, v]) => sum + v.totalTickets, 0);
-  const maxTickets = sorted[0][1].totalTickets;
+  const maxTickets = sorted.length > 0 ? sorted[0][1].totalTickets : 1;
 
   const rankClass = i => i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : 'rank-other';
-  const rankLabel = i => i === 0 ? '👑' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1;
+  const rankLabel = i => i === 0 ? '👑' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i + 1);
 
-  const rows = sorted.map(([m, v], i) => {
-    const pct = Math.round((v.totalTickets / maxTickets) * 100);
-    const detailHtml = DAYS.map(d => {
-      if (!v.detail[d] || v.detail[d].length === 0) return '';
-      const acts = v.detail[d].map(a => `
-        <div class="detail-activity-row">
-          <span class="text-gray-300 font-semibold" style="min-width:90px">${a.time}</span>
-          <span class="text-cyan-400" style="flex:1">${a.booth}</span>
-          <span class="text-yellow-400 font-bold whitespace-nowrap">${a.tickets} ใบ</span>
-        </div>`).join('');
-      return `<div class="detail-day-label">${d}</div>${acts}`;
-    }).join('');
-
-    return `
-    <div class="stat-row" id="srow-${i}" onclick="toggleStatRow(${i})">
-      <div class="stat-row-header">
-        <div class="rank-badge ${rankClass(i)}">${rankLabel(i)}</div>
-        <div style="flex:1;min-width:0">
-          <div class="flex items-center justify-between mb-1">
-            <span class="font-bold text-sm text-white truncate">${m}</span>
-            <span class="text-cyan-400 font-black text-sm ml-2 whitespace-nowrap">${v.totalTickets} ใบ</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <div class="bar-wrap"><div class="bar-fill" style="width:${pct}%"></div></div>
-            <span class="text-gray-500 text-[10px] whitespace-nowrap">${v.totalActivities} รอบ</span>
-          </div>
-        </div>
-        <i class="ti ti-chevron-down stat-chevron text-sm"></i>
-      </div>
-      <div class="stat-row-detail">
-        <div class="flex gap-4 mb-3 pt-2 flex-wrap">
-          <div class="text-center"><div class="text-lg font-black text-cyan-400">${v.totalActivities}</div><div class="text-[9px] text-gray-500 uppercase">รอบกิจกรรม</div></div>
-          <div class="text-center"><div class="text-lg font-black text-pink-400">${v.totalTickets}</div><div class="text-[9px] text-gray-500 uppercase">ตั๋วรวม</div></div>
-          <div class="text-center"><div class="text-lg font-black text-yellow-400">${DAYS.filter(d => v.detail[d]?.length).length}</div><div class="text-[9px] text-gray-500 uppercase">วันที่มีกิจกรรม</div></div>
-        </div>
-        ${detailHtml}
-      </div>
-    </div>`;
-  }).join('');
-
-  el.innerHTML = `
+  let html = `
     <div class="summary-banner">
-      <div class="summary-number">${grandTotal.toLocaleString()}</div>
-      <div class="text-xs opacity-70 mt-1 uppercase tracking-widest">Total Tickets Across All Members</div>
-      <div class="flex justify-center gap-6 mt-4 flex-wrap">
-        <div class="text-center"><div class="text-xl font-black text-cyan-400">${ALL_MEMBERS.length}</div><div class="text-[10px] text-gray-400 uppercase">เมมเบอร์ทั้งหมด</div></div>
-        <div class="text-center"><div class="text-xl font-black text-pink-400">${BOOTHS.length}</div><div class="text-[10px] text-gray-400 uppercase">บูธ</div></div>
-        <div class="text-center"><div class="text-xl font-black text-yellow-400">${DAYS.length}</div><div class="text-[10px] text-gray-400 uppercase">วัน</div></div>
+      <div class="text-gray-400 text-sm font-medium mb-1">จำนวนคูปองรวมของเมมเบอร์ทุกคนในงาน</div>
+      <div class="summary-number">${grandTotal.toLocaleString()} ใบ</div>
+      <div class="text-[10px] text-cyan-400 font-bold uppercase tracking-wider mt-2">รวมทั้งหมด ${sorted.length} เมมเบอร์</div>
+    </div>
+    <div class="space-y-3">
+  `;
+
+  sorted.forEach(([m, v], idx) => {
+    const pct = maxTickets > 0 ? (v.totalTickets / maxTickets) * 100 : 0;
+    
+    let detailHtml = '';
+    DAYS.forEach(d => {
+      const items = v.detail[d] || [];
+      if (items.length === 0) return;
+      detailHtml += `<div class="detail-day-label">${d}</div>`;
+      items.forEach(item => {
+        detailHtml += `
+          <div class="detail-activity-row">
+            <span class="text-gray-300 font-medium">${item.time} — ${item.booth}</span>
+            <span class="text-cyan-400 font-bold">${item.tickets} ใบ</span>
+          </div>
+        `;
+      });
+    });
+
+    html += `
+      <div class="stat-row" onclick="this.classList.toggle('open')">
+        <div class="stat-row-header">
+          <div class="rank-badge ${rankClass(idx)}">${rankLabel(idx)}</div>
+          <div class="flex-1 min-w-0">
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-bold text-white text-sm truncate">${m}</span>
+              <span class="text-xs font-bold text-pink-400">${v.totalTickets} ใบ</span>
+            </div>
+            <div class="flex items-center">
+              <div class="bar-wrap">
+                <div class="bar-fill" style="width: ${pct}%"></div>
+              </div>
+              <span class="text-[10px] text-gray-500 font-medium w-8 text-right">${v.totalActivities} บูธ</span>
+            </div>
+          </div>
+          <i class="ti ti-chevron-down stat-chevron text-lg"></i>
+        </div>
+        <div class="stat-row-detail">
+          ${detailHtml || '<div class="text-[10px] text-gray-500 italic">ไม่มีข้อมูลกิจกรรม</div>'}
+        </div>
       </div>
-    </div>
-    <div class="glass p-4 rounded-2xl mb-3 flex items-center gap-2 text-sm text-gray-400">
-      <i class="ti ti-info-circle text-cyan-400"></i>
-      กดที่ชื่อเมมเบอร์เพื่อดูรายละเอียดกิจกรรมแต่ละรอบ
-    </div>
-    <div id="statRows">${rows}</div>`;
+    `;
+  });
+
+  html += '</div>';
+  el.innerHTML = html;
 }
 
-function toggleStatRow(i) {
-  document.getElementById('srow-' + i).classList.toggle('open');
+// Theme Switcher Functions
+function toggleTheme() {
+  const body = document.body;
+  const isSakura = body.classList.toggle('theme-sakura');
+  localStorage.setItem('theme', isSakura ? 'sakura' : 'cyberpunk');
+  
+  const icon = document.getElementById('theme-icon');
+  const text = document.getElementById('theme-text');
+  if (icon && text) {
+    if (isSakura) {
+      icon.className = 'ti ti-sparkles text-sm';
+      text.textContent = 'โหมดไซเบอร์พังค์';
+      icon.style.color = '#FF8F3D';
+    } else {
+      icon.className = 'ti ti-sunset-2 text-sm';
+      text.textContent = 'โหมดเทศกาลซากุระ';
+      icon.style.color = '#F5C842';
+    }
+  }
+  playSynthSound('theme');
+  initParticles(isSakura ? 'sakura' : 'cyberpunk');
 }
 
-document.addEventListener('DOMContentLoaded', initializeApp);
+function loadTheme() {
+  const theme = localStorage.getItem('theme');
+  const isSakura = theme === 'sakura';
+  if (isSakura) {
+    document.body.classList.add('theme-sakura');
+    const icon = document.getElementById('theme-icon');
+    const text = document.getElementById('theme-text');
+    if (icon && text) {
+      icon.className = 'ti ti-sparkles text-sm';
+      text.textContent = 'โหมดไซเบอร์พังค์';
+      icon.style.color = '#FF8F3D';
+    }
+  }
+  initParticles(isSakura ? 'sakura' : 'cyberpunk');
+}
+
+// Canvas Particle System
+let canvas, ctx;
+let particles = [];
+let animId = null;
+let currentTheme = 'cyberpunk';
+
+function initParticles(theme) {
+  currentTheme = theme;
+  canvas = document.getElementById('effectCanvas');
+  if (!canvas) return;
+  ctx = canvas.getContext('2d');
+  
+  window.removeEventListener('resize', resizeCanvas);
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  particles = [];
+  const particleCount = theme === 'sakura' ? 45 : 30;
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(createParticle(true));
+  }
+
+  if (animId) cancelAnimationFrame(animId);
+  drawParticles();
+}
+
+function resizeCanvas() {
+  if (canvas) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+}
+
+function createParticle(randomY = false) {
+  const w = canvas ? canvas.width : window.innerWidth;
+  const h = canvas ? canvas.height : window.innerHeight;
+  return {
+    x: Math.random() * w,
+    y: randomY ? Math.random() * h : (currentTheme === 'sakura' ? -20 : h + 20),
+    size: Math.random() * (currentTheme === 'sakura' ? 8 + 4 : 4 + 2),
+    speedX: currentTheme === 'sakura' ? Math.random() * 1.5 - 0.5 : Math.random() * 0.5 - 0.25,
+    speedY: currentTheme === 'sakura' ? Math.random() * 1 + 1 : -(Math.random() * 0.8 + 0.4),
+    angle: Math.random() * 360,
+    spin: Math.random() * 1.5 - 0.75,
+    opacity: Math.random() * 0.6 + 0.2
+  };
+}
+
+function drawParticles() {
+  if (!canvas || !ctx) return;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const w = canvas.width;
+  const h = canvas.height;
+
+  particles.forEach((p, idx) => {
+    ctx.save();
+    ctx.globalAlpha = p.opacity;
+    ctx.translate(p.x, p.y);
+    
+    if (currentTheme === 'sakura') {
+      ctx.rotate((p.angle * Math.PI) / 180);
+      ctx.fillStyle = '#FFB7C5';
+      ctx.beginPath();
+      ctx.ellipse(0, 0, p.size, p.size / 2, 0, 0, 2 * Math.PI);
+      ctx.fill();
+      ctx.strokeStyle = '#FFA4B4';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(-p.size, 0);
+      ctx.lineTo(p.size, 0);
+      ctx.stroke();
+    } else {
+      const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, p.size);
+      const color = idx % 2 === 0 ? 'rgba(232, 69, 122, ' : 'rgba(6, 182, 212, ';
+      grad.addColorStop(0, color + '1)');
+      grad.addColorStop(1, color + '0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(0, 0, p.size, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+    
+    ctx.restore();
+
+    p.x += p.speedX;
+    p.y += p.speedY;
+    p.angle += p.spin;
+
+    if (currentTheme === 'sakura') {
+      if (p.y > h + 20 || p.x > w + 20 || p.x < -20) {
+        particles[idx] = createParticle(false);
+      }
+    } else {
+      if (p.y < -20 || p.x > w + 20 || p.x < -20) {
+        particles[idx] = createParticle(false);
+      }
+    }
+  });
+
+  animId = requestAnimationFrame(drawParticles);
+}
+
+// Web Audio Synthesizer SFX Engine
+let audioCtx = null;
+let soundEnabled = false;
+
+function toggleAudio() {
+  soundEnabled = !soundEnabled;
+  const icon = document.getElementById('audio-icon');
+  const text = document.getElementById('audio-text');
+  if (icon && text) {
+    if (soundEnabled) {
+      icon.className = 'ti ti-volume text-sm';
+      text.textContent = 'ปิดเสียงเอฟเฟกต์';
+      icon.style.color = '#06B6D4';
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      playSynthSound('ui');
+    } else {
+      icon.className = 'ti ti-volume-off text-sm';
+      text.textContent = 'เปิดเสียงเอฟเฟกต์';
+      icon.style.color = '#b0b0b0';
+    }
+  }
+}
+
+function playSynthSound(type) {
+  if (!soundEnabled || !audioCtx) return;
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  const dest = audioCtx.destination;
+
+  if (type === 'ui') {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(1046.50, audioCtx.currentTime + 0.08);
+    gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+    osc.connect(gain);
+    gain.connect(dest);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.12);
+  }
+  else if (type === 'theme') {
+    const now = audioCtx.currentTime;
+    [261.63, 329.63, 392.00, 523.25].forEach((freq, idx) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now + idx * 0.05);
+      gain.gain.setValueAtTime(0.06, now + idx * 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.05 + 0.3);
+      osc.connect(gain);
+      gain.connect(dest);
+      osc.start(now + idx * 0.05);
+      osc.stop(now + idx * 0.05 + 0.3);
+    });
+  }
+  else if (type === 'gacha_roll') {
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(150, now);
+    osc.frequency.linearRampToValueAtTime(800, now + 0.4);
+    gain.gain.setValueAtTime(0.04, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+    osc.connect(gain);
+    gain.connect(dest);
+    osc.start();
+    osc.stop(now + 0.45);
+  }
+  else if (type === 'gacha_shake') {
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(60, now);
+    osc.frequency.setValueAtTime(90, now + 0.12);
+    osc.frequency.setValueAtTime(60, now + 0.24);
+    gain.gain.setValueAtTime(0.06, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+    osc.connect(gain);
+    gain.connect(dest);
+    osc.start();
+    osc.stop(now + 0.35);
+  }
+  else if (type === 'gacha_reveal') {
+    const now = audioCtx.currentTime;
+    const notes = [523.25, 659.25, 783.99, 1046.50];
+    notes.forEach((freq, idx) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+      gain.gain.setValueAtTime(0.08, now + idx * 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.5);
+      osc.connect(gain);
+      gain.connect(dest);
+      osc.start(now + idx * 0.08);
+      osc.stop(now + idx * 0.08 + 0.5);
+    });
+  }
+  else if (type === 'klab_sad') {
+    const now = audioCtx.currentTime;
+    const osc1 = audioCtx.createOscillator();
+    const osc2 = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc1.type = 'sawtooth';
+    osc1.frequency.setValueAtTime(120, now);
+    osc1.frequency.linearRampToValueAtTime(80, now + 1.2);
+    osc2.type = 'triangle';
+    osc2.frequency.setValueAtTime(144, now);
+    osc2.frequency.linearRampToValueAtTime(96, now + 1.2);
+    gain.gain.setValueAtTime(0.1, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 1.3);
+    osc1.connect(gain);
+    osc2.connect(gain);
+    gain.connect(dest);
+    osc1.start();
+    osc2.start();
+    osc1.stop(now + 1.3);
+    osc2.stop(now + 1.3);
+  }
+}
+
+// Sharing Frame Selector
+let currentShareFrame = 'none';
+function setShareFrame(frame) {
+  currentShareFrame = frame;
+  document.querySelectorAll('[id^="frame-btn-"]').forEach(btn => {
+    btn.className = "bg-gray-800 border border-white/5 text-[10px] py-1.5 px-2 rounded-lg font-bold text-gray-400 transition-all text-center";
+  });
+  
+  const activeBtn = document.getElementById(`frame-btn-${frame}`);
+  if (activeBtn) {
+    if (frame === 'none') {
+      activeBtn.className = "bg-cyan-600/30 border border-cyan-400/50 text-[10px] py-1.5 px-2 rounded-lg font-bold text-white transition-all text-center";
+    } else if (frame === 'gold') {
+      activeBtn.className = "bg-yellow-600/30 border border-yellow-400/50 text-[10px] py-1.5 px-2 rounded-lg font-bold text-yellow-400 transition-all text-center";
+    } else if (frame === 'noodle') {
+      activeBtn.className = "bg-pink-600/30 border border-pink-400/50 text-[10px] py-1.5 px-2 rounded-lg font-bold text-pink-400 transition-all text-center";
+    }
+  }
+
+  const area = document.getElementById('klabCaptureArea');
+  area.classList.remove('frame-gold', 'frame-noodle');
+  if (frame === 'gold') area.classList.add('frame-gold');
+  if (frame === 'noodle') area.classList.add('frame-noodle');
+  playSynthSound('ui');
+}
+
+// Route Planner & Oshi Schedule Finder Logic
+let currentRouteDay = '24 July';
+
+function setRouteDay(d, btn) {
+  currentRouteDay = d;
+  document.querySelectorAll('[id^="route-day-"]').forEach(b => {
+    b.className = "btn-secondary bg-gray-800 p-2 rounded-xl text-xs font-bold text-gray-400 transition-all";
+  });
+  btn.className = "btn-primary";
+  renderRoutePlanner();
+  playSynthSound('ui');
+}
+
+function renderRoutePlanner() {
+  const el = document.getElementById('routeTimeline');
+  if (!el) return;
+  if (selected.size === 0) {
+    el.innerHTML = '<div class="text-center py-10 text-gray-500 italic">กรุณาเลือกเมมเบอร์ในหน้า "คำนวณบัตร" เพื่อดูตารางการเดินเที่ยวของคุณ</div>';
+    return;
+  }
+
+  const slots = [];
+  selected.forEach(m => {
+    BOOTHS.forEach(b => {
+      const dayData = DATA[b.k] && DATA[b.k][currentRouteDay];
+      if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
+        if (arr.includes(m)) {
+          const sid = `${m}|${b.k}|${currentRouteDay}|${t}`;
+          const r = slotRounds[sid] !== undefined ? slotRounds[sid] : 1;
+          if (r > 0) {
+            slots.push({ member: m, booth: b, time: t, rounds: r });
+          }
+        }
+      });
+    });
+  });
+
+  slots.sort((a, b) => a.time.localeCompare(b.time));
+
+  if (slots.length === 0) {
+    el.innerHTML = `<div class="text-center py-10 text-gray-500 italic">ไม่มีกิจกรรมที่คุณเลือกในวันที่ ${currentRouteDay}</div>`;
+    return;
+  }
+
+  const timeGroups = {};
+  slots.forEach(s => {
+    if (!timeGroups[s.time]) timeGroups[s.time] = [];
+    timeGroups[s.time].push(s);
+  });
+
+  let html = '<div class="relative border-l-2 border-white/10 pl-6 ml-4 space-y-8">';
+  
+  Object.entries(timeGroups).sort((a, b) => a[0].localeCompare(b[0])).forEach(([time, list]) => {
+    const hasOverlap = list.length > 1;
+    
+    html += `
+      <div class="relative">
+        <span class="absolute -left-[31px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full ${hasOverlap ? 'bg-red-500 animate-ping' : 'bg-cyan-500'}">
+          <span class="h-2 w-2 rounded-full ${hasOverlap ? 'bg-red-600' : 'bg-cyan-600'}"></span>
+        </span>
+        
+        <div class="text-sm font-bold text-yellow-400 mb-2 flex items-center gap-2">
+          <i class="ti ti-clock text-xs"></i> ${time} น.
+          ${hasOverlap ? '<span class="text-[9px] bg-red-600 text-white px-2 py-0.5 rounded-full font-bold">เวลาทับซ้อนกัน!</span>' : ''}
+        </div>
+        
+        <div class="grid grid-cols-1 gap-3">
+    `;
+
+    list.forEach(s => {
+      html += `
+        <div class="slot-item !mb-0 border-l-4 ${hasOverlap ? 'border-red-500 !bg-red-500/5' : 'border-cyan-500 !bg-cyan-500/5'}">
+          <div class="slot-info text-left">
+            <div class="text-xs font-bold text-cyan-400">${s.member}</div>
+            <div class="text-sm font-black text-white">${s.booth.s}</div>
+            <div class="text-[10px] text-gray-400 mt-0.5">เล่น ${s.rounds} ครั้ง | ${s.booth.price > 0 ? (s.booth.price * s.rounds) + '฿' : 'ฟรี'}</div>
+          </div>
+          <div class="text-right text-xs font-bold text-gray-500">
+            <i class="ti ti-map-pin"></i> บูธหลัก
+          </div>
+        </div>
+      `;
+    });
+
+    html += `
+        </div>
+      </div>
+    `;
+  });
+
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function populateOshiDropdown() {
+  const select = document.getElementById('oshiSelect');
+  if (!select) return;
+  
+  select.innerHTML = '<option value="">— เลือกเมมเบอร์เพื่อดูตารางงาน —</option>';
+  
+  ALL_MEMBERS.forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m;
+    opt.textContent = m;
+    select.appendChild(opt);
+  });
+}
+
+function renderOshiSchedule(m) {
+  const el = document.getElementById('oshiTimelineResult');
+  if (!el) return;
+  if (!m) {
+    el.innerHTML = '<div class="text-center py-10 text-gray-500 italic">กรุณาเลือกเมมเบอร์เพื่อแสดงผลตารางกิจกรรม</div>';
+    return;
+  }
+
+  playSynthSound('ui');
+
+  let html = '';
+  DAYS.forEach(d => {
+    const dayActivities = [];
+    BOOTHS.forEach(b => {
+      const dayData = DATA[b.k] && DATA[b.k][d];
+      if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
+        if (arr.includes(m)) {
+          dayActivities.push({ booth: b.s, time: t, cost: b.price });
+        }
+      });
+    });
+
+    dayActivities.sort((a, b) => a.time.localeCompare(b.time));
+
+    html += `
+      <div class="result-card">
+        <div class="text-purple-400 font-black text-sm mb-4 border-b border-white/5 pb-2 uppercase tracking-wider flex items-center gap-2">
+          <i class="ti ti-calendar"></i> วันที่ ${d}
+        </div>
+    `;
+
+    if (dayActivities.length === 0) {
+      html += `<p class="text-xs italic text-gray-500 py-2">ไม่มีตารางกิจกรรมในวันนี้</p>`;
+    } else {
+      html += `<div class="space-y-3">`;
+      dayActivities.forEach(act => {
+        html += `
+          <div class="slot-item border-l-4 border-purple-500 !bg-purple-500/5">
+            <div class="slot-info text-left">
+              <div class="text-sm font-bold text-white">${act.booth}</div>
+              <div class="text-[10px] text-gray-400 mt-0.5"><i class="ti ti-clock"></i> ${act.time} น.</div>
+            </div>
+            <div class="text-right text-xs font-bold text-purple-300">
+              ${act.cost > 0 ? act.cost.toLocaleString() + '฿' : 'เข้าร่วมฟรี'}
+            </div>
+          </div>
+        `;
+      });
+      html += `</div>`;
+    }
+    html += `</div>`;
+  });
+
+  el.innerHTML = html;
+}
+
+// Call initialization
+initializeApp();
 </script>
 </body>
 </html>
