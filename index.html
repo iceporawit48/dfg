@@ -8,226 +8,909 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&family=Bebas+Neue&display=swap');
-* { font-family: 'Noto Sans Thai', sans-serif; }
-:root { --neon-pink: #E8457A; --neon-purple: #7B5CF0; --neon-cyan: #06B6D4; --neon-green: #1CC8A0; --neon-yellow: #F5C842; --dark-bg: #0a0e27; --card-bg: #1a1f3a; }
-html, body { margin: 0; padding: 0; height: 100%; overflow-x: hidden; background: #0a0e27; color: #e0e0e0; }
-body { background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1629 100%); background-attachment: fixed; }
-.neon-glow { box-shadow: 0 0 20px rgba(232, 69, 122, 0.3), 0 0 40px rgba(123, 92, 240, 0.2); border: 1px solid rgba(232, 69, 122, 0.2); }
-.glass { background: rgba(26, 31, 58, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-.header-gradient { background: linear-gradient(135deg, rgba(232, 69, 122, 0.15) 0%, rgba(123, 92, 240, 0.15) 100%); border-bottom: 2px solid rgba(232, 69, 122, 0.3); }
-.logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; letter-spacing: 3px; background: linear-gradient(135deg, #E8457A, #7B5CF0, #06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.logo-sub { font-size: 0.75rem; letter-spacing: 2px; color: #06B6D4; text-transform: uppercase; font-weight: 600; }
-.nav-container { background: rgba(10, 14, 39, 0.5); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-.nav-btn { padding: 12px 20px; font-size: 0.9rem; font-weight: 600; color: #b0b0b0; border: none; background: transparent; cursor: pointer; transition: 0.3s; white-space: nowrap; }
-.nav-btn.active { color: #E8457A; border-bottom: 2px solid #E8457A; }
-.search-input { background: rgba(26, 31, 58, 0.6); border: 1px solid rgba(232, 69, 122, 0.2); color: #e0e0e0; outline: none; }
-.btn-primary { background: linear-gradient(135deg, #E8457A, #7B5CF0); color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 700; cursor: pointer; }
-.btn-klab { background: linear-gradient(135deg, #F5C842, #E8457A); color: white; padding: 15px 30px; border-radius: 30px; font-weight: 900; cursor: pointer; box-shadow: 0 0 20px rgba(245, 200, 66, 0.4); }
-.member-chip { background: rgba(26, 31, 58, 0.5); border: 1px solid rgba(123, 92, 240, 0.3); color: #b0b0b0; padding: 10px 12px; border-radius: 12px; cursor: pointer; text-align: center; }
-.member-chip.selected { background: linear-gradient(135deg, #7B5CF0, #06B6D4); color: white; }
-.result-card { background: rgba(26, 31, 58, 0.6); border: 1px solid rgba(123, 92, 240, 0.2); border-radius: 16px; padding: 20px; margin-bottom: 16px; }
-.result-name { font-size: 1.3rem; font-weight: 700; color: #06B6D4; margin-bottom: 12px; }
-.slot-item { background: rgba(26, 31, 58, 0.6); border: 1px solid rgba(6, 182, 212, 0.2); border-radius: 12px; padding: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
-.slot-item.zero-round { opacity: 0.4; background: rgba(239, 68, 68, 0.05); }
-.round-btn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid rgba(123, 92, 240, 0.4); background: rgba(123, 92, 240, 0.1); color: #c4b5fd; cursor: pointer; font-weight: bold; }
-.btn-set-zero { width: 34px; height: 34px; border-radius: 8px; background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.price-bar { background: linear-gradient(135deg, rgba(28, 200, 160, 0.2), rgba(6, 182, 212, 0.2)); border: 2px solid rgba(28, 200, 160, 0.4); border-radius: 12px; padding: 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
-.price-bar-value { font-size: 1.8rem; font-weight: 900; color: #1CC8A0; }
-.selected-bar { background: rgba(26, 31, 58, 0.8); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.selected-chip { background: linear-gradient(135deg, #7B5CF0, #06B6D4); color: white; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
-.custom-scrollbar::-webkit-scrollbar { width: 4px; }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: #E8457A; border-radius: 10px; }
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+Thai:wght@300;400;500;600;700;800;900&display=swap');
 
-/* KLAB MODAL */
-#klabModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px); }
-.klab-content { background: #1a1f3a; color: #fff; width: 100%; max-width: 500px; border-radius: 24px; padding: 40px; border: 2px solid #F5C842; box-shadow: 0 0 50px rgba(245, 200, 66, 0.3); text-align: center; position: relative; }
-.klab-title { font-size: 2.5rem; font-weight: 900; color: #F5C842; margin-bottom: 10px; }
-.klab-total-value { font-size: 2.5rem; font-weight: 900; color: #E8457A; }
-
-/* SUMMARY PAGE */
-.summary-banner { background: linear-gradient(135deg, rgba(232,69,122,0.15), rgba(123,92,240,0.15)); border: 1px solid rgba(232,69,122,0.3); border-radius: 20px; padding: 32px; text-align: center; margin-bottom: 24px; }
-.summary-number { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; background: linear-gradient(135deg,#E8457A,#7B5CF0,#06B6D4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; }
-.stat-row { background: rgba(26,31,58,0.6); border: 1px solid rgba(123,92,240,0.2); border-radius: 14px; margin-bottom: 8px; overflow: hidden; transition: border-color 0.2s; cursor: pointer; }
-.stat-row:hover { border-color: rgba(6,182,212,0.5); }
-.stat-row.open { border-color: rgba(6,182,212,0.6); }
-.stat-row-header { display: flex; align-items: center; gap: 12px; padding: 14px 16px; user-select: none; }
-.stat-row-detail { display: none; padding: 0 16px 14px; border-top: 1px solid rgba(255,255,255,0.06); }
-.stat-row.open .stat-row-detail { display: block; }
-.stat-row.open .stat-chevron { transform: rotate(180deg); }
-.stat-chevron { transition: transform 0.2s; color: #7B5CF0; flex-shrink: 0; }
-.rank-badge { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 900; flex-shrink: 0; }
-.rank-1 { background: linear-gradient(135deg,#F5C842,#E8457A); color: #000; }
-.rank-2 { background: rgba(200,200,220,0.3); color: #ccc; }
-.rank-3 { background: linear-gradient(135deg,#cd7f32,#a0522d); color: #fff; }
-.rank-other { background: rgba(100,100,130,0.25); color: #888; }
-.detail-activity-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.72rem; }
-.detail-activity-row:last-child { border-bottom: none; }
-.detail-day-label { font-size: 0.65rem; font-weight: 800; color: #F5C842; text-transform: uppercase; letter-spacing: 1px; margin: 10px 0 4px; }
-.bar-wrap { flex: 1; background: rgba(255,255,255,0.07); border-radius: 999px; height: 6px; margin: 0 10px; overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg,#E8457A,#7B5CF0); }
-
-/* BOD SYSTEM STYLES */
-.conflict-item { background: rgba(232, 69, 122, 0.1); border: 1px solid rgba(232, 69, 122, 0.2); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.animate-spin { display: inline-block; animation: spin 0.8s linear infinite; }
-@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
-.animate-pulse { animation: pulse 1.5s ease-in-out infinite; }
-#klabModal { overflow-y: auto; }
-.klab-content { max-height: 90vh; overflow-y: auto; }
-
-/* Theme: Sakura overrides */
-body.theme-sakura {
-  background: linear-gradient(135deg, #320a18 0%, #4c1122 50%, #20040e 100%);
-  color: #ffeef2;
+* {
+  font-family: 'Outfit', 'Noto Sans Thai', sans-serif;
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
-body.theme-sakura .header-gradient {
-  background: linear-gradient(135deg, rgba(255, 77, 121, 0.15) 0%, rgba(245, 200, 66, 0.15) 100%);
-  border-bottom: 2px solid rgba(255, 77, 121, 0.3);
+
+:root {
+  --neon-pink: #E8457A;
+  --neon-purple: #7B5CF0;
+  --neon-cyan: #06B6D4;
+  --neon-green: #1CC8A0;
+  --neon-yellow: #F5C842;
+  --dark-bg: #0a0e27;
+  --card-bg: #1a1f3a;
 }
-body.theme-sakura .logo-text {
-  background: linear-gradient(135deg, #FF4D79, #FF8F3D, #F5C842);
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  background: #eef5ff;
+  color: #1d2e5a;
+}
+
+body {
+  background: linear-gradient(135deg, #eef5ff 0%, #d4e5ff 100%);
+  background-attachment: fixed;
+}
+
+#effectCanvas {
+  display: none !important;
+}
+
+.neon-glow {
+  box-shadow: 0 8px 30px rgba(180, 206, 245, 0.25);
+  border: 1px solid rgba(75, 123, 236, 0.25);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 8px 32px rgba(180, 206, 245, 0.2);
+}
+
+.header-gradient {
+  background: rgba(255, 255, 255, 0.4);
+  border-bottom: 2px solid rgba(75, 123, 236, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.logo-text {
+  font-weight: 900;
+  font-size: 2.6rem;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #1d3557, #457b9d, #e63946);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-body.theme-sakura .logo-sub {
-  color: #FF8F3D;
-}
-body.theme-sakura .neon-glow {
-  box-shadow: 0 0 20px rgba(255, 77, 121, 0.3), 0 0 40px rgba(245, 200, 66, 0.15);
-  border-color: rgba(255, 77, 121, 0.2);
-}
-body.theme-sakura .glass {
-  background: rgba(82, 21, 40, 0.7);
-  border-color: rgba(255, 77, 121, 0.15);
-}
-body.theme-sakura .nav-btn.active {
-  color: #FF4D79;
-  border-color: #FF4D79;
-}
-body.theme-sakura .search-input {
-  background: rgba(82, 21, 40, 0.6);
-  border-color: rgba(255, 77, 121, 0.25);
-  color: #ffeef2;
-}
-body.theme-sakura .btn-primary {
-  background: linear-gradient(135deg, #FF4D79, #FF8F3D);
-}
-body.theme-sakura .member-chip {
-  background: rgba(82, 21, 40, 0.5);
-  border-color: rgba(255, 143, 61, 0.25);
-}
-body.theme-sakura .member-chip.selected {
-  background: linear-gradient(135deg, #FF8F3D, #FF4D79);
-  color: white;
-}
-body.theme-sakura .selected-chip {
-  background: linear-gradient(135deg, #FF8F3D, #FF4D79);
-}
-body.theme-sakura .result-card {
-  background: rgba(82, 21, 40, 0.6);
-  border-color: rgba(255, 143, 61, 0.2);
-}
-body.theme-sakura .slot-item {
-  background: rgba(82, 21, 40, 0.6);
-  border-color: rgba(255, 143, 61, 0.15);
-}
-body.theme-sakura .price-bar-value {
-  color: #FF8F3D;
-}
-body.theme-sakura .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #FF4D79;
-}
-body.theme-sakura .stat-chevron {
-  color: #FF8F3D;
-}
-body.theme-sakura .bar-fill {
-  background: linear-gradient(90deg, #FF4D79, #FF8F3D);
-}
-body.theme-sakura .klab-content {
-  background: #3c0c1b;
-  border-color: #FF8F3D;
-  box-shadow: 0 0 50px rgba(255, 143, 61, 0.3);
-}
-body.theme-sakura .bg-gray-800 {
-  background-color: #521528 !important;
-}
 
-/* Custom CSS for Creative Features */
-@keyframes shake {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  10% { transform: translate(-3px, -2px) rotate(-1.5deg); }
-  30% { transform: translate(2px, 3px) rotate(1.5deg); }
-  50% { transform: translate(-2px, 2px) rotate(-1.5deg); }
-  70% { transform: translate(3px, 2px) rotate(1.5deg); }
-  90% { transform: translate(-3px, -3px) rotate(-1.5deg); }
-}
-.shake-anim { animation: shake 0.3s infinite; }
-
-.tier-ur { border: 2.5px solid #FF3366 !important; box-shadow: 0 0 20px rgba(255, 51, 102, 0.7); background: linear-gradient(135deg, rgba(255, 51, 102, 0.2) 0%, rgba(20, 24, 50, 0.95) 100%) !important; }
-.tier-ssr { border: 2.5px solid #FFCC00 !important; box-shadow: 0 0 20px rgba(255, 204, 0, 0.7); background: linear-gradient(135deg, rgba(255, 204, 0, 0.15) 0%, rgba(20, 24, 50, 0.95) 100%) !important; }
-.tier-sr { border: 2.5px solid #A0A0A0 !important; box-shadow: 0 0 15px rgba(160, 160, 160, 0.4); background: linear-gradient(135deg, rgba(160, 160, 160, 0.1) 0%, rgba(20, 24, 50, 0.95) 100%) !important; }
-.tier-r { border: 2.5px solid #00CCFF !important; box-shadow: 0 0 15px rgba(0, 204, 255, 0.4); background: linear-gradient(135deg, rgba(0, 204, 255, 0.1) 0%, rgba(20, 24, 50, 0.95) 100%) !important; }
-
-/* Custom Frames for Sharing */
-.klab-content.frame-gold {
-  border: 5px solid #FFCC00 !important;
-  box-shadow: 0 0 50px rgba(255, 204, 0, 0.6) !important;
-  background: linear-gradient(135deg, #1c150b 0%, #1a1f3a 100%) !important;
-}
-.klab-content.frame-gold::before {
-  content: "★ OFFICIAL VIP SPONSOR ★";
-  display: block;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 3px;
-  color: #FFCC00;
-  margin-bottom: 12px;
-  text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
-}
-.klab-content.frame-noodle {
-  border: 5px solid #FF3366 !important;
-  box-shadow: 0 0 50px rgba(255, 51, 102, 0.5) !important;
-  background: linear-gradient(135deg, #1f0c15 0%, #101428 100%) !important;
-}
-.klab-content.frame-noodle::before {
-  content: "🍜 วิกฤตการณ์การคลัง: โหมดต้มมาม่า 🍜";
-  display: block;
-  font-family: 'Noto Sans Thai', sans-serif;
-  font-weight: 800;
+.logo-sub {
   font-size: 0.75rem;
-  color: #FF3366;
+  letter-spacing: 2px;
+  color: #457b9d;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.nav-container {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(75, 123, 236, 0.15);
+}
+
+.nav-btn {
+  padding: 12px 22px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #457b9d;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: 12px;
+  margin: 0 3px;
+}
+
+.nav-btn:hover {
+  color: #1d3557;
+  background: rgba(75, 123, 236, 0.05);
+}
+
+.nav-btn.active {
+  color: #1d3557;
+  background: rgba(75, 123, 236, 0.12);
+  box-shadow: 0 4px 15px rgba(75, 123, 236, 0.1);
+  border: 1px solid rgba(75, 123, 236, 0.35);
+}
+
+.search-input {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1.5px solid rgba(75, 123, 236, 0.25) !important;
+  color: #1d3557 !important;
+  outline: none;
+  font-weight: 500;
+  box-shadow: inset 0 2px 4px rgba(75, 123, 236, 0.05);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #3867d6 !important;
+  box-shadow: 0 0 12px rgba(75, 123, 236, 0.2), inset 0 2px 4px rgba(75, 123, 236, 0.05) !important;
+  background: #ffffff !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #4b7bec, #3867d6);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(75, 123, 236, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(75, 123, 236, 0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-klab {
+  background: linear-gradient(135deg, #ff7da0, #e63946);
+  color: white;
+  padding: 15px 32px;
+  border-radius: 30px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 6px 25px rgba(230, 57, 70, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.btn-klab:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(230, 57, 70, 0.35);
+}
+
+.btn-klab:active {
+  transform: translateY(0);
+}
+
+.member-chip {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(75, 123, 236, 0.15);
+  color: #223a70;
+  padding: 12px 14px;
+  border-radius: 16px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(75, 123, 236, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.member-chip:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #4b7bec;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(75, 123, 236, 0.15);
+}
+
+.member-chip.selected {
+  background: linear-gradient(135deg, #4b7bec, #3867d6);
+  color: white;
+  border-color: #3867d6;
+  box-shadow: 0 4px 15px rgba(75, 123, 236, 0.3), inset 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.result-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(75, 123, 236, 0.1);
+}
+
+.result-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1d3557;
   margin-bottom: 12px;
+}
+
+.slot-item {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(75, 123, 236, 0.1);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+  color: #223a70;
+}
+
+.slot-item:hover {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(75, 123, 236, 0.25);
+  transform: translateX(4px);
+}
+
+.slot-item.zero-round {
+  opacity: 0.35;
+  background: rgba(239, 68, 68, 0.03);
+}
+
+.round-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  border: 1px solid rgba(75, 123, 236, 0.25);
+  background: rgba(75, 123, 236, 0.05);
+  color: #3867d6;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.round-btn:hover {
+  background: rgba(75, 123, 236, 0.15);
+  border-color: #3867d6;
+  color: #1d3557;
+  transform: scale(1.08);
+}
+
+.round-btn:active {
+  transform: scale(0.92);
+}
+
+.btn-set-zero {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.05);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-set-zero:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #f87171;
+  color: #dc2626;
+  transform: scale(1.08);
+}
+
+.btn-set-zero:active {
+  transform: scale(0.92);
+}
+
+.price-bar {
+  background: linear-gradient(135deg, rgba(75, 123, 236, 0.08) 0%, rgba(230, 57, 70, 0.03) 100%);
+  border: 1.5px solid rgba(75, 123, 236, 0.2);
+  border-radius: 20px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 8px 25px rgba(75, 123, 236, 0.08);
+}
+
+.price-bar-value {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #1d3557;
+}
+
+.selected-bar {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1.5px solid rgba(75, 123, 236, 0.2);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.selected-chip {
+  background: linear-gradient(135deg, #4b7bec, #3867d6);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(75, 123, 236, 0.15);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #4b7bec;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+/* KLAB MODAL */
+#klabModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(29, 46, 90, 0.4);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(16px);
+}
+
+.klab-content {
+  background: radial-gradient(circle at top left, #ffffff, #eef5ff);
+  color: #1d2e5a;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 32px;
+  padding: 44px;
+  border: 2px solid #ff7da0;
+  box-shadow: 0 25px 60px rgba(29, 46, 90, 0.15);
+  text-align: center;
+  position: relative;
+}
+
+.klab-title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #e63946;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.klab-total-value {
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: #ff7da0;
+}
+
+/* SUMMARY PAGE */
+.summary-banner {
+  background: linear-gradient(135deg, rgba(75, 123, 236, 0.08), rgba(230, 57, 70, 0.03));
+  border: 1px solid rgba(75, 123, 236, 0.2);
+  border-radius: 24px;
+  padding: 36px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.summary-number {
+  font-size: 4.2rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #1d3557, #457b9d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.stat-row {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(75, 123, 236, 0.15);
+  border-radius: 16px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.stat-row:hover {
+  border-color: #4b7bec;
+  transform: translateY(-1px);
+}
+
+.stat-row.open {
+  border-color: #3867d6;
+}
+
+.stat-row-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  user-select: none;
+}
+
+.stat-row-detail {
+  display: none;
+  padding: 0 20px 18px;
+  border-top: 1px solid rgba(75, 123, 236, 0.1);
+}
+
+.stat-row.open .stat-row-detail {
+  display: block;
+}
+
+.stat-row.open .stat-chevron {
+  transform: rotate(180deg);
+}
+
+.stat-chevron {
+  color: #4b7bec;
+  flex-shrink: 0;
+}
+
+.rank-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 900;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(75, 123, 236, 0.1);
+}
+
+.rank-1 {
+  background: linear-gradient(135deg,#ff7da0,#e63946);
+  color: #fff;
+}
+
+.rank-2 {
+  background: rgba(75, 123, 236, 0.15);
+  color: #1d3557;
+}
+
+.rank-3 {
+  background: linear-gradient(135deg,#cd7f32,#a0522d);
+  color: #fff;
+}
+
+.rank-other {
+  background: rgba(0,0,0,0.05);
+  color: #457b9d;
+}
+
+.detail-activity-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+  font-size: 0.76rem;
+}
+
+.detail-activity-row:last-child {
+  border-bottom: none;
+}
+
+.detail-day-label {
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: #e63946;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 14px 0 6px;
+}
+
+.bar-wrap {
+  flex: 1;
+  background: rgba(0,0,0,0.05);
+  border-radius: 999px;
+  height: 8px;
+  margin: 0 12px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #4b7bec, #ff7da0);
+}
+
+/* BOD SYSTEM STYLES */
+.conflict-item {
+  background: rgba(230, 57, 70, 0.05);
+  border: 1px solid rgba(230, 57, 70, 0.15);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+/* ACTIVITIES MODAL (จัดตาราง) */
+#activitiesModal {
+  backdrop-filter: blur(16px);
+  background: rgba(29, 46, 90, 0.4);
+}
+
+#activitiesModal .glass {
+  background: radial-gradient(circle at top left, #ffffff, #eef5ff);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 25px 50px rgba(29, 46, 90, 0.15);
+}
+
+/* SAKURA THEME OVERWRITES (Let Me Know - Dark Red/Black) */
+body.theme-sakura {
+  background: linear-gradient(135deg, #090204 0%, #120409 50%, #000000 100%) !important;
+  background-attachment: fixed !important;
+  color: #f8fafc !important;
+}
+
+body.theme-sakura .neon-glow {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+  border: 1.5px solid rgba(214, 28, 78, 0.25) !important;
+}
+
+body.theme-sakura .logo-text {
+  background: linear-gradient(135deg, #d61c4e, #9e1a38, #ffffff) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+body.theme-sakura .logo-sub {
+  color: #d61c4e !important;
+}
+
+body.theme-sakura .glass {
+  background: rgba(18, 10, 13, 0.75) !important;
+  border: 1.5px solid rgba(214, 28, 78, 0.2) !important;
+  box-shadow: 0 10px 45px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.theme-sakura .header-gradient {
+  background: rgba(0, 0, 0, 0.6) !important;
+  border-bottom: 2px solid rgba(214, 28, 78, 0.4) !important;
+}
+
+body.theme-sakura .nav-container {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border-bottom: 1px solid rgba(214, 28, 78, 0.2) !important;
+}
+
+body.theme-sakura .nav-btn {
+  color: #94a3b8 !important;
+}
+
+body.theme-sakura .nav-btn:hover {
+  color: #ffffff !important;
+  background: rgba(214, 28, 78, 0.08) !important;
+}
+
+body.theme-sakura .nav-btn.active {
+  background: linear-gradient(135deg, rgba(214, 28, 78, 0.2) 0%, rgba(158, 26, 56, 0.2) 100%) !important;
+  border: 1px solid rgba(214, 28, 78, 0.45) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 15px rgba(214, 28, 78, 0.3) !important;
+}
+
+body.theme-sakura .search-input {
+  background: rgba(15, 10, 12, 0.8) !important;
+  border: 1.5px solid rgba(214, 28, 78, 0.3) !important;
+  color: #ffffff !important;
+}
+
+body.theme-sakura .search-input:focus {
+  border-color: #d61c4e !important;
+  box-shadow: 0 0 12px rgba(214, 28, 78, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  background: rgba(15, 10, 12, 0.95) !important;
+}
+
+body.theme-sakura .btn-primary {
+  background: linear-gradient(135deg, #d61c4e, #9e1a38) !important;
+  box-shadow: 0 4px 15px rgba(214, 28, 78, 0.35) !important;
+}
+
+body.theme-sakura .btn-primary:hover {
+  box-shadow: 0 6px 20px rgba(214, 28, 78, 0.5) !important;
+}
+
+body.theme-sakura .btn-klab {
+  background: linear-gradient(135deg, #ff2a5f, #7f0019) !important;
+  box-shadow: 0 6px 25px rgba(214, 28, 78, 0.4) !important;
+}
+
+body.theme-sakura .btn-klab:hover {
+  box-shadow: 0 10px 30px rgba(214, 28, 78, 0.6) !important;
+}
+
+body.theme-sakura .member-chip {
+  background: rgba(22, 13, 16, 0.6) !important;
+  border: 1px solid rgba(214, 28, 78, 0.15) !important;
+  color: #94a3b8 !important;
+}
+
+body.theme-sakura .member-chip:hover {
+  background: rgba(22, 13, 16, 0.9) !important;
+  border-color: #d61c4e !important;
+  box-shadow: 0 6px 15px rgba(214, 28, 78, 0.25) !important;
+}
+
+body.theme-sakura .member-chip.selected {
+  background: linear-gradient(135deg, #d61c4e, #9e1a38) !important;
+  color: white !important;
+  border-color: #d61c4e !important;
+  box-shadow: 0 0 20px rgba(214, 28, 78, 0.45) !important;
+}
+
+body.theme-sakura .result-card {
+  background: rgba(18, 10, 13, 0.75) !important;
+  border: 1.5px solid rgba(214, 28, 78, 0.25) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.theme-sakura .result-name {
+  color: #ffffff !important;
+}
+
+body.theme-sakura .slot-item {
+  background: rgba(22, 13, 16, 0.4) !important;
+  border: 1px solid rgba(214, 28, 78, 0.1) !important;
+  color: #ffffff !important;
+}
+
+body.theme-sakura .slot-item:hover {
+  background: rgba(22, 13, 16, 0.7) !important;
+  border-color: rgba(214, 28, 78, 0.3) !important;
+}
+
+body.theme-sakura .round-btn {
+  border: 1px solid rgba(214, 28, 78, 0.3) !important;
+  background: rgba(214, 28, 78, 0.1) !important;
+  color: #ff2a5f !important;
+}
+
+body.theme-sakura .round-btn:hover {
+  background: rgba(214, 28, 78, 0.2) !important;
+  border-color: #ff2a5f !important;
+  color: #ffffff !important;
+}
+
+body.theme-sakura .btn-set-zero {
+  background: rgba(239, 68, 68, 0.08) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  color: #f87171 !important;
+}
+
+body.theme-sakura .btn-set-zero:hover {
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #ffffff !important;
+}
+
+body.theme-sakura .price-bar {
+  background: linear-gradient(135deg, rgba(214, 28, 78, 0.2) 0%, rgba(0, 0, 0, 0.4) 100%) !important;
+  border: 1.5px solid rgba(214, 28, 78, 0.4) !important;
+  box-shadow: 0 8px 25px rgba(214, 28, 78, 0.15) !important;
+}
+
+body.theme-sakura .price-bar-value {
+  color: #ff2a5f !important;
+  text-shadow: 0 0 15px rgba(214, 28, 78, 0.4) !important;
+}
+
+body.theme-sakura .selected-bar {
+  background: rgba(18, 10, 13, 0.8) !important;
+  border: 1.5px solid rgba(214, 28, 78, 0.3) !important;
+}
+
+body.theme-sakura .selected-chip {
+  background: linear-gradient(135deg, #d61c4e, #9e1a38) !important;
+  box-shadow: 0 4px 10px rgba(214, 28, 78, 0.3) !important;
+}
+
+body.theme-sakura .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #d61c4e !important;
+}
+
+body.theme-sakura #klabModal {
+  background: rgba(0, 0, 0, 0.85) !important;
+}
+
+body.theme-sakura .klab-content {
+  background: radial-gradient(circle at top left, #120409, #000000) !important;
+  border-color: #d61c4e !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8) !important;
+  color: #ffffff !important;
+}
+
+body.theme-sakura .klab-title {
+  color: #d61c4e !important;
+}
+
+body.theme-sakura .klab-total-value {
+  color: #ff2a5f !important;
+}
+
+body.theme-sakura .summary-banner {
+  background: linear-gradient(135deg, rgba(214, 28, 78, 0.2), rgba(0, 0, 0, 0.4)) !important;
+  border: 1px solid rgba(214, 28, 78, 0.3) !important;
+}
+
+body.theme-sakura .summary-number {
+  background: linear-gradient(135deg, #ff2a5f, #ffffff) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+body.theme-sakura .stat-row {
+  background: rgba(22, 13, 16, 0.5) !important;
+  border: 1px solid rgba(214, 28, 78, 0.2) !important;
+}
+
+body.theme-sakura .stat-row:hover {
+  border-color: #d61c4e !important;
+}
+
+body.theme-sakura .stat-row.open {
+  border-color: #ff2a5f !important;
+}
+
+body.theme-sakura .stat-chevron {
+  color: #d61c4e !important;
+}
+
+body.theme-sakura .rank-1 {
+  background: linear-gradient(135deg,#ff2a5f,#7f0019) !important;
+}
+
+body.theme-sakura .rank-2 {
+  background: rgba(255,255,255,0.15) !important;
+  color: #ffffff !important;
+}
+
+body.theme-sakura .rank-other {
+  background: rgba(214, 28, 78, 0.1) !important;
+  color: #94a3b8 !important;
+}
+
+body.theme-sakura .bar-wrap {
+  background: rgba(255,255,255,0.05) !important;
+}
+
+body.theme-sakura .bar-fill {
+  background: linear-gradient(90deg, #d61c4e, #ff2a5f) !important;
+}
+
+body.theme-sakura .conflict-item {
+  background: rgba(214, 28, 78, 0.08) !important;
+  border: 1px solid rgba(214, 28, 78, 0.25) !important;
+}
+
+body.theme-sakura #activitiesModal {
+  background: rgba(0, 0, 0, 0.85) !important;
+}
+
+body.theme-sakura #activitiesModal .glass {
+  background: radial-gradient(circle at top left, #120409, #000000) !important;
+  border: 1px solid rgba(214, 28, 78, 0.25) !important;
+}
+
+.flex.items-center.gap-3.no-print button {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(75, 123, 236, 0.25);
+  color: #1d3557;
+}
+.flex.items-center.gap-3.no-print button:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #3867d6;
+}
+body.theme-sakura .flex.items-center.gap-3.no-print button {
+  background: rgba(22, 13, 16, 0.7) !important;
+  border: 1px solid rgba(214, 28, 78, 0.3) !important;
+  color: #ffffff !important;
+}
+body.theme-sakura .flex.items-center.gap-3.no-print button:hover {
+  background: rgba(22, 13, 16, 0.95) !important;
+  border-color: #ff2a5f !important;
+}
+
+/* Typography Contrast Overrides for Light Theme */
+body:not(.theme-sakura) .text-white {
+  color: #1d2e5a !important;
+}
+body:not(.theme-sakura) .text-gray-300 {
+  color: #2e4374 !important;
+}
+body:not(.theme-sakura) .text-gray-400 {
+  color: #4b6584 !important;
+}
+body:not(.theme-sakura) .text-gray-500 {
+  color: #57606f !important;
+}
+body:not(.theme-sakura) .text-pink-400 {
+  color: #d63031 !important;
+}
+body:not(.theme-sakura) .text-cyan-400 {
+  color: #0984e3 !important;
+}
+body:not(.theme-sakura) .text-yellow-400 {
+  color: #b8860b !important;
+}
+body:not(.theme-sakura) .text-yellow-500 {
+  color: #b8860b !important;
+}
+body:not(.theme-sakura) .bg-gray-800 {
+  background-color: rgba(75, 123, 236, 0.08) !important;
+  color: #1d3557 !important;
+}
+body:not(.theme-sakura) .bg-blue-900\/20 {
+  background-color: rgba(75, 123, 236, 0.08) !important;
+}
+body:not(.theme-sakura) .border-blue-500\/40 {
+  border-color: rgba(75, 123, 236, 0.25) !important;
+}
+body:not(.theme-sakura) .btn-secondary {
+  color: #1d3557 !important;
+}
+body:not(.theme-sakura) .btn-primary,
+body:not(.theme-sakura) .btn-klab,
+body:not(.theme-sakura) .selected-chip,
+body:not(.theme-sakura) .member-chip.selected {
+  color: #ffffff !important;
+}
+body:not(.theme-sakura) .border-cyan-500 {
+  border-color: #4b7bec !important;
+}
+body:not(.theme-sakura) .bg-cyan-500\/5 {
+  background-color: rgba(75, 123, 236, 0.06) !important;
+}
+body:not(.theme-sakura) .border-green-500 {
+  border-color: #20bf6b !important;
+}
+body:not(.theme-sakura) .bg-green-500\/5 {
+  background-color: rgba(32, 191, 107, 0.06) !important;
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white !important; color: black !important; }
+  .glass { background: white !important; color: black !important; border: none !important; box-shadow: none !important; }
+  .slot-item { border: 1px solid #ccc !important; background: white !important; color: black !important; }
+  .slot-item span, .slot-item div { color: black !important; }
 }
 </style>
 </head>
 <body>
-<canvas id="effectCanvas" class="fixed inset-0 pointer-events-none z-[49]"></canvas>
+
+<canvas id="effectCanvas" class="fixed inset-0 pointer-events-none z-[-1]"></canvas>
 
 <div class="header-gradient">
-  <div class="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
+  <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
     <div><div class="logo-text">BON ODORI 2026</div><div class="logo-sub">BNK48 × CGM48 × FASHION ISLAND</div></div>
-    <div class="flex items-center gap-2 sm:gap-4">
-      <button onclick="toggleAudio()" class="text-xs px-3 py-1.5 rounded-xl glass border border-white/10 hover:bg-white/5 active:scale-95 flex items-center gap-1.5 transition-all text-cyan-400 font-bold">
-        <i id="audio-icon" class="ti ti-volume-off text-sm"></i> <span id="audio-text" class="hidden sm:inline">เปิดเสียงเอฟเฟกต์</span>
+    <div class="flex items-center gap-3 no-print">
+      <!-- Theme Switcher -->
+      <button onclick="toggleTheme()" class="border py-2 px-3 rounded-xl flex items-center gap-1.5 transition-all text-xs font-bold cursor-pointer shadow-sm">
+        <i id="theme-icon" class="ti ti-moon text-sm text-red-500"></i>
+        <span id="theme-text">เปลี่ยนเป็นธีมแดงดำ</span>
       </button>
-      <button onclick="toggleTheme()" class="text-xs px-3 py-1.5 rounded-xl glass border border-white/10 hover:bg-white/5 active:scale-95 flex items-center gap-1.5 transition-all text-yellow-400 font-bold">
-        <i id="theme-icon" class="ti ti-sunset-2 text-sm"></i> <span id="theme-text" class="hidden sm:inline">โหมดเทศกาลซากุระ</span>
+      
+      <!-- Audio Toggle -->
+      <button onclick="toggleAudio()" class="border py-2 px-3 rounded-xl flex items-center gap-1.5 transition-all text-xs font-bold cursor-pointer shadow-sm">
+        <i id="audio-icon" class="ti ti-volume-off text-sm text-gray-400"></i>
+        <span id="audio-text">เปิดเสียง</span>
       </button>
-      <div class="text-right hidden lg:block"><p class="text-sm font-bold text-yellow-400">24 – 26 JULY 2026 @ISLAND HALL 3FL.</p></div>
     </div>
+    <div class="text-right hidden md:block"><p class="text-sm font-bold text-yellow-400">24 – 26 JULY 2026 @ISLAND HALL 3FL.</p></div>
   </div>
 </div>
 
 <div class="nav-container sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto px-4 flex gap-2 overflow-x-auto py-2">
+  <div class="max-w-7xl mx-auto px-4 flex gap-2 overflow-x-auto py-2 no-print">
     <button onclick="showPage('calc',this)" class="nav-btn active">คำนวณบัตร</button>
     <button onclick="showPage('bod',this)" class="nav-btn">บด System</button>
     <button onclick="showPage('activities',this)" class="nav-btn">รายละเอียด</button>
     <button onclick="showPage('summary',this)" class="nav-btn">สถิติรวม</button>
-    <button onclick="showPage('route',this)" class="nav-btn">แผนเดินงาน</button>
-    <button onclick="showPage('oshi',this)" class="nav-btn">ตารางโอชิ</button>
+    <button onclick="showPage('schedule',this)" class="nav-btn">จัดตาราง</button>
   </div>
 </div>
 
@@ -277,46 +960,71 @@ body.theme-sakura .bg-gray-800 {
     </div>
   </div>
 
+  <!-- Page: Activities Details -->
   <div id="page-activities" class="page-content hidden"><div id="activitiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div></div>
+  
+  <!-- Page: Statistics Summary -->
   <div id="page-summary" class="page-content hidden"><div id="summaryContent" class="space-y-6"></div></div>
 
-  <!-- Page: Route Planner -->
-  <div id="page-route" class="page-content hidden">
-    <div class="space-y-6">
-      <div class="glass p-6 rounded-2xl border-l-4 border-cyan-500">
-        <h2 class="text-xl font-bold text-cyan-400 mb-2 flex items-center gap-2">
-          <i class="ti ti-map-pin"></i> แผนเดินงานรายวัน (Event Route Planner)
-        </h2>
-        <p class="text-sm text-gray-400">สรุปเส้นทางการเดินเที่ยวใน Island Hall ตามลำดับเวลาที่เลือกไว้เพื่อวางแผนล่วงหน้า</p>
+  <!-- Page: Schedule (จัดตาราง) -->
+  <div id="page-schedule" class="page-content hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Left Column: Member List -->
+      <div class="lg:col-span-2 space-y-4">
+        <div class="glass p-6 rounded-2xl border-l-4 border-cyan-500">
+          <h2 class="text-xl font-bold text-cyan-400 mb-2">จัดตารางงานส่วนตัว</h2>
+          <p class="text-sm text-gray-400">กดที่ชื่อเมมเบอร์เพื่อดูคิวงานและเลือกกิจกรรมที่คุณสนใจลงในตะกร้าแผนการเดินงานของคุณ</p>
+        </div>
+        <input type="text" id="schedSearchInput" placeholder="ค้นหาชื่อเมมเบอร์..." oninput="renderScheduleGrid()" class="w-full search-input rounded-xl px-4 py-3 text-sm">
+        <div id="schedMemberGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3"></div>
       </div>
       
-      <div class="flex justify-center gap-3">
-        <button id="route-day-24" onclick="setRouteDay('24 July', this)" class="btn-primary">24 July</button>
-        <button id="route-day-25" onclick="setRouteDay('25 July', this)" class="btn-secondary bg-gray-800 p-2 rounded-xl text-xs font-bold text-gray-400 transition-all">25 July</button>
-        <button id="route-day-26" onclick="setRouteDay('26 July', this)" class="btn-secondary bg-gray-800 p-2 rounded-xl text-xs font-bold text-gray-400 transition-all">26 July</button>
+      <!-- Right Column: Cart -->
+      <div class="lg:col-span-1">
+        <div class="sticky top-20 space-y-4" id="cartCaptureArea">
+          <div class="glass p-6 rounded-2xl border border-white/10 flex flex-col gap-4">
+            <div id="printHeader" class="hidden text-center pb-4 border-b border-white/10">
+              <div class="text-xl font-black text-yellow-400 tracking-wider">MY BON ODORI 2026 SCHEDULE</div>
+              <div class="text-[9px] text-gray-400">สร้างด้วยระบบจัดตารางงาน Bon Odori 2026</div>
+            </div>
+            
+            <div class="flex justify-between items-center no-print">
+              <span class="text-base font-black text-white flex items-center gap-1.5"><i class="ti ti-shopping-cart text-cyan-400"></i> ตะกร้าตารางงาน</span>
+              <button onclick="clearCart()" class="text-red-400 hover:text-red-300 text-xs font-bold transition-all"><i class="ti ti-trash"></i> ล้างตะกร้า</button>
+            </div>
+            
+            <div id="cartItemList" class="space-y-3 max-h-[50vh] overflow-y-auto pr-1 custom-scrollbar"></div>
+            
+            <!-- Cart totals and buttons -->
+            <div id="cartSummary" class="border-t border-white/5 pt-4 mt-2 space-y-4">
+              <div class="grid grid-cols-2 gap-2 text-center text-xs">
+                <div class="bg-white/5 p-2 rounded-xl border border-white/5">
+                  <div class="text-gray-400 mb-0.5">ยอดรวมเงิน</div>
+                  <div id="cartTotalPrice" class="font-black text-green-400 text-sm">0฿</div>
+                </div>
+                <div class="bg-white/5 p-2 rounded-xl border border-white/5">
+                  <div class="text-gray-400 mb-0.5">ตั๋วที่ต้องใช้</div>
+                  <div id="cartTotalTickets" class="font-black text-cyan-400 text-sm">0 ใบ</div>
+                </div>
+              </div>
+              
+              <div class="flex flex-col gap-2 no-print">
+                <div class="flex gap-2">
+                  <button onclick="downloadCartImage()" class="flex-1 bg-cyan-600 hover:bg-cyan-500 text-white text-[11px] font-bold py-2.5 px-2 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1">
+                    <i class="ti ti-download"></i> บันทึกรูป
+                  </button>
+                  <button onclick="copyScheduleLink()" class="flex-1 bg-purple-700 hover:bg-purple-600 text-white text-[11px] font-bold py-2.5 px-2 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1">
+                    <i class="ti ti-link"></i> คัดลอกลิงค์แชร์
+                  </button>
+                </div>
+                <button onclick="printCart()" class="w-full bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold py-2.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1 border border-white/5">
+                  <i class="ti ti-printer"></i> พิมพ์ตารางงาน (Print)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div id="routeTimeline" class="max-w-xl mx-auto space-y-4"></div>
-    </div>
-  </div>
-
-  <!-- Page: Oshi Schedule -->
-  <div id="page-oshi" class="page-content hidden">
-    <div class="space-y-6">
-      <div class="glass p-6 rounded-2xl border-l-4 border-purple-500">
-        <h2 class="text-xl font-bold text-purple-400 mb-2 flex items-center gap-2">
-          <i class="ti ti-heart"></i> ตารางโอชิ (Oshi Schedule Finder)
-        </h2>
-        <p class="text-sm text-gray-400">ค้นหาตารางกิจกรรมและช่วงเวลาทั้งหมดของเมมเบอร์ที่คุณรักได้ตลอดงานทั้ง 3 วัน</p>
-      </div>
-
-      <div class="max-w-md mx-auto space-y-4">
-        <select id="oshiSelect" onchange="renderOshiSchedule(this.value)" class="w-full search-input rounded-xl px-4 py-3 font-bold text-white bg-gray-800 border border-white/10 outline-none">
-          <option value="">— เลือกเมมเบอร์เพื่อดูตารางงาน —</option>
-        </select>
-      </div>
-
-      <div id="oshiTimelineResult" class="max-w-xl mx-auto space-y-6"></div>
     </div>
   </div>
 </div>
@@ -335,14 +1043,6 @@ body.theme-sakura .bg-gray-800 {
       <div class="bg-gray-800 p-3 rounded-xl"><div id="klabTicketCount" class="text-xl font-bold text-cyan-400">0</div><div class="text-[10px]">ตั๋วรวม (ใบ)</div></div>
     </div>
     <div id="klabMessage" class="italic text-yellow-400 text-sm mb-6"></div>
-    <div class="no-capture mb-4 text-left">
-      <label class="block text-[10px] font-bold text-gray-400 mb-1.5 uppercase">เลือกกรอบรูปสำหรับแชร์:</label>
-      <div class="grid grid-cols-3 gap-2">
-        <button onclick="setShareFrame('none')" id="frame-btn-none" class="bg-cyan-600/30 border border-cyan-400/50 text-[10px] py-1.5 px-2 rounded-lg font-bold text-white transition-all text-center">ไม่มีกรอบ</button>
-        <button onclick="setShareFrame('gold')" id="frame-btn-gold" class="bg-gray-800 border border-white/5 text-[10px] py-1.5 px-2 rounded-lg font-bold text-yellow-400 hover:bg-gray-700 transition-all text-center">กรอบสปอนเซอร์</button>
-        <button onclick="setShareFrame('noodle')" id="frame-btn-noodle" class="bg-gray-800 border border-white/5 text-[10px] py-1.5 px-2 rounded-lg font-bold text-pink-400 hover:bg-gray-700 transition-all text-center">กรอบต้มมาม่า</button>
-      </div>
-    </div>
     <div class="flex flex-col gap-2 no-capture">
       <div class="flex gap-2">
         <button onclick="downloadKlabImage()" id="btnDownload" class="flex-1 bg-cyan-600 hover:bg-cyan-500 active:scale-95 p-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
@@ -352,9 +1052,24 @@ body.theme-sakura .bg-gray-800 {
           <i class="ti ti-link"></i> คัดลอกลิงค์
         </button>
       </div>
-      <button onclick="closeKlab()" class="bg-gray-700 hover:bg-gray-600 p-3 rounded-xl font-bold transition-all">ปิด</button>
+      <button onclick="closeKlab()" class="bg-gray-700 hover:bg-gray-600 p-3 rounded-xl font-bold transition-all w-full text-white mt-1">ปิด</button>
     </div>
     <div id="klabToast" class="hidden mt-3 text-center text-sm font-bold text-green-400 animate-pulse"></div>
+  </div>
+</div>
+
+<!-- Modal: Activities List (จัดตาราง) -->
+<div id="activitiesModal" class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-50" style="display:none;">
+  <div class="glass max-w-md w-full rounded-2xl p-6 border border-cyan-500/30 text-center relative max-h-[85vh] flex flex-col">
+    <!-- Close button top-right -->
+    <button onclick="closeActivitiesModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-all text-xl font-bold bg-white/5 w-8 h-8 rounded-full flex items-center justify-center border border-white/10 no-print" aria-label="Close">
+      ✕
+    </button>
+    <div id="modalMemberName" class="text-lg font-black text-cyan-400 mb-4 pr-8"></div>
+    <div id="modalActivitiesList" class="flex-1 overflow-y-auto space-y-3 pr-2 custom-scrollbar text-left"></div>
+    <div class="mt-6 pt-4 border-t border-white/5 flex justify-end gap-2 no-print">
+      <button onclick="closeActivitiesModal()" class="w-full bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold py-3 rounded-xl transition-all border border-white/10">ปิดหน้าต่าง</button>
+    </div>
   </div>
 </div>
 
@@ -365,7 +1080,7 @@ const BOOTHS = [
   { k: "CenterStage", s: "Bon Odori Center Stage", t: 0, price: 0 },
   { k: "HachiCha", s: "はちCHA (Hachi Cha)", t: 0, price: 145 },
   { k: "LuckyRoulette", s: "ラッキールーレット (Lucky Roulette)", t: 5, price: 5 * TICKET_PRICE },
-  { k: "CorkShateki", s: "コルก射ที่ 3発 (Cork Shateki)", t: 5, price: 5 * TICKET_PRICE },
+  { k: "CorkShateki", s: "コルก射적 3発 (Cork Shateki)", t: 5, price: 5 * TICKET_PRICE },
   { k: "Plinko", s: "プリンコ (Plinko)", t: 5, price: 5 * TICKET_PRICE },
   { k: "OmikujiSuuji", s: "おみくじ数字バトル (Omikuji Suuji Battle)", t: 5, price: 5 * TICKET_PRICE },
   { k: "Wanage", s: "輪投げ (Wanage)", t: 5, price: 5 * TICKET_PRICE }
@@ -420,13 +1135,16 @@ let currentDay = 'all';
 let slotRounds = {};
 let selectedFanmeetZones = {};
 
+// Scheduler Cart variables
+let selectedActivities = new Set();
+let activeMember = '';
+
 function initializeApp() {
   ALL_MEMBERS = Array.from(new Set(Object.values(DATA).flatMap(b => Object.values(b).flatMap(d => Object.values(d).flat())))).sort();
   renderMemberGrid();
   renderActivities();
   loadStateFromURL();
   loadTheme();
-  populateOshiDropdown();
 }
 
 function showPage(p, btn) {
@@ -439,12 +1157,11 @@ function showPage(p, btn) {
     renderBodSelectedBar();
     renderBod();
   }
-  if (p === 'route') renderRoutePlanner();
-  if (p === 'oshi') {
-    const oshiSelect = document.getElementById('oshiSelect');
-    renderOshiSchedule(oshiSelect ? oshiSelect.value : '');
-  }
   if (p === 'summary') renderSummary();
+  if (p === 'schedule') {
+    renderScheduleGrid();
+    renderCart();
+  }
   playSynthSound('ui');
 }
 
@@ -457,13 +1174,16 @@ function setDay(d, el) {
   el.classList.remove('btn-secondary');
   el.classList.add('btn-primary');
   renderCalc();
-  playSynthSound('ui');
 }
 
 function filterMembers() { renderMemberGrid(); }
 
 function toggleMember(m) {
-  if (selected.has(m)) selected.delete(m); else selected.add(m);
+  if (selected.has(m)) {
+    selected.delete(m);
+  } else {
+    selected.add(m);
+  }
   renderMemberGrid(); 
   renderCalc(); 
   renderSelectedBar(); 
@@ -532,13 +1252,6 @@ function updateTotalPrice() {
         });
       });
     });
-    // Fanmeet: evIdx-based
-    const mzMap = selectedFanmeetZones[m] || {};
-    Object.entries(mzMap).forEach(([evIdx, zk]) => {
-      const ev = FANMEET_EVENTS[evIdx]; if (!ev) return;
-      const z = ev.zones.find(z => z.k === zk); if (!z) return;
-      totalMoney += z.price; totalTickets += 1;
-    });
   });
   document.getElementById('totalPriceValue').textContent = totalMoney.toLocaleString() + ' บาท';
   document.getElementById('totalTicketValue').textContent = totalTickets.toLocaleString() + ' ใบ';
@@ -570,7 +1283,7 @@ function renderBodMemberGrid() {
   ).join('');
 }
 
-// BOD SYSTEM SELECTED BAR
+// BOD Selected Bar Rendering
 function renderBodSelectedBar() {
   const bar = document.getElementById('bodSelectedBar');
   if (selected.size === 0) { bar.classList.add('hidden'); return; }
@@ -590,7 +1303,6 @@ function renderBod() {
   let html = '';
   DAYS.forEach(d => {
     const activitySlots = {}; 
-    const timeOverlaps = {};
     
     selected.forEach(m => {
       BOOTHS.forEach(b => {
@@ -603,9 +1315,6 @@ function renderBod() {
               const key = `${t} @ ${b.s}`;
               if (!activitySlots[key]) activitySlots[key] = [];
               activitySlots[key].push(m);
-
-              if (!timeOverlaps[t]) timeOverlaps[t] = [];
-              timeOverlaps[t].push({ member: m, booth: b.s });
             }
           }
         });
@@ -614,89 +1323,34 @@ function renderBod() {
 
     const conflicts = Object.entries(activitySlots).filter(([key, members]) => members.length > 1);
     
-    const overlaps = Object.entries(timeOverlaps).filter(([time, list]) => {
-      return list.length > 1;
-    });
-    
-    if (conflicts.length > 0 || overlaps.length > 0) {
+    if (conflicts.length > 0) {
       html += `<div class="result-card border-pink-500/50">
         <div class="text-pink-400 font-bold mb-3 flex items-center gap-2">
           <i class="ti ti-users"></i> วันที่ ${d} 
+          <span class="text-[10px] bg-pink-500/20 px-2 py-0.5 rounded">พบบูธเดียวกัน-เวลาเดียวกัน</span>
         </div>`;
       
-      if (conflicts.length > 0) {
-        html += `<div class="mb-4"><div class="text-[10px] text-pink-400 font-bold uppercase tracking-wider mb-2">📌 เมมเบอร์เจอกัน บูธเดียวกัน-เวลาเดียวกัน</div>`;
-        conflicts.forEach(([key, members]) => {
-          const [time, boothName] = key.split(' @ ');
-          html += `<div class="conflict-item !bg-pink-500/5 !border-pink-500/20 mb-2">
-            <div class="flex items-center justify-between mb-2 border-b border-white/5 pb-1">
-              <span class="text-xs font-bold text-white"><i class="ti ti-clock"></i> ${time}</span>
-              <span class="text-[10px] font-bold text-pink-400 uppercase">${boothName}</span>
-            </div>
-            <div class="flex flex-wrap gap-1.5">
-              ${members.map(name => `
-                <div class="bg-gray-800/80 px-2 py-1 rounded-lg border border-pink-500/30 text-[10px] font-bold text-cyan-400">
-                   ${name}
-                </div>
-              `).join('')}
-            </div>
-          </div>`;
-        });
-        html += `</div>`;
-      }
-
-      if (overlaps.length > 0) {
-        html += `<div class="mb-2"><div class="text-[10px] text-yellow-400 font-bold uppercase tracking-wider mb-2">🚨 เตือนร่างทอง! กิจกรรมชนเวลากัน (แยกร่างไม่ได้นะ)</div>`;
-        overlaps.forEach(([time, list]) => {
-          html += `<div class="conflict-item !bg-yellow-500/5 !border-yellow-500/20 mb-2">
-            <div class="flex items-center justify-between mb-2 border-b border-white/5 pb-1">
-              <span class="text-xs font-bold text-white"><i class="ti ti-clock"></i> ${time}</span>
-              <span class="text-[10px] font-bold text-yellow-400 uppercase">ทับซ้อนเวลากัน</span>
-            </div>
-            <div class="space-y-1">
-              ${list.map(item => `
-                <div class="text-[10px] text-gray-300">
-                  • <span class="font-bold text-cyan-400">${item.member}</span> ที่บูธ <span class="text-white">${item.booth}</span>
-                </div>
-              `).join('')}
-            </div>
-          </div>`;
-        });
-        html += `</div>`;
-      }
-
+      conflicts.forEach(([key, members]) => {
+        const [time, boothName] = key.split(' @ ');
+        html += `<div class="conflict-item !bg-pink-500/5 !border-pink-500/20">
+          <div class="flex items-center justify-between mb-3 border-b border-white/5 pb-2">
+            <span class="text-sm font-bold text-white"><i class="ti ti-clock"></i> ${time}</span>
+            <span class="text-xs font-bold text-pink-400 uppercase">${boothName}</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            ${members.map(name => `
+              <div class="bg-gray-800/80 px-3 py-1.5 rounded-lg border border-pink-500/30 text-xs font-bold text-cyan-400">
+                ${name}
+              </div>
+            `).join('')}
+          </div>
+        </div>`;
+      });
       html += `</div>`;
     }
   });
 
-  el.innerHTML = html || '<div class="text-center py-10 text-green-400 font-bold"><i class="ti ti-circle-check"></i> ไม่พบกิจกรรมที่ชนเวลากัน (Safe!)</div>';
-}
-
-const FANMEET_EVENTS = [];
-
-function getFanmeetEventsForMember(m) {
-  return FANMEET_EVENTS.filter(ev => ev.members.includes(m));
-}
-
-function setFanmeetZone(memberName, evIdx, zoneKey) {
-  if (!selectedFanmeetZones[memberName]) selectedFanmeetZones[memberName] = {};
-  if (selectedFanmeetZones[memberName][evIdx] === zoneKey) {
-    delete selectedFanmeetZones[memberName][evIdx];
-  } else {
-    selectedFanmeetZones[memberName][evIdx] = zoneKey;
-  }
-  renderCalc();
-  updateTotalPrice();
-}
-
-function removeFanmeetZone(memberName, evIdx) {
-  if (selectedFanmeetZones[memberName]) delete selectedFanmeetZones[memberName][evIdx];
-  renderCalc();
-  updateTotalPrice();
-}
-
-function getSelectedZone(memberName, evIdx) {
-  return (selectedFanmeetZones[memberName] || {})[evIdx] || null;
+  el.innerHTML = html || '<div class="text-center py-10 text-green-400 font-bold"><i class="ti ti-circle-check"></i> ไม่พบเมมเบอร์ที่ "ชนกันในกิจกรรมเดียวกัน" (Safe!)</div>';
 }
 
 function renderCalc() {
@@ -716,46 +1370,42 @@ function renderCalc() {
       });
     });
 
-    const memberFmEvents = getFanmeetEventsForMember(m).map((ev, globalIdx) => {
-      const evIdx = FANMEET_EVENTS.indexOf(ev);
-      return { ev, evIdx };
-    }).filter(({ ev }) => currentDay === 'all' || ev.day === currentDay);
-
     let mTotalMoney = 0, mTotalTickets = 0;
     regularSlots.forEach(s => {
       const r = slotRounds[s.id] !== undefined ? slotRounds[s.id] : 1;
       mTotalMoney += s.b.price * r; mTotalTickets += s.b.t * r;
     });
-    memberFmEvents.forEach(({ ev, evIdx }) => {
-      const zk = getSelectedZone(m, evIdx);
-      const z = zk ? ev.zones.find(z => z.k === zk) : null;
-      if (z) { mTotalMoney += z.price; mTotalTickets += 1; }
-    });
 
-    if (regularSlots.length === 0 && memberFmEvents.length === 0) return;
-
-    html += `
-      <div class="result-card">
-        <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
-          <div>
-            <div class="result-name">${m}</div>
-            <div class="text-[10px] text-gray-400">สรุปยอดเมมเบอร์: ใช้ตั๋วรวม <span class="text-cyan-400 font-bold">${mTotalTickets} ใบ</span> | ค่าใช้จ่าย <span class="text-yellow-400 font-bold">${mTotalMoney.toLocaleString()}฿</span></div>
-          </div>
+    html += `<div class="result-card neon-glow">
+      <div class="flex justify-between items-center mb-4">
+        <div>
+          <div class="result-name">${m}</div>
+          <div class="text-[10px] text-cyan-400 font-bold uppercase tracking-tight">คูปองรวม: ${mTotalTickets} ใบ</div>
         </div>
-        <div class="space-y-3">
-    `;
+        <div class="text-green-400 font-bold text-xl">${mTotalMoney.toLocaleString()}฿</div>
+      </div>`;
 
-    regularSlots.forEach(s => {
-      const r = slotRounds[s.id] !== undefined ? slotRounds[s.id] : 1;
-      html += `
-        <div class="slot-item ${r === 0 ? 'zero-round' : ''}">
-          <div class="slot-info flex-1 min-w-0">
-            <div class="flex items-center gap-2 mb-1.5 flex-wrap">
-              <span class="text-[9px] font-black bg-cyan-900/60 text-cyan-400 px-2 py-0.5 rounded-full whitespace-nowrap">${s.b.s}</span>
-              <span class="text-[10px] font-bold text-yellow-400 whitespace-nowrap">${s.d}</span>
+    const daysToShow = currentDay === 'all' ? DAYS : [currentDay];
+    let hasAnything = false;
+
+    daysToShow.forEach(d => {
+      const dRegular = regularSlots.filter(s => s.d === d);
+      if (dRegular.length === 0) return;
+      hasAnything = true;
+
+      const allItems = dRegular.map(s => ({ type:'regular', s, sortKey: s.t.split('-')[0] })).sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+
+      html += `<div class="mb-4"><div class="text-[10px] font-bold text-yellow-500 uppercase mb-2 border-b border-yellow-500/20 pb-1">${d}</div>`;
+
+      allItems.forEach(item => {
+        const s = item.s;
+        const r = slotRounds[s.id] !== undefined ? slotRounds[s.id] : 1;
+        html += `<div class="slot-item ${r===0?'zero-round':''}">
+          <div class="slot-info">
+            <div class="text-sm font-bold flex items-center gap-2">
+              ${s.t} — ${s.b.s}
             </div>
-            <div class="text-sm font-black text-white truncate">${s.t} น.</div>
-            <div class="text-[10px] text-gray-500 mt-1">
+            <div class="text-[10px] text-gray-400">
               <span class="text-white">${(s.b.price*r).toLocaleString()}฿</span> | <span class="text-cyan-400">${s.b.t*r} ตั๋ว</span>
             </div>
           </div>
@@ -766,47 +1416,16 @@ function renderCalc() {
             <button class="btn-set-zero" onclick="setSlotZero('${s.id}')"><i class="ti ti-trash"></i></button>
           </div>
         </div>`;
+      });
+
+      html += `</div>`;
     });
 
-    memberFmEvents.forEach(({ ev, evIdx }) => {
-      const selectedZk = getSelectedZone(m, evIdx);
-      const selectedZone = selectedZk ? ev.zones.find(z => z.k === selectedZk) : null;
-
-      html += `<div class="slot-item" style="border-color:rgba(245,200,66,${selectedZone?'0.5':'0.2'});background:rgba(245,200,66,${selectedZone?'0.08':'0.03'})">
-        <div class="slot-info flex-1 min-w-0">
-          <div class="flex items-center gap-2 mb-1.5 flex-wrap">
-            <span class="text-[9px] font-black bg-yellow-600/40 text-yellow-300 px-2 py-0.5 rounded-full whitespace-nowrap">🎪 FANMEET</span>
-            <span class="text-xs font-bold text-yellow-200 truncate">${ev.name}</span>
-          </div>
-          <div class="text-[10px] text-gray-500 mb-2">${ev.time} น. — เลือก Zone / ราคาที่ซื้อ</div>
-          <div class="relative">
-            <select onchange="setFanmeetZone('${m}',${evIdx},this.value)"
-              class="w-full text-[11px] font-bold rounded-lg px-3 py-2 pr-7 appearance-none cursor-pointer"
-              style="background:rgba(20,24,50,0.95);border:1.5px solid rgba(245,200,66,${selectedZone?'0.6':'0.25'});color:${selectedZone?'#fde68a':'#888'};outline:none">
-              <option value="">— ไม่ได้ซื้อ —</option>
-              ${ev.zones.map(z => `<option value="${z.k}" ${selectedZk===z.k?'selected':''}>${z.label} — ${z.price.toLocaleString()}฿</option>`).join('')}
-            </select>
-            <i class="ti ti-chevron-down" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:#888;pointer-events:none"></i>
-          </div>
-          ${selectedZone ? `<div class="mt-1.5 text-[10px] font-bold text-yellow-400">${selectedZone.label} — ${selectedZone.price.toLocaleString()}฿</div>` : ''}
-        </div>
-      </div>`;
-    });
-
-    html += `</div></div>`;
+    if (!hasAnything) html += `<p class="text-xs italic opacity-50">ไม่มีกิจกรรมในวันที่เลือก</p>`;
+    html += `</div>`;
   });
 
-  if (!html) html = `<p class="text-xs italic opacity-50">ไม่มีกิจกรรมในวันที่เลือก</p>`;
   el.innerHTML = html;
-}
-
-function getKlabLevel(price) {
-  if (price === 0) return { label: "กระเป๋าตังค์ยังยิ้มได้ ☕", desc: "ยังไม่ได้เลือกกิจกรรมใดๆ เลย ปลอดภัย 100%", color: "text-green-400" };
-  if (price <= 500) return { label: "ระดับ จิบชาชิลๆ 🍵", desc: "ใช้จ่ายเบาๆ ยังอยู่ดีกินดีในร้านหรูได้สบายๆ", color: "text-cyan-400" };
-  if (price <= 1500) return { label: "ระดับ กะเพราไข่ดาว 🍳", desc: "กระเป๋าตังค์เริ่มตึงตัว งดขนมหวาน แล้วกินข้าวแกงข้างทาง", color: "text-yellow-400" };
-  if (price <= 3000) return { label: "ระดับ มิตรแท้เส้นบะหมี่ 🍜", desc: "เตรียมซื้อบะหมี่กึ่งสำเร็จรูปยกแพ็คกินสามมื้อต่อวัน", color: "text-pink-400" };
-  if (price <= 6000) return { label: "ระดับ ต้มน้ำลวกเกลือ 🧂", desc: "วิกฤตทางการเงินค่อนข้างรุนแรง แค่กินน้ำลวกเกลือก็หรูแล้ว", color: "text-red-400" };
-  return { label: "ระดับ กินลมหายใจเป็นอาหาร 🌬️", desc: "เงินหมดเกลี้ยง นิพพานทางการเงิน อากาศหายใจคืออาหารหลักเท่านั้น!", color: "text-purple-400 animate-pulse" };
 }
 
 function openKlab() {
@@ -828,39 +1447,32 @@ function openKlab() {
         });
       });
     });
-    const mzMap = selectedFanmeetZones[m] || {};
-    Object.entries(mzMap).forEach(([evIdx, zk]) => {
-      const ev = FANMEET_EVENTS[evIdx]; if (!ev) return;
-      const z = ev.zones.find(z => z.k === zk); if (!z) return;
-      totalMoney += z.price; totalTickets += 1;
-      items += `<div class="flex justify-between text-[10px] border-b border-white/5 pb-1"><span class="text-yellow-300">🎪 ${m} — ${ev.name} ${z.label}</span><span class="font-bold text-yellow-400">${z.price.toLocaleString()}฿</span></div>`;
-    });
   });
   document.getElementById('klabTotalValue').textContent = totalMoney.toLocaleString() + '฿';
   document.getElementById('klabMamaCount').textContent = Math.ceil(totalMoney / 7).toLocaleString();
   document.getElementById('klabTicketCount').textContent = totalTickets.toLocaleString();
   document.getElementById('klabItemList').innerHTML = items;
   
-  const klabLevel = getKlabLevel(totalMoney);
-  const kMsgEl = document.getElementById('klabMessage');
-  kMsgEl.className = "text-center mb-6 px-4 py-2 bg-white/5 border border-white/10 rounded-xl";
-  kMsgEl.innerHTML = `<div class="font-bold text-sm ${klabLevel.color}">${klabLevel.label}</div><div class="text-[10px] text-gray-400 mt-1">${klabLevel.desc}</div>`;
-
-  if (totalMoney > 3000) {
-    playSynthSound('klab_sad');
-  } else {
-    playSynthSound('ui');
-  }
-
-  setShareFrame('none');
+  // Set funny status message
+  let msg = '';
+  if (totalMoney === 0) msg = "ยังไม่ได้ใช้เงินเลย เซฟเงินไว้เต็มกระเป๋า!";
+  else if (totalMoney <= 500) msg = "ระดับความแกลบ: ระดับเริ่มต้น ยังพอมีเงินซื้อข้าวกะเพรากินได้!";
+  else if (totalMoney <= 1500) msg = "ระดับความแกลบ: ระดับต้มมาม่าประทังชีวิต เริ่มต้มมาม่ากินทีละครึ่งซองแล้ว!";
+  else if (totalMoney <= 3500) msg = "ระดับความแกลบ: ดื่มน้ำเปล่าลูบท้อง กลิ่นหอมจากร้านข้าวข้างทางคืออาหารหลักของคุณ!";
+  else msg = "ระดับความแกลบ: สังเคราะห์แสงประทังชีวิต หายใจเข้าออกเป็นอากาศบริสุทธิ์เพื่อความอยู่รอด!";
+  document.getElementById('klabMessage').textContent = msg;
 
   const isSharedLink = new URLSearchParams(location.search).get('share') === '1';
   const banner = document.getElementById('klabSharedBanner');
   if (banner) banner.classList.toggle('hidden', !isSharedLink);
   document.getElementById('klabModal').style.display = 'flex';
+  playSynthSound('ui');
 }
 
-function closeKlab() { document.getElementById('klabModal').style.display = 'none'; playSynthSound('ui'); }
+function closeKlab() { 
+  document.getElementById('klabModal').style.display = 'none'; 
+  playSynthSound('ui');
+}
 
 function showKlabToast(msg, color = 'text-green-400') {
   const t = document.getElementById('klabToast');
@@ -878,26 +1490,11 @@ async function downloadKlabImage() {
   try {
     const area = document.getElementById('klabCaptureArea');
     const clone = area.cloneNode(true);
-    
-    if (currentShareFrame === 'gold') {
-      const banner = document.createElement('div');
-      banner.style.cssText = "font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 3px; color: #FFCC00; font-weight: bold; margin-bottom: 15px; text-shadow: 0 0 10px rgba(255, 204, 0, 0.5); text-align: center;";
-      banner.textContent = "★ OFFICIAL VIP SPONSOR ★";
-      clone.insertBefore(banner, clone.firstChild);
-    } else if (currentShareFrame === 'noodle') {
-      const banner = document.createElement('div');
-      banner.style.cssText = "font-family: 'Noto Sans Thai', sans-serif; font-weight: 800; font-size: 0.8rem; color: #FF3366; margin-bottom: 15px; text-align: center;";
-      banner.textContent = "🍜 วิกฤตการณ์การคลัง: โหมดต้มมาม่า 🍜";
-      clone.insertBefore(banner, clone.firstChild);
-    }
-
     clone.style.cssText = `
       position: fixed; left: -9999px; top: 0;
       width: 480px; max-height: none; overflow: visible;
       border-radius: 24px; padding: 40px;
-      background: ${currentShareFrame === 'gold' ? 'linear-gradient(135deg, #1c150b 0%, #1a1f3a 100%)' : currentShareFrame === 'noodle' ? 'linear-gradient(135deg, #1f0c15 0%, #101428 100%)' : '#1a1f3a'};
-      border: ${currentShareFrame === 'gold' ? '5px solid #FFCC00' : currentShareFrame === 'noodle' ? '5px solid #FF3366' : '2px solid #F5C842'};
-      box-shadow: ${currentShareFrame === 'gold' ? '0 0 50px rgba(255, 204, 0, 0.6)' : currentShareFrame === 'noodle' ? '0 0 50px rgba(255, 51, 102, 0.5)' : 'none'};
+      background: #1a1f3a;
     `;
     const itemList = clone.querySelector('#klabItemList');
     if (itemList) { itemList.style.maxHeight = 'none'; itemList.style.overflow = 'visible'; }
@@ -923,6 +1520,7 @@ async function downloadKlabImage() {
     link.href = canvas.toDataURL('image/png');
     link.click();
     showKlabToast('✅ บันทึกรูปสำเร็จ!');
+    playSynthSound('ui');
   } catch(e) {
     showKlabToast('❌ เกิดข้อผิดพลาด: ' + e.message, 'text-red-400');
     console.error('Download error:', e);
@@ -958,20 +1556,10 @@ function copyKlabLink() {
     }
 
     const url = `${location.origin}${location.pathname}?${params.toString()}`;
-
-    const doShare = (url) => {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(url)
-          .then(() => showKlabToast('✅ คัดลอกลิงค์แล้ว! ส่งให้เพื่อนได้เลย'))
-          .catch(() => fallbackCopy(url));
-      } else {
-        fallbackCopy(url);
-      }
-    };
-    doShare(url);
+    fallbackCopy(url);
+    playSynthSound('ui');
   } catch(e) {
     showKlabToast('❌ ไม่สามารถคัดลอกลิงค์ได้', 'text-red-400');
-    console.error('copyKlabLink error:', e);
   }
 }
 
@@ -983,9 +1571,9 @@ function fallbackCopy(text) {
   ta.focus(); ta.select();
   try {
     document.execCommand('copy');
-    showKlabToast('✅ คัดลอกลิงค์แล้ว! วางในแชทเพื่อแชร์ได้เลย');
+    showKlabToast('✅ คัดลอกลิงค์แล้ว! ส่งต่อให้เพื่อนดูได้เลย');
   } catch(e) {
-    showKlabToast('❌ ไม่สามารถคัดลอกได้ กรุณาใช้ browser ที่รองรับ', 'text-red-400');
+    showKlabToast('❌ ไม่สามารถคัดลอกได้', 'text-red-400');
   }
   document.body.removeChild(ta);
 }
@@ -997,6 +1585,8 @@ function loadStateFromURL() {
     const dayParam = params.get('day');
     const roundsParam = params.get('rounds');
     const isShare = params.get('share') === '1';
+    const timetableParam = params.get('timetable');
+    const isScheduleShare = params.get('share') === '3';
 
     if (membersParam) {
       membersParam.split(',').forEach(m => {
@@ -1008,6 +1598,13 @@ function loadStateFromURL() {
     if (roundsParam) {
       const parsed = JSON.parse(roundsParam);
       Object.assign(slotRounds, parsed);
+    }
+
+    if (timetableParam) {
+      const parsed = JSON.parse(timetableParam);
+      if (Array.isArray(parsed)) {
+        selectedActivities = new Set(parsed);
+      }
     }
 
     if (dayParam && ['all','24 July','25 July','26 July'].includes(dayParam)) {
@@ -1033,13 +1630,21 @@ function loadStateFromURL() {
         setTimeout(() => openKlab(), 300);
       }
     }
+
+    if (selectedActivities.size > 0) {
+      renderCart();
+      if (isScheduleShare) {
+        setTimeout(() => {
+          const btn = document.querySelector('button[onclick="showPage(\'schedule\',this)"]');
+          showPage('schedule', btn);
+        }, 100);
+      }
+    }
   } catch(e) { console.warn('Could not load URL state:', e); }
 }
 
 function renderActivities() {
-  const regularBooths = BOOTHS;
-
-  const regularHtml = regularBooths.map(b => `
+  const regularHtml = BOOTHS.map(b => `
     <div class="glass p-4 rounded-xl border-l-4 border-cyan-500">
       <div class="flex justify-between mb-2">
         <div class="font-bold text-cyan-400">${b.s}</div>
@@ -1141,178 +1746,309 @@ function renderSummary() {
   el.innerHTML = html;
 }
 
-// Theme Switcher Functions
-function toggleTheme() {
-  const body = document.body;
-  const isSakura = body.classList.toggle('theme-sakura');
-  localStorage.setItem('theme', isSakura ? 'sakura' : 'cyberpunk');
-  
-  const icon = document.getElementById('theme-icon');
-  const text = document.getElementById('theme-text');
-  if (icon && text) {
-    if (isSakura) {
-      icon.className = 'ti ti-sparkles text-sm';
-      text.textContent = 'โหมดไซเบอร์พังค์';
-      icon.style.color = '#FF8F3D';
-    } else {
-      icon.className = 'ti ti-sunset-2 text-sm';
-      text.textContent = 'โหมดเทศกาลซากุระ';
-      icon.style.color = '#F5C842';
-    }
-  }
-  playSynthSound('theme');
-  initParticles(isSakura ? 'sakura' : 'cyberpunk');
+// Personal Timetable Scheduler Cart functions
+function renderScheduleGrid() {
+  const q = document.getElementById('schedSearchInput').value.toLowerCase();
+  const filtered = ALL_MEMBERS.filter(m => m.toLowerCase().includes(q));
+  document.getElementById('schedMemberGrid').innerHTML = filtered.map(m =>
+    `<div class="member-chip transition-all duration-200 transform hover:scale-[1.03] active:scale-[0.97]" onclick="openActivitiesModal('${m}')">${m}</div>`
+  ).join('');
 }
 
-function loadTheme() {
-  const theme = localStorage.getItem('theme');
-  const isSakura = theme === 'sakura';
-  if (isSakura) {
-    document.body.classList.add('theme-sakura');
-    const icon = document.getElementById('theme-icon');
-    const text = document.getElementById('theme-text');
-    if (icon && text) {
-      icon.className = 'ti ti-sparkles text-sm';
-      text.textContent = 'โหมดไซเบอร์พังค์';
-      icon.style.color = '#FF8F3D';
-    }
-  }
-  initParticles(isSakura ? 'sakura' : 'cyberpunk');
+function getMemberActivities(m) {
+  const activities = [];
+  BOOTHS.forEach(b => {
+    DAYS.forEach(d => {
+      const dayData = DATA[b.k] && DATA[b.k][d];
+      if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
+        if (arr.includes(m)) {
+          activities.push({ booth: b, day: d, time: t });
+        }
+      });
+    });
+  });
+  return activities;
 }
 
-// Canvas Particle System
-let canvas, ctx;
-let particles = [];
-let animId = null;
-let currentTheme = 'cyberpunk';
+function openActivitiesModal(m) {
+  activeMember = m;
+  const nameEl = document.getElementById('modalMemberName');
+  if (nameEl) nameEl.textContent = m + " — กิจกรรมในงาน";
 
+  const listEl = document.getElementById('modalActivitiesList');
+  if (!listEl) return;
+
+  const activities = getMemberActivities(m);
+  if (activities.length === 0) {
+    listEl.innerHTML = '<div class="text-center py-6 text-gray-500 italic text-sm">ไม่มีข้อมูลกิจกรรมในงานของเมมเบอร์คนนี้</div>';
+  } else {
+    let html = '';
+    const daysGroup = {};
+    activities.forEach(act => {
+      if (!daysGroup[act.day]) daysGroup[act.day] = [];
+      daysGroup[act.day].push(act);
+    });
+
+    Object.entries(daysGroup).forEach(([day, list]) => {
+      html += `<div class="text-xs font-black text-yellow-400 border-b border-white/5 pb-1 mt-3 uppercase tracking-widest text-left">${day}</div>`;
+      list.forEach(act => {
+        const slotId = `${m}|${act.booth.k}|${act.day}|${act.time}`;
+        const isAdded = selectedActivities.has(slotId);
+        
+        html += `
+          <div class="slot-item border-l-4 ${isAdded ? 'border-green-500 bg-green-500/5' : 'border-cyan-500 bg-cyan-500/5'} p-3 flex justify-between items-center gap-4 mt-2">
+            <div class="text-left">
+              <div class="text-sm font-bold text-white">${act.booth.s}</div>
+              <div class="text-[10px] text-gray-400 mt-0.5"><i class="ti ti-clock"></i> ${act.time} น. | ${act.booth.price > 0 ? act.booth.price + '฿' : 'ฟรี'}</div>
+            </div>
+            <button onclick="toggleCartActivity('${slotId}')" class="text-xs font-bold px-3 py-1.5 rounded-lg active:scale-95 transition-all text-white ${isAdded ? 'bg-red-600/70 hover:bg-red-600' : 'bg-cyan-600 hover:bg-cyan-500'}">
+              ${isAdded ? 'ลบออก' : 'เลือก'}
+            </button>
+          </div>
+        `;
+      });
+    });
+    listEl.innerHTML = html;
+  }
+
+  document.getElementById('activitiesModal').style.display = 'flex';
+  playSynthSound('ui');
+}
+
+function closeActivitiesModal() {
+  document.getElementById('activitiesModal').style.display = 'none';
+  playSynthSound('ui');
+}
+
+function toggleCartActivity(slotId) {
+  if (selectedActivities.has(slotId)) {
+    selectedActivities.delete(slotId);
+  } else {
+    selectedActivities.add(slotId);
+  }
+  renderCart();
+  if (activeMember) openActivitiesModal(activeMember);
+  playSynthSound('ui');
+}
+
+function renderCart() {
+  const listEl = document.getElementById('cartItemList');
+  if (!listEl) return;
+
+  if (selectedActivities.size === 0) {
+    listEl.innerHTML = '<div class="text-center py-10 text-gray-500 italic text-xs">ตะกร้าว่างเปล่า — กรุณาเลือกกิจกรรม</div>';
+    document.getElementById('cartSummary').classList.add('hidden');
+    updateCartTotals(0, 0);
+    return;
+  }
+  document.getElementById('cartSummary').classList.remove('hidden');
+
+  let html = '';
+  let totalPrice = 0;
+  let totalTickets = 0;
+
+  const daysGroup = {};
+  Array.from(selectedActivities).forEach(slotId => {
+    const [member, boothKey, day, time] = slotId.split('|');
+    const booth = BOOTHS.find(b => b.k === boothKey);
+    if (!daysGroup[day]) daysGroup[day] = [];
+    daysGroup[day].push({ slotId, member, booth, time });
+  });
+
+  Object.entries(daysGroup).forEach(([day, list]) => {
+    list.sort((a, b) => a.time.localeCompare(b.time));
+    html += `<div class="text-xs font-bold text-yellow-400 mt-4 border-b border-white/5 pb-1 uppercase tracking-wider text-left">${day}</div>`;
+    list.forEach(item => {
+      const price = item.booth ? item.booth.price : 0;
+      const tickets = item.booth ? item.booth.t : 0;
+      totalPrice += price;
+      totalTickets += tickets;
+      html += `
+        <div class="slot-item border-l-4 border-cyan-500 !bg-cyan-500/5 p-3 flex justify-between items-center gap-4 mt-2">
+          <div class="text-left">
+            <span class="text-[9px] bg-cyan-900/60 text-cyan-300 px-1.5 py-0.5 rounded-full font-bold">${item.booth.s}</span>
+            <div class="text-sm font-black text-white mt-1">${item.member}</div>
+            <div class="text-[10px] text-gray-400 mt-0.5"><i class="ti ti-clock"></i> ${item.time} น. | ${price > 0 ? price.toLocaleString() + '฿' : 'ฟรี'}</div>
+          </div>
+          <button onclick="removeFromCart('${item.slotId}')" class="text-red-400 hover:text-red-300 p-2 rounded-lg text-xs font-bold transition-all no-print"><i class="ti ti-trash"></i></button>
+        </div>
+      `;
+    });
+  });
+  listEl.innerHTML = html;
+  updateCartTotals(totalPrice, totalTickets);
+}
+
+function removeFromCart(slotId) {
+  selectedActivities.delete(slotId);
+  renderCart();
+  if (activeMember) openActivitiesModal(activeMember);
+  playSynthSound('ui');
+}
+
+function clearCart() {
+  selectedActivities.clear();
+  renderCart();
+  if (activeMember) openActivitiesModal(activeMember);
+  playSynthSound('ui');
+}
+
+function updateCartTotals(price, tickets) {
+  document.getElementById('cartTotalPrice').textContent = price.toLocaleString() + '฿';
+  document.getElementById('cartTotalTickets').textContent = tickets.toLocaleString() + ' ใบ';
+}
+
+async function downloadCartImage() {
+  if (selectedActivities.size === 0) return;
+  const header = document.getElementById('printHeader');
+  header.classList.remove('hidden');
+  const btn = document.querySelector('[onclick="downloadCartImage()"]');
+  const originalHtml = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ti ti-loader animate-spin"></i> สร้างรูป...';
+
+  try {
+    const area = document.getElementById('cartCaptureArea');
+    const clone = area.cloneNode(true);
+    clone.style.cssText = `
+      position: fixed; left: -9999px; top: 0;
+      width: 480px; max-height: none; overflow: visible;
+      border-radius: 24px; padding: 40px;
+      background: ${document.body.classList.contains('theme-sakura') ? '#320a18' : '#0a0e27'};
+      border: 3px solid #F5C842;
+      box-shadow: 0 0 50px rgba(245, 200, 66, 0.4);
+    `;
+    clone.querySelectorAll('.no-print').forEach(el => el.remove());
+    const cartList = clone.querySelector('#cartItemList');
+    if (cartList) { cartList.style.maxHeight = 'none'; cartList.style.overflow = 'visible'; }
+
+    document.body.appendChild(clone);
+    await new Promise(r => setTimeout(r, 80));
+    const canvas = await html2canvas(clone, { 
+      scale: 2, 
+      backgroundColor: document.body.classList.contains('theme-sakura') ? '#320a18' : '#0a0e27' 
+    });
+    document.body.removeChild(clone);
+
+    const link = document.createElement('a');
+    link.download = 'my-bonodori-schedule.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    playSynthSound('ui');
+  } finally {
+    header.classList.add('hidden');
+    btn.disabled = false;
+    btn.innerHTML = originalHtml;
+  }
+}
+
+function printCart() {
+  const header = document.getElementById('printHeader');
+  header.classList.remove('hidden');
+  window.print();
+  header.classList.add('hidden');
+}
+
+function copyScheduleLink() {
+  try {
+    const params = new URLSearchParams();
+    params.set('timetable', JSON.stringify(Array.from(selectedActivities)));
+    params.set('share', '3');
+    const url = `${location.origin}${location.pathname}?${params.toString()}`;
+
+    const ta = document.createElement('textarea');
+    ta.value = url;
+    ta.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try {
+      document.execCommand('copy');
+      alert("คัดลอกลิงค์แชร์ตะกร้าตารางงานของคุณสำเร็จแล้ว!");
+    } catch(e) {
+      alert("ไม่สามารถคัดลอกลิงค์ได้อัตโนมัติ กรุณาคัดลอกด้วยตนเอง");
+    }
+    document.body.removeChild(ta);
+    playSynthSound('ui');
+  } catch(e) {
+    console.error(e);
+  }
+}
+
+// Particle canvas systems
+let canvas, ctx, particles = [], animId = null, currentTheme = 'cyberpunk';
 function initParticles(theme) {
   currentTheme = theme;
   canvas = document.getElementById('effectCanvas');
-  if (!canvas) return;
   ctx = canvas.getContext('2d');
-  
-  window.removeEventListener('resize', resizeCanvas);
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
   particles = [];
-  const particleCount = theme === 'sakura' ? 45 : 30;
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(createParticle(true));
-  }
-
+  for (let i = 0; i < 30; i++) particles.push(createParticle(true));
   if (animId) cancelAnimationFrame(animId);
   drawParticles();
 }
 
-function resizeCanvas() {
-  if (canvas) {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-}
-
-function createParticle(randomY = false) {
-  const w = canvas ? canvas.width : window.innerWidth;
-  const h = canvas ? canvas.height : window.innerHeight;
-  return {
-    x: Math.random() * w,
-    y: randomY ? Math.random() * h : (currentTheme === 'sakura' ? -20 : h + 20),
-    size: Math.random() * (currentTheme === 'sakura' ? 8 + 4 : 4 + 2),
-    speedX: currentTheme === 'sakura' ? Math.random() * 1.5 - 0.5 : Math.random() * 0.5 - 0.25,
-    speedY: currentTheme === 'sakura' ? Math.random() * 1 + 1 : -(Math.random() * 0.8 + 0.4),
-    angle: Math.random() * 360,
-    spin: Math.random() * 1.5 - 0.75,
-    opacity: Math.random() * 0.6 + 0.2
+function createParticle(randomY) {
+  return { 
+    x: Math.random() * canvas.width, 
+    y: randomY ? Math.random() * canvas.height : canvas.height + 20, 
+    size: Math.random() * 4 + 2, 
+    speedX: Math.random() * 0.5 - 0.25, 
+    speedY: -(Math.random() * 0.8 + 0.4), 
+    opacity: Math.random() * 0.6 + 0.2 
   };
 }
 
 function drawParticles() {
-  if (!canvas || !ctx) return;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  const w = canvas.width;
-  const h = canvas.height;
-
-  particles.forEach((p, idx) => {
-    ctx.save();
-    ctx.globalAlpha = p.opacity;
-    ctx.translate(p.x, p.y);
-    
-    if (currentTheme === 'sakura') {
-      ctx.rotate((p.angle * Math.PI) / 180);
-      ctx.fillStyle = '#FFB7C5';
-      ctx.beginPath();
-      ctx.ellipse(0, 0, p.size, p.size / 2, 0, 0, 2 * Math.PI);
-      ctx.fill();
-      ctx.strokeStyle = '#FFA4B4';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(-p.size, 0);
-      ctx.lineTo(p.size, 0);
-      ctx.stroke();
-    } else {
-      const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, p.size);
-      const color = idx % 2 === 0 ? 'rgba(232, 69, 122, ' : 'rgba(6, 182, 212, ';
-      grad.addColorStop(0, color + '1)');
-      grad.addColorStop(1, color + '0)');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(0, 0, p.size, 0, 2 * Math.PI);
-      ctx.fill();
-    }
-    
-    ctx.restore();
-
-    p.x += p.speedX;
-    p.y += p.speedY;
-    p.angle += p.spin;
-
-    if (currentTheme === 'sakura') {
-      if (p.y > h + 20 || p.x > w + 20 || p.x < -20) {
-        particles[idx] = createParticle(false);
-      }
-    } else {
-      if (p.y < -20 || p.x > w + 20 || p.x < -20) {
-        particles[idx] = createParticle(false);
-      }
-    }
-  });
-
-  animId = requestAnimationFrame(drawParticles);
+  // Static page, no animation loop needed
 }
 
-// Web Audio Synthesizer SFX Engine
-let audioCtx = null;
-let soundEnabled = false;
+// Theme switch functions
+function toggleTheme() {
+  const isSakura = document.body.classList.toggle('theme-sakura');
+  localStorage.setItem('theme', isSakura ? 'sakura' : 'cyberpunk');
+  const icon = document.getElementById('theme-icon');
+  const text = document.getElementById('theme-text');
+  if (icon) {
+    icon.className = isSakura ? 'ti ti-sun text-sm text-cyan-400' : 'ti ti-moon text-sm text-red-500';
+  }
+  if (text) {
+    text.textContent = isSakura ? 'เปลี่ยนเป็นธีมหลัก (ฟ้า)' : 'เปลี่ยนเป็นธีมแดงดำ';
+  }
+  playSynthSound('theme');
+}
 
+function loadTheme() {
+  const theme = localStorage.getItem('theme');
+  if (theme === 'sakura') {
+    document.body.classList.add('theme-sakura');
+    const icon = document.getElementById('theme-icon');
+    const text = document.getElementById('theme-text');
+    if (icon) icon.className = 'ti ti-sun text-sm text-cyan-400';
+    if (text) text.textContent = 'เปลี่ยนเป็นธีมหลัก (ฟ้า)';
+  } else {
+    const icon = document.getElementById('theme-icon');
+    const text = document.getElementById('theme-text');
+    if (icon) icon.className = 'ti ti-moon text-sm text-red-500';
+    if (text) text.textContent = 'เปลี่ยนเป็นธีมแดงดำ';
+  }
+}
+
+// Audio synth functions
+let audioCtx = null, soundEnabled = false;
 function toggleAudio() {
   soundEnabled = !soundEnabled;
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const icon = document.getElementById('audio-icon');
   const text = document.getElementById('audio-text');
-  if (icon && text) {
-    if (soundEnabled) {
-      icon.className = 'ti ti-volume text-sm';
-      text.textContent = 'ปิดเสียงเอฟเฟกต์';
-      icon.style.color = '#06B6D4';
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      playSynthSound('ui');
-    } else {
-      icon.className = 'ti ti-volume-off text-sm';
-      text.textContent = 'เปิดเสียงเอฟเฟกต์';
-      icon.style.color = '#b0b0b0';
-    }
-  }
+  icon.className = soundEnabled ? 'ti ti-volume text-sm text-cyan-400' : 'ti ti-volume-off text-sm text-gray-400';
+  text.textContent = soundEnabled ? 'ปิดเสียง' : 'เปิดเสียง';
+  if (soundEnabled && audioCtx.state === 'suspended') audioCtx.resume();
+  playSynthSound('ui');
 }
 
 function playSynthSound(type) {
   if (!soundEnabled || !audioCtx) return;
-  if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
+  if (audioCtx.state === 'suspended') audioCtx.resume();
   const dest = audioCtx.destination;
 
   if (type === 'ui') {
@@ -1343,262 +2079,6 @@ function playSynthSound(type) {
       osc.stop(now + idx * 0.05 + 0.3);
     });
   }
-  else if (type === 'gacha_roll') {
-    const now = audioCtx.currentTime;
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(150, now);
-    osc.frequency.linearRampToValueAtTime(800, now + 0.4);
-    gain.gain.setValueAtTime(0.04, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
-    osc.connect(gain);
-    gain.connect(dest);
-    osc.start();
-    osc.stop(now + 0.45);
-  }
-  else if (type === 'gacha_shake') {
-    const now = audioCtx.currentTime;
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = 'square';
-    osc.frequency.setValueAtTime(60, now);
-    osc.frequency.setValueAtTime(90, now + 0.12);
-    osc.frequency.setValueAtTime(60, now + 0.24);
-    gain.gain.setValueAtTime(0.06, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-    osc.connect(gain);
-    gain.connect(dest);
-    osc.start();
-    osc.stop(now + 0.35);
-  }
-  else if (type === 'gacha_reveal') {
-    const now = audioCtx.currentTime;
-    const notes = [523.25, 659.25, 783.99, 1046.50];
-    notes.forEach((freq, idx) => {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, now + idx * 0.08);
-      gain.gain.setValueAtTime(0.08, now + idx * 0.08);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.5);
-      osc.connect(gain);
-      gain.connect(dest);
-      osc.start(now + idx * 0.08);
-      osc.stop(now + idx * 0.08 + 0.5);
-    });
-  }
-  else if (type === 'klab_sad') {
-    const now = audioCtx.currentTime;
-    const osc1 = audioCtx.createOscillator();
-    const osc2 = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc1.type = 'sawtooth';
-    osc1.frequency.setValueAtTime(120, now);
-    osc1.frequency.linearRampToValueAtTime(80, now + 1.2);
-    osc2.type = 'triangle';
-    osc2.frequency.setValueAtTime(144, now);
-    osc2.frequency.linearRampToValueAtTime(96, now + 1.2);
-    gain.gain.setValueAtTime(0.1, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 1.3);
-    osc1.connect(gain);
-    osc2.connect(gain);
-    gain.connect(dest);
-    osc1.start();
-    osc2.start();
-    osc1.stop(now + 1.3);
-    osc2.stop(now + 1.3);
-  }
-}
-
-// Sharing Frame Selector
-let currentShareFrame = 'none';
-function setShareFrame(frame) {
-  currentShareFrame = frame;
-  document.querySelectorAll('[id^="frame-btn-"]').forEach(btn => {
-    btn.className = "bg-gray-800 border border-white/5 text-[10px] py-1.5 px-2 rounded-lg font-bold text-gray-400 transition-all text-center";
-  });
-  
-  const activeBtn = document.getElementById(`frame-btn-${frame}`);
-  if (activeBtn) {
-    if (frame === 'none') {
-      activeBtn.className = "bg-cyan-600/30 border border-cyan-400/50 text-[10px] py-1.5 px-2 rounded-lg font-bold text-white transition-all text-center";
-    } else if (frame === 'gold') {
-      activeBtn.className = "bg-yellow-600/30 border border-yellow-400/50 text-[10px] py-1.5 px-2 rounded-lg font-bold text-yellow-400 transition-all text-center";
-    } else if (frame === 'noodle') {
-      activeBtn.className = "bg-pink-600/30 border border-pink-400/50 text-[10px] py-1.5 px-2 rounded-lg font-bold text-pink-400 transition-all text-center";
-    }
-  }
-
-  const area = document.getElementById('klabCaptureArea');
-  area.classList.remove('frame-gold', 'frame-noodle');
-  if (frame === 'gold') area.classList.add('frame-gold');
-  if (frame === 'noodle') area.classList.add('frame-noodle');
-  playSynthSound('ui');
-}
-
-// Route Planner & Oshi Schedule Finder Logic
-let currentRouteDay = '24 July';
-
-function setRouteDay(d, btn) {
-  currentRouteDay = d;
-  document.querySelectorAll('[id^="route-day-"]').forEach(b => {
-    b.className = "btn-secondary bg-gray-800 p-2 rounded-xl text-xs font-bold text-gray-400 transition-all";
-  });
-  btn.className = "btn-primary";
-  renderRoutePlanner();
-  playSynthSound('ui');
-}
-
-function renderRoutePlanner() {
-  const el = document.getElementById('routeTimeline');
-  if (!el) return;
-  if (selected.size === 0) {
-    el.innerHTML = '<div class="text-center py-10 text-gray-500 italic">กรุณาเลือกเมมเบอร์ในหน้า "คำนวณบัตร" เพื่อดูตารางการเดินเที่ยวของคุณ</div>';
-    return;
-  }
-
-  const slots = [];
-  selected.forEach(m => {
-    BOOTHS.forEach(b => {
-      const dayData = DATA[b.k] && DATA[b.k][currentRouteDay];
-      if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
-        if (arr.includes(m)) {
-          const sid = `${m}|${b.k}|${currentRouteDay}|${t}`;
-          const r = slotRounds[sid] !== undefined ? slotRounds[sid] : 1;
-          if (r > 0) {
-            slots.push({ member: m, booth: b, time: t, rounds: r });
-          }
-        }
-      });
-    });
-  });
-
-  slots.sort((a, b) => a.time.localeCompare(b.time));
-
-  if (slots.length === 0) {
-    el.innerHTML = `<div class="text-center py-10 text-gray-500 italic">ไม่มีกิจกรรมที่คุณเลือกในวันที่ ${currentRouteDay}</div>`;
-    return;
-  }
-
-  const timeGroups = {};
-  slots.forEach(s => {
-    if (!timeGroups[s.time]) timeGroups[s.time] = [];
-    timeGroups[s.time].push(s);
-  });
-
-  let html = '<div class="relative border-l-2 border-white/10 pl-6 ml-4 space-y-8">';
-  
-  Object.entries(timeGroups).sort((a, b) => a[0].localeCompare(b[0])).forEach(([time, list]) => {
-    const hasOverlap = list.length > 1;
-    
-    html += `
-      <div class="relative">
-        <span class="absolute -left-[31px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full ${hasOverlap ? 'bg-red-500 animate-ping' : 'bg-cyan-500'}">
-          <span class="h-2 w-2 rounded-full ${hasOverlap ? 'bg-red-600' : 'bg-cyan-600'}"></span>
-        </span>
-        
-        <div class="text-sm font-bold text-yellow-400 mb-2 flex items-center gap-2">
-          <i class="ti ti-clock text-xs"></i> ${time} น.
-          ${hasOverlap ? '<span class="text-[9px] bg-red-600 text-white px-2 py-0.5 rounded-full font-bold">เวลาทับซ้อนกัน!</span>' : ''}
-        </div>
-        
-        <div class="grid grid-cols-1 gap-3">
-    `;
-
-    list.forEach(s => {
-      html += `
-        <div class="slot-item !mb-0 border-l-4 ${hasOverlap ? 'border-red-500 !bg-red-500/5' : 'border-cyan-500 !bg-cyan-500/5'}">
-          <div class="slot-info text-left">
-            <div class="text-xs font-bold text-cyan-400">${s.member}</div>
-            <div class="text-sm font-black text-white">${s.booth.s}</div>
-            <div class="text-[10px] text-gray-400 mt-0.5">เล่น ${s.rounds} ครั้ง | ${s.booth.price > 0 ? (s.booth.price * s.rounds) + '฿' : 'ฟรี'}</div>
-          </div>
-          <div class="text-right text-xs font-bold text-gray-500">
-            <i class="ti ti-map-pin"></i> บูธหลัก
-          </div>
-        </div>
-      `;
-    });
-
-    html += `
-        </div>
-      </div>
-    `;
-  });
-
-  html += '</div>';
-  el.innerHTML = html;
-}
-
-function populateOshiDropdown() {
-  const select = document.getElementById('oshiSelect');
-  if (!select) return;
-  
-  select.innerHTML = '<option value="">— เลือกเมมเบอร์เพื่อดูตารางงาน —</option>';
-  
-  ALL_MEMBERS.forEach(m => {
-    const opt = document.createElement('option');
-    opt.value = m;
-    opt.textContent = m;
-    select.appendChild(opt);
-  });
-}
-
-function renderOshiSchedule(m) {
-  const el = document.getElementById('oshiTimelineResult');
-  if (!el) return;
-  if (!m) {
-    el.innerHTML = '<div class="text-center py-10 text-gray-500 italic">กรุณาเลือกเมมเบอร์เพื่อแสดงผลตารางกิจกรรม</div>';
-    return;
-  }
-
-  playSynthSound('ui');
-
-  let html = '';
-  DAYS.forEach(d => {
-    const dayActivities = [];
-    BOOTHS.forEach(b => {
-      const dayData = DATA[b.k] && DATA[b.k][d];
-      if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
-        if (arr.includes(m)) {
-          dayActivities.push({ booth: b.s, time: t, cost: b.price });
-        }
-      });
-    });
-
-    dayActivities.sort((a, b) => a.time.localeCompare(b.time));
-
-    html += `
-      <div class="result-card">
-        <div class="text-purple-400 font-black text-sm mb-4 border-b border-white/5 pb-2 uppercase tracking-wider flex items-center gap-2">
-          <i class="ti ti-calendar"></i> วันที่ ${d}
-        </div>
-    `;
-
-    if (dayActivities.length === 0) {
-      html += `<p class="text-xs italic text-gray-500 py-2">ไม่มีตารางกิจกรรมในวันนี้</p>`;
-    } else {
-      html += `<div class="space-y-3">`;
-      dayActivities.forEach(act => {
-        html += `
-          <div class="slot-item border-l-4 border-purple-500 !bg-purple-500/5">
-            <div class="slot-info text-left">
-              <div class="text-sm font-bold text-white">${act.booth}</div>
-              <div class="text-[10px] text-gray-400 mt-0.5"><i class="ti ti-clock"></i> ${act.time} น.</div>
-            </div>
-            <div class="text-right text-xs font-bold text-purple-300">
-              ${act.cost > 0 ? act.cost.toLocaleString() + '฿' : 'เข้าร่วมฟรี'}
-            </div>
-          </div>
-        `;
-      });
-      html += `</div>`;
-    }
-    html += `</div>`;
-  });
-
-  el.innerHTML = html;
 }
 
 // Call initialization
