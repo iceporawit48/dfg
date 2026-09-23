@@ -3,2086 +3,1478 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BON ODORI 2026 - Complete System</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/tabler-icons.min.css">
-<script src="https://cdn.tailwindcss.com"></script>
+<title>FAN FESTIVAL 2026 - BNK48 × CGM48 Schedule & Plan Tool</title>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+Thai:wght@300;400;500;600;700;800;900&display=swap');
-
-* {
-  font-family: 'Outfit', 'Noto Sans Thai', sans-serif;
-  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Thai:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  --neon-pink: #E8457A;
-  --neon-purple: #7B5CF0;
-  --neon-cyan: #06B6D4;
-  --neon-green: #1CC8A0;
-  --neon-yellow: #F5C842;
-  --dark-bg: #0a0e27;
-  --card-bg: #1a1f3a;
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  --fg: #f8fafc;
+  --fg-soft: #cbd5e1;
+  --mut: #94a3b8;
+  --card-bg: rgba(30, 41, 59, 0.78);
+  --card-hover: rgba(45, 55, 72, 0.92);
+  --bd: rgba(99, 102, 241, 0.25);
+  --bd-hover: rgba(99, 102, 241, 0.5);
+  --ac: #6366f1;
+  --ac-dark: #4f46e5;
+  --ac-light: rgba(99, 102, 241, 0.18);
+  --ac2: #f43f5e;
+  --ac2-light: rgba(244, 63, 94, 0.18);
+  --ok: #10b981;
+  --ok-light: rgba(16, 185, 129, 0.18);
+  --hl: #f59e0b;
+  --in-bg: rgba(15, 23, 42, 0.85);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.6);
+  --glass: blur(16px);
+  
+  --purple-pill: #b57edc;
+  --purple-bg: rgba(181, 126, 220, 0.22);
+  --purple-border: rgba(181, 126, 220, 0.5);
+  --purple-text: #e9d5ff;
+
+  --teal-pill: #2dd4bf;
+  --teal-bg: rgba(45, 212, 191, 0.22);
+  --teal-border: rgba(45, 212, 191, 0.5);
+  --teal-text: #99f6e4;
+  
+  --hall-bg: #eddcc9;
+  --hall-bd: #c4a482;
+  --hall-fg: #1e1008;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow-x: hidden;
-  background: #eef5ff;
-  color: #1d2e5a;
+body.light-theme {
+  --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  --fg: #0f172a;
+  --fg-soft: #334155;
+  --mut: #64748b;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-hover: #ffffff;
+  --bd: rgba(148, 163, 184, 0.3);
+  --ac: #2563eb;
+  --ac-dark: #1d4ed8;
+  --ac-light: #eff6ff;
+  --in-bg: #ffffff;
+  --shadow-sm: 0 2px 6px rgba(0,0,0,0.05);
+  --purple-pill: #a855f7;
+  --purple-bg: rgba(168, 85, 247, 0.12);
+  --purple-text: #7e22ce;
+  --teal-pill: #0d9488;
+  --teal-bg: rgba(13, 148, 136, 0.12);
+  --teal-text: #0f766e;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Outfit', 'Noto Sans Thai', sans-serif;
+  transition: background-color .15s ease, border-color .15s ease, transform .12s ease, box-shadow .15s ease;
 }
 
 body {
-  background: linear-gradient(135deg, #eef5ff 0%, #d4e5ff 100%);
-  background-attachment: fixed;
+  margin: 0;
+  color: var(--fg);
+  background: var(--bg-gradient) fixed;
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-#effectCanvas {
-  display: none !important;
+/* Header */
+.hd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 20px 12px;
 }
 
-.neon-glow {
-  box-shadow: 0 8px 30px rgba(180, 206, 245, 0.25);
-  border: 1px solid rgba(75, 123, 236, 0.25);
+.logo-group {
+  display: flex;
+  flex-direction: column;
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  box-shadow: 0 8px 32px rgba(180, 206, 245, 0.2);
-}
-
-.header-gradient {
-  background: rgba(255, 255, 255, 0.4);
-  border-bottom: 2px solid rgba(75, 123, 236, 0.2);
-  backdrop-filter: blur(8px);
-}
-
-.logo-text {
+.logo {
   font-weight: 900;
-  font-size: 2.6rem;
-  letter-spacing: 1px;
-  background: linear-gradient(135deg, #1d3557, #457b9d, #e63946);
+  font-size: 2.2rem;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #f43f5e, #fb7185 40%, #fbbf24);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+  text-transform: uppercase;
 }
 
-.logo-sub {
+.sub {
   font-size: 0.75rem;
   letter-spacing: 2px;
-  color: #457b9d;
+  color: var(--mut);
+  font-weight: 800;
   text-transform: uppercase;
-  font-weight: 800;
+  margin-top: 2px;
 }
 
-.nav-container {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(75, 123, 236, 0.15);
-}
-
-.nav-btn {
-  padding: 12px 22px;
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: #457b9d;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  white-space: nowrap;
-  border-radius: 12px;
-  margin: 0 3px;
-}
-
-.nav-btn:hover {
-  color: #1d3557;
-  background: rgba(75, 123, 236, 0.05);
-}
-
-.nav-btn.active {
-  color: #1d3557;
-  background: rgba(75, 123, 236, 0.12);
-  box-shadow: 0 4px 15px rgba(75, 123, 236, 0.1);
-  border: 1px solid rgba(75, 123, 236, 0.35);
-}
-
-.search-input {
-  background: rgba(255, 255, 255, 0.8) !important;
-  border: 1.5px solid rgba(75, 123, 236, 0.25) !important;
-  color: #1d3557 !important;
-  outline: none;
-  font-weight: 500;
-  box-shadow: inset 0 2px 4px rgba(75, 123, 236, 0.05);
-  transition: all 0.3s ease;
-}
-
-.search-input:focus {
-  border-color: #3867d6 !important;
-  box-shadow: 0 0 12px rgba(75, 123, 236, 0.2), inset 0 2px 4px rgba(75, 123, 236, 0.05) !important;
-  background: #ffffff !important;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #4b7bec, #3867d6);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 25px;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(75, 123, 236, 0.2);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(75, 123, 236, 0.35);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-.btn-klab {
-  background: linear-gradient(135deg, #ff7da0, #e63946);
-  color: white;
-  padding: 15px 32px;
-  border-radius: 30px;
-  font-weight: 900;
-  cursor: pointer;
-  box-shadow: 0 6px 25px rgba(230, 57, 70, 0.2);
-  letter-spacing: 0.5px;
-}
-
-.btn-klab:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(230, 57, 70, 0.35);
-}
-
-.btn-klab:active {
-  transform: translateY(0);
-}
-
-.member-chip {
-  background: rgba(255, 255, 255, 0.65);
-  border: 1px solid rgba(75, 123, 236, 0.15);
-  color: #223a70;
-  padding: 12px 14px;
-  border-radius: 16px;
-  cursor: pointer;
-  text-align: center;
-  font-weight: 600;
-  font-size: 0.9rem;
-  box-shadow: 0 4px 12px rgba(75, 123, 236, 0.05);
+.header-right {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-.member-chip:hover {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: #4b7bec;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(75, 123, 236, 0.15);
-}
-
-.member-chip.selected {
-  background: linear-gradient(135deg, #4b7bec, #3867d6);
-  color: white;
-  border-color: #3867d6;
-  box-shadow: 0 4px 15px rgba(75, 123, 236, 0.3), inset 0 0 8px rgba(255, 255, 255, 0.2);
-}
-
-.result-card {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 20px;
-  padding: 24px;
-  margin-bottom: 20px;
-  box-shadow: 0 10px 30px rgba(75, 123, 236, 0.1);
-}
-
-.result-name {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: #1d3557;
-  margin-bottom: 12px;
-}
-
-.slot-item {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(75, 123, 236, 0.1);
-  border-radius: 16px;
-  padding: 14px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 10px;
-  color: #223a70;
-}
-
-.slot-item:hover {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(75, 123, 236, 0.25);
-  transform: translateX(4px);
-}
-
-.slot-item.zero-round {
-  opacity: 0.35;
-  background: rgba(239, 68, 68, 0.03);
-}
-
-.round-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  border: 1px solid rgba(75, 123, 236, 0.25);
-  background: rgba(75, 123, 236, 0.05);
-  color: #3867d6;
-  cursor: pointer;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.round-btn:hover {
-  background: rgba(75, 123, 236, 0.15);
-  border-color: #3867d6;
-  color: #1d3557;
-  transform: scale(1.08);
-}
-
-.round-btn:active {
-  transform: scale(0.92);
-}
-
-.btn-set-zero {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  background: rgba(239, 68, 68, 0.05);
-  color: #f87171;
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-set-zero:hover {
-  background: rgba(239, 68, 68, 0.15);
-  border-color: #f87171;
-  color: #dc2626;
-  transform: scale(1.08);
-}
-
-.btn-set-zero:active {
-  transform: scale(0.92);
-}
-
-.price-bar {
-  background: linear-gradient(135deg, rgba(75, 123, 236, 0.08) 0%, rgba(230, 57, 70, 0.03) 100%);
-  border: 1.5px solid rgba(75, 123, 236, 0.2);
-  border-radius: 20px;
-  padding: 20px 24px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 8px 25px rgba(75, 123, 236, 0.08);
-}
-
-.price-bar-value {
-  font-size: 2.2rem;
-  font-weight: 900;
-  color: #1d3557;
-}
-
-.selected-bar {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1.5px solid rgba(75, 123, 236, 0.2);
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
-.selected-chip {
-  background: linear-gradient(135deg, #4b7bec, #3867d6);
-  color: white;
+.date-pill {
+  background: var(--card-bg);
+  border: 1px solid var(--bd);
+  backdrop-filter: var(--glass);
   padding: 6px 14px;
   border-radius: 20px;
+  color: var(--hl);
   font-size: 0.85rem;
+  font-weight: 800;
+  box-shadow: var(--shadow-sm);
+}
+
+.tbtn, .btn {
   font-weight: 700;
-  box-shadow: 0 4px 10px rgba(75, 123, 236, 0.15);
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #4b7bec;
+  border: 1px solid var(--bd);
+  background: var(--card-bg);
+  color: var(--fg);
+  padding: 8px 14px;
   border-radius: 10px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-}
-
-/* KLAB MODAL */
-#klabModal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(29, 46, 90, 0.4);
-  z-index: 100;
+  cursor: pointer;
+  font-size: 0.82rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  backdrop-filter: blur(16px);
+  gap: 6px;
+  user-select: none;
+  box-shadow: var(--shadow-sm);
 }
 
-.klab-content {
-  background: radial-gradient(circle at top left, #ffffff, #eef5ff);
-  color: #1d2e5a;
-  width: 100%;
-  max-width: 500px;
-  border-radius: 32px;
-  padding: 44px;
-  border: 2px solid #ff7da0;
-  box-shadow: 0 25px 60px rgba(29, 46, 90, 0.15);
-  text-align: center;
-  position: relative;
+.btn.p {
+  background: linear-gradient(135deg, var(--ac), var(--ac-dark));
+  border: 0;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
 }
 
-.klab-title {
-  font-size: 3rem;
-  font-weight: 900;
-  color: #e63946;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
+.btn.danger {
+  background: linear-gradient(135deg, var(--ac2), #be123c);
+  border: 0;
+  color: #ffffff;
 }
 
-.klab-total-value {
-  font-size: 3.2rem;
-  font-weight: 900;
-  color: #ff7da0;
+.btn.sm {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  border-radius: 8px;
 }
 
-/* SUMMARY PAGE */
-.summary-banner {
-  background: linear-gradient(135deg, rgba(75, 123, 236, 0.08), rgba(230, 57, 70, 0.03));
-  border: 1px solid rgba(75, 123, 236, 0.2);
-  border-radius: 24px;
-  padding: 36px;
-  text-align: center;
-  margin-bottom: 24px;
+.btn.subtle {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  color: var(--mut);
 }
 
-.summary-number {
-  font-size: 4.2rem;
-  font-weight: 900;
-  background: linear-gradient(135deg, #1d3557, #457b9d);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1;
+.btn.subtle:hover {
+  background: var(--card-bg);
+  color: var(--fg);
 }
 
-.stat-row {
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(75, 123, 236, 0.15);
-  border-radius: 16px;
-  margin-bottom: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-}
-
-.stat-row:hover {
-  border-color: #4b7bec;
+.btn:hover, .tbtn:hover {
   transform: translateY(-1px);
+  border-color: var(--ac);
 }
 
-.stat-row.open {
-  border-color: #3867d6;
+/* Navigation */
+nav.np {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--card-bg);
+  backdrop-filter: var(--glass);
+  border-bottom: 1px solid var(--bd);
+  box-shadow: var(--shadow-sm);
 }
 
-.stat-row-header {
+nav div.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 6px 16px;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+nav div.nav-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.nb {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--mut);
+  font-weight: 700;
+  padding: 9px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 0.9rem;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px 20px;
-  user-select: none;
+  gap: 8px;
 }
 
-.stat-row-detail {
+.nb:hover {
+  color: var(--fg);
+  background: var(--ac-light);
+}
+
+.nb.on {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--ac), var(--ac-dark));
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+}
+
+/* Main Container */
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 16px 80px;
+}
+
+.pg {
   display: none;
-  padding: 0 20px 18px;
-  border-top: 1px solid rgba(75, 123, 236, 0.1);
+  animation: fadeIn 0.2s ease-in-out;
 }
 
-.stat-row.open .stat-row-detail {
+.pg.on {
   display: block;
 }
 
-.stat-row.open .stat-chevron {
-  transform: rotate(180deg);
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.stat-chevron {
-  color: #4b7bec;
-  flex-shrink: 0;
+/* Cards */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: var(--glass);
+  border: 1px solid var(--bd);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
 }
 
-.rank-badge {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
+.card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 800;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 0.82rem;
-  font-weight: 900;
-  flex-shrink: 0;
-  box-shadow: 0 4px 10px rgba(75, 123, 236, 0.1);
-}
-
-.rank-1 {
-  background: linear-gradient(135deg,#ff7da0,#e63946);
-  color: #fff;
-}
-
-.rank-2 {
-  background: rgba(75, 123, 236, 0.15);
-  color: #1d3557;
-}
-
-.rank-3 {
-  background: linear-gradient(135deg,#cd7f32,#a0522d);
-  color: #fff;
-}
-
-.rank-other {
-  background: rgba(0,0,0,0.05);
-  color: #457b9d;
-}
-
-.detail-activity-row {
-  display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.card-subtitle {
+  font-size: 0.82rem;
+  color: var(--mut);
+  margin-top: 2px;
+}
+
+/* Multi Column Layout for Page 1 */
+.two-plan {
+  display: grid;
+  grid-template-columns: 2.2fr 1.1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 1080px) {
+  .two-plan {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Filter Bar */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
   align-items: center;
-  padding: 9px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.03);
-  font-size: 0.76rem;
-}
-
-.detail-activity-row:last-child {
-  border-bottom: none;
-}
-
-.detail-day-label {
-  font-size: 0.7rem;
-  font-weight: 900;
-  color: #e63946;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 14px 0 6px;
-}
-
-.bar-wrap {
-  flex: 1;
-  background: rgba(0,0,0,0.05);
-  border-radius: 999px;
-  height: 8px;
-  margin: 0 12px;
-  overflow: hidden;
-}
-
-.bar-fill {
-  height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #4b7bec, #ff7da0);
-}
-
-/* BOD SYSTEM STYLES */
-.conflict-item {
-  background: rgba(230, 57, 70, 0.05);
-  border: 1px solid rgba(230, 57, 70, 0.15);
-  border-radius: 16px;
-  padding: 16px;
   margin-bottom: 12px;
 }
 
-/* ACTIVITIES MODAL (จัดตาราง) */
-#activitiesModal {
-  backdrop-filter: blur(16px);
-  background: rgba(29, 46, 90, 0.4);
+.filter-chip {
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--bd);
+  background: var(--card-bg);
+  color: var(--fg-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
 }
 
-#activitiesModal .glass {
-  background: radial-gradient(circle at top left, #ffffff, #eef5ff);
-  border-radius: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 25px 50px rgba(29, 46, 90, 0.15);
+.filter-chip:hover {
+  border-color: var(--ac);
+  color: var(--ac);
 }
 
-/* SAKURA THEME OVERWRITES (Let Me Know - Dark Red/Black) */
-body.theme-sakura {
-  background: linear-gradient(135deg, #090204 0%, #120409 50%, #000000 100%) !important;
-  background-attachment: fixed !important;
-  color: #f8fafc !important;
+.filter-chip.on {
+  background: var(--ac);
+  color: #ffffff;
+  border-color: var(--ac);
 }
 
-body.theme-sakura .neon-glow {
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
-  border: 1.5px solid rgba(214, 28, 78, 0.25) !important;
+/* Search Input */
+.search-wrapper {
+  position: relative;
+  margin-bottom: 12px;
 }
 
-body.theme-sakura .logo-text {
-  background: linear-gradient(135deg, #d61c4e, #9e1a38, #ffffff) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
+.inp {
+  width: 100%;
+  padding: 12px 18px;
+  padding-right: 40px;
+  border-radius: 12px;
+  border: 1.5px solid var(--bd);
+  background: var(--in-bg);
+  color: var(--fg);
+  font-size: 0.95rem;
+  font-weight: 500;
+  outline: none;
+  box-shadow: var(--shadow-sm);
 }
 
-body.theme-sakura .logo-sub {
-  color: #d61c4e !important;
+.inp:focus {
+  border-color: var(--ac);
+  box-shadow: 0 0 0 3px var(--ac-light);
 }
 
-body.theme-sakura .glass {
-  background: rgba(18, 10, 13, 0.75) !important;
-  border: 1.5px solid rgba(214, 28, 78, 0.2) !important;
-  box-shadow: 0 10px 45px rgba(0, 0, 0, 0.6) !important;
+.search-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--mut);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 2px;
+  display: none;
 }
 
-body.theme-sakura .header-gradient {
-  background: rgba(0, 0, 0, 0.6) !important;
-  border-bottom: 2px solid rgba(214, 28, 78, 0.4) !important;
+.search-clear.show {
+  display: block;
 }
 
-body.theme-sakura .nav-container {
-  background: rgba(0, 0, 0, 0.8) !important;
-  border-bottom: 1px solid rgba(214, 28, 78, 0.2) !important;
+/* INTERACTIVE FAN PLAN GRAPHIC LAYOUT */
+.plan-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
 }
 
-body.theme-sakura .nav-btn {
-  color: #94a3b8 !important;
+@media (max-width: 768px) {
+  .plan-container {
+    grid-template-columns: 1fr;
+  }
 }
 
-body.theme-sakura .nav-btn:hover {
-  color: #ffffff !important;
-  background: rgba(214, 28, 78, 0.08) !important;
+/* Directory List (Left Column) */
+.plan-directory {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
 }
 
-body.theme-sakura .nav-btn.active {
-  background: linear-gradient(135deg, rgba(214, 28, 78, 0.2) 0%, rgba(158, 26, 56, 0.2) 100%) !important;
-  border: 1px solid rgba(214, 28, 78, 0.45) !important;
-  color: #ffffff !important;
-  box-shadow: 0 0 15px rgba(214, 28, 78, 0.3) !important;
+@media (max-width: 500px) {
+  .plan-directory {
+    grid-template-columns: 1fr;
+  }
 }
 
-body.theme-sakura .search-input {
-  background: rgba(15, 10, 12, 0.8) !important;
-  border: 1.5px solid rgba(214, 28, 78, 0.3) !important;
-  color: #ffffff !important;
+.dir-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 1.5px solid var(--purple-border);
+  background: var(--purple-bg);
+  color: var(--purple-text);
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  user-select: none;
 }
 
-body.theme-sakura .search-input:focus {
-  border-color: #d61c4e !important;
-  box-shadow: 0 0 12px rgba(214, 28, 78, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.5) !important;
-  background: rgba(15, 10, 12, 0.95) !important;
+.dir-item.teal {
+  border-color: var(--teal-border);
+  background: var(--teal-bg);
+  color: var(--teal-text);
 }
 
-body.theme-sakura .btn-primary {
-  background: linear-gradient(135deg, #d61c4e, #9e1a38) !important;
-  box-shadow: 0 4px 15px rgba(214, 28, 78, 0.35) !important;
+.dir-item:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  filter: brightness(1.15);
 }
 
-body.theme-sakura .btn-primary:hover {
-  box-shadow: 0 6px 20px rgba(214, 28, 78, 0.5) !important;
+.dir-item.selected-active {
+  background: var(--hl) !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.8);
 }
 
-body.theme-sakura .btn-klab {
-  background: linear-gradient(135deg, #ff2a5f, #7f0019) !important;
-  box-shadow: 0 6px 25px rgba(214, 28, 78, 0.4) !important;
+.dir-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1e1008;
+  font-weight: 900;
+  font-size: 0.7rem;
+  display: grid;
+  place-items: center;
+  flex: none;
 }
 
-body.theme-sakura .btn-klab:hover {
-  box-shadow: 0 10px 30px rgba(214, 28, 78, 0.6) !important;
+.dir-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-body.theme-sakura .member-chip {
-  background: rgba(22, 13, 16, 0.6) !important;
-  border: 1px solid rgba(214, 28, 78, 0.15) !important;
-  color: #94a3b8 !important;
+/* MCC Hall Visual Floor Map (Right Column) */
+.hall-wrapper {
+  background: var(--hall-bg);
+  border: 4px solid var(--hall-bd);
+  border-radius: 20px;
+  padding: 14px;
+  color: var(--hall-fg);
+  box-shadow: var(--shadow-lg);
+  position: relative;
 }
 
-body.theme-sakura .member-chip:hover {
-  background: rgba(22, 13, 16, 0.9) !important;
-  border-color: #d61c4e !important;
-  box-shadow: 0 6px 15px rgba(214, 28, 78, 0.25) !important;
+.hall-stage {
+  background: #000000;
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-body.theme-sakura .member-chip.selected {
-  background: linear-gradient(135deg, #d61c4e, #9e1a38) !important;
-  color: white !important;
-  border-color: #d61c4e !important;
-  box-shadow: 0 0 20px rgba(214, 28, 78, 0.45) !important;
+.hall-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
-body.theme-sakura .result-card {
-  background: rgba(18, 10, 13, 0.75) !important;
-  border: 1.5px solid rgba(214, 28, 78, 0.25) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+.hall-aisle {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-body.theme-sakura .result-name {
-  color: #ffffff !important;
+.hall-entrance-gap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 900;
+  padding: 6px 0;
+  color: #78350f;
 }
 
-body.theme-sakura .slot-item {
-  background: rgba(22, 13, 16, 0.4) !important;
-  border: 1px solid rgba(214, 28, 78, 0.1) !important;
-  color: #ffffff !important;
+.booth-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 7px;
+  border-radius: 12px;
+  background: #000000;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
 }
 
-body.theme-sakura .slot-item:hover {
-  background: rgba(22, 13, 16, 0.7) !important;
-  border-color: rgba(214, 28, 78, 0.3) !important;
+.booth-pill.cgm {
+  border: 1px solid #2dd4bf;
+  color: #99f6e4;
 }
 
-body.theme-sakura .round-btn {
-  border: 1px solid rgba(214, 28, 78, 0.3) !important;
-  background: rgba(214, 28, 78, 0.1) !important;
-  color: #ff2a5f !important;
+.booth-pill:hover {
+  transform: scale(1.05);
+  background: var(--ac);
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.6);
 }
 
-body.theme-sakura .round-btn:hover {
-  background: rgba(214, 28, 78, 0.2) !important;
-  border-color: #ff2a5f !important;
-  color: #ffffff !important;
+.booth-pill.selected-active {
+  background: var(--hl) !important;
+  color: #000000 !important;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.9);
 }
 
-body.theme-sakura .btn-set-zero {
-  background: rgba(239, 68, 68, 0.08) !important;
-  border: 1px solid rgba(239, 68, 68, 0.3) !important;
-  color: #f87171 !important;
+.hall-center-island {
+  display: flex;
+  gap: 3px;
+  justify-content: center;
 }
 
-body.theme-sakura .btn-set-zero:hover {
-  background: rgba(239, 68, 68, 0.2) !important;
-  color: #ffffff !important;
+.hall-bottom-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 2px dashed #c4a482;
 }
 
-body.theme-sakura .price-bar {
-  background: linear-gradient(135deg, rgba(214, 28, 78, 0.2) 0%, rgba(0, 0, 0, 0.4) 100%) !important;
-  border: 1.5px solid rgba(214, 28, 78, 0.4) !important;
-  box-shadow: 0 8px 25px rgba(214, 28, 78, 0.15) !important;
+.hall-bottom-row .booth-pill {
+  padding: 5px 6px;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  justify-content: center;
+  font-size: 0.7rem;
 }
 
-body.theme-sakura .price-bar-value {
-  color: #ff2a5f !important;
-  text-shadow: 0 0 15px rgba(214, 28, 78, 0.4) !important;
+/* Slots & Badges */
+.slot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  background: var(--card-bg);
 }
 
-body.theme-sakura .selected-bar {
-  background: rgba(18, 10, 13, 0.8) !important;
-  border: 1.5px solid rgba(214, 28, 78, 0.3) !important;
+.slot:hover {
+  border-color: var(--ac);
+  background: var(--card-hover);
 }
 
-body.theme-sakura .selected-chip {
-  background: linear-gradient(135deg, #d61c4e, #9e1a38) !important;
-  box-shadow: 0 4px 10px rgba(214, 28, 78, 0.3) !important;
+.act-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid var(--bd);
+  background: var(--ac-light);
+  color: var(--ac);
 }
 
-body.theme-sakura .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #d61c4e !important;
+.act-badge.appeal { background: rgba(99, 102, 241, 0.15); color: #818cf8; border-color: rgba(99, 102, 241, 0.3); }
+.act-badge.booth { background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.3); }
+.act-badge.hitouch { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border-color: rgba(245, 158, 11, 0.3); }
+.act-badge.hachi { background: rgba(168, 85, 247, 0.15); color: #c084fc; border-color: rgba(168, 85, 247, 0.3); }
+.act-badge.merch { background: rgba(244, 63, 94, 0.15); color: #fb7185; border-color: rgba(244, 63, 94, 0.3); }
+
+.group-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+.group-tag.bnk { background: var(--purple-bg); color: var(--purple-text); border: 1px solid var(--purple-border); }
+.group-tag.cgm { background: var(--teal-bg); color: var(--teal-text); border: 1px solid var(--teal-border); }
+
+/* Overlap Conflict */
+.cf {
+  border: 1px solid var(--ac2);
+  border-radius: 14px;
+  padding: 14px;
+  margin-top: 10px;
+  background: var(--ac2-light);
 }
 
-body.theme-sakura #klabModal {
-  background: rgba(0, 0, 0, 0.85) !important;
+.tag {
+  display: inline-block;
+  padding: 3px 8px;
+  border: 1px solid var(--bd);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin: 2px 2px 0 0;
+  background: var(--card-bg);
 }
 
-body.theme-sakura .klab-content {
-  background: radial-gradient(circle at top left, #120409, #000000) !important;
-  border-color: #d61c4e !important;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8) !important;
-  color: #ffffff !important;
+/* Two Column Layout */
+.two {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 2fr 1fr;
 }
 
-body.theme-sakura .klab-title {
-  color: #d61c4e !important;
+/* Modal Drawer */
+#modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
 }
 
-body.theme-sakura .klab-total-value {
-  color: #ff2a5f !important;
+#modal .card {
+  width: 100%;
+  max-width: 500px;
+  max-height: 88vh;
+  overflow-y: auto;
+  margin: 0;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  border-color: var(--ac);
 }
 
-body.theme-sakura .summary-banner {
-  background: linear-gradient(135deg, rgba(214, 28, 78, 0.2), rgba(0, 0, 0, 0.4)) !important;
-  border: 1px solid rgba(214, 28, 78, 0.3) !important;
+.x {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
 }
 
-body.theme-sakura .summary-number {
-  background: linear-gradient(135deg, #ff2a5f, #ffffff) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
+.empty {
+  text-align: center;
+  padding: 30px 16px;
+  color: var(--mut);
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
-body.theme-sakura .stat-row {
-  background: rgba(22, 13, 16, 0.5) !important;
-  border: 1px solid rgba(214, 28, 78, 0.2) !important;
+.hid {
+  display: none !important;
 }
 
-body.theme-sakura .stat-row:hover {
-  border-color: #d61c4e !important;
+/* Floating Mobile Cart Button */
+.floating-cart-btn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 50;
+  background: linear-gradient(135deg, var(--ac), var(--ac-dark));
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-weight: 800;
+  font-size: 0.88rem;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  cursor: pointer;
+  align-items: center;
+  gap: 8px;
 }
 
-body.theme-sakura .stat-row.open {
-  border-color: #ff2a5f !important;
+.floating-cart-btn span {
+  background: #ffffff;
+  color: var(--ac-dark);
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 900;
 }
 
-body.theme-sakura .stat-chevron {
-  color: #d61c4e !important;
+#toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #0f172a;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  z-index: 200;
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+  pointer-events: none;
 }
 
-body.theme-sakura .rank-1 {
-  background: linear-gradient(135deg,#ff2a5f,#7f0019) !important;
+#toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
 }
 
-body.theme-sakura .rank-2 {
-  background: rgba(255,255,255,0.15) !important;
-  color: #ffffff !important;
-}
-
-body.theme-sakura .rank-other {
-  background: rgba(214, 28, 78, 0.1) !important;
-  color: #94a3b8 !important;
-}
-
-body.theme-sakura .bar-wrap {
-  background: rgba(255,255,255,0.05) !important;
-}
-
-body.theme-sakura .bar-fill {
-  background: linear-gradient(90deg, #d61c4e, #ff2a5f) !important;
-}
-
-body.theme-sakura .conflict-item {
-  background: rgba(214, 28, 78, 0.08) !important;
-  border: 1px solid rgba(214, 28, 78, 0.25) !important;
-}
-
-body.theme-sakura #activitiesModal {
-  background: rgba(0, 0, 0, 0.85) !important;
-}
-
-body.theme-sakura #activitiesModal .glass {
-  background: radial-gradient(circle at top left, #120409, #000000) !important;
-  border: 1px solid rgba(214, 28, 78, 0.25) !important;
-}
-
-.flex.items-center.gap-3.no-print button {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(75, 123, 236, 0.25);
-  color: #1d3557;
-}
-.flex.items-center.gap-3.no-print button:hover {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: #3867d6;
-}
-body.theme-sakura .flex.items-center.gap-3.no-print button {
-  background: rgba(22, 13, 16, 0.7) !important;
-  border: 1px solid rgba(214, 28, 78, 0.3) !important;
-  color: #ffffff !important;
-}
-body.theme-sakura .flex.items-center.gap-3.no-print button:hover {
-  background: rgba(22, 13, 16, 0.95) !important;
-  border-color: #ff2a5f !important;
-}
-
-/* Typography Contrast Overrides for Light Theme */
-body:not(.theme-sakura) .text-white {
-  color: #1d2e5a !important;
-}
-body:not(.theme-sakura) .text-gray-300 {
-  color: #2e4374 !important;
-}
-body:not(.theme-sakura) .text-gray-400 {
-  color: #4b6584 !important;
-}
-body:not(.theme-sakura) .text-gray-500 {
-  color: #57606f !important;
-}
-body:not(.theme-sakura) .text-pink-400 {
-  color: #d63031 !important;
-}
-body:not(.theme-sakura) .text-cyan-400 {
-  color: #0984e3 !important;
-}
-body:not(.theme-sakura) .text-yellow-400 {
-  color: #b8860b !important;
-}
-body:not(.theme-sakura) .text-yellow-500 {
-  color: #b8860b !important;
-}
-body:not(.theme-sakura) .bg-gray-800 {
-  background-color: rgba(75, 123, 236, 0.08) !important;
-  color: #1d3557 !important;
-}
-body:not(.theme-sakura) .bg-blue-900\/20 {
-  background-color: rgba(75, 123, 236, 0.08) !important;
-}
-body:not(.theme-sakura) .border-blue-500\/40 {
-  border-color: rgba(75, 123, 236, 0.25) !important;
-}
-body:not(.theme-sakura) .btn-secondary {
-  color: #1d3557 !important;
-}
-body:not(.theme-sakura) .btn-primary,
-body:not(.theme-sakura) .btn-klab,
-body:not(.theme-sakura) .selected-chip,
-body:not(.theme-sakura) .member-chip.selected {
-  color: #ffffff !important;
-}
-body:not(.theme-sakura) .border-cyan-500 {
-  border-color: #4b7bec !important;
-}
-body:not(.theme-sakura) .bg-cyan-500\/5 {
-  background-color: rgba(75, 123, 236, 0.06) !important;
-}
-body:not(.theme-sakura) .border-green-500 {
-  border-color: #20bf6b !important;
-}
-body:not(.theme-sakura) .bg-green-500\/5 {
-  background-color: rgba(32, 191, 107, 0.06) !important;
+@media(max-width: 800px) {
+  .two { grid-template-columns: 1fr; }
+  .hd { padding: 14px 16px 8px; }
+  .logo { font-size: 1.6rem; }
+  .floating-cart-btn.show { display: flex; }
 }
 
 @media print {
-  .no-print { display: none !important; }
-  body { background: white !important; color: black !important; }
-  .glass { background: white !important; color: black !important; border: none !important; box-shadow: none !important; }
-  .slot-item { border: 1px solid #ccc !important; background: white !important; color: black !important; }
-  .slot-item span, .slot-item div { color: black !important; }
+  .np, .floating-cart-btn { display: none !important; }
+  body { background: #ffffff !important; color: #000000 !important; }
 }
 </style>
 </head>
 <body>
 
-<canvas id="effectCanvas" class="fixed inset-0 pointer-events-none z-[-1]"></canvas>
-
-<div class="header-gradient">
-  <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div><div class="logo-text">BON ODORI 2026</div><div class="logo-sub">BNK48 × CGM48 × FASHION ISLAND</div></div>
-    <div class="flex items-center gap-3 no-print">
-      <!-- Theme Switcher -->
-      <button onclick="toggleTheme()" class="border py-2 px-3 rounded-xl flex items-center gap-1.5 transition-all text-xs font-bold cursor-pointer shadow-sm">
-        <i id="theme-icon" class="ti ti-moon text-sm text-red-500"></i>
-        <span id="theme-text">เปลี่ยนเป็นธีมแดงดำ</span>
-      </button>
-      
-      <!-- Audio Toggle -->
-      <button onclick="toggleAudio()" class="border py-2 px-3 rounded-xl flex items-center gap-1.5 transition-all text-xs font-bold cursor-pointer shadow-sm">
-        <i id="audio-icon" class="ti ti-volume-off text-sm text-gray-400"></i>
-        <span id="audio-text">เปิดเสียง</span>
-      </button>
-    </div>
-    <div class="text-right hidden md:block"><p class="text-sm font-bold text-yellow-400">24 – 26 JULY 2026 @ISLAND HALL 3FL.</p></div>
+<div class="hd">
+  <div class="logo-group">
+    <div class="logo">FAN FESTIVAL 2026</div>
+    <div class="sub">BNK48 × CGM48 · SENBATSU GENERAL ELECTION</div>
+  </div>
+  <div class="header-right np">
+    <button class="tbtn" id="themeBtn" onclick="toggleTheme()">☀️ ธีมสว่าง</button>
+    <div class="date-pill">📍 3 – 4 OCT 2026 @ MCC HALL</div>
   </div>
 </div>
 
-<div class="nav-container sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto px-4 flex gap-2 overflow-x-auto py-2 no-print">
-    <button onclick="showPage('calc',this)" class="nav-btn active">คำนวณบัตร</button>
-    <button onclick="showPage('bod',this)" class="nav-btn">บด System</button>
-    <button onclick="showPage('activities',this)" class="nav-btn">รายละเอียด</button>
-    <button onclick="showPage('summary',this)" class="nav-btn">สถิติรวม</button>
-    <button onclick="showPage('schedule',this)" class="nav-btn">จัดตาราง</button>
+<nav class="np">
+  <div class="nav-inner">
+    <button class="nb on" onclick="showPage('plan',this)">🗺️ ผังบูธ Interactive</button>
+    <button class="nb" onclick="showPage('bod',this)">🤝 บด System</button>
+    <button class="nb" onclick="showPage('activities',this)">📋 รายละเอียดกิจกรรม</button>
+    <button class="nb" onclick="showPage('summary',this)">📊 สถิติรวม</button>
+    <button class="nb" onclick="showPage('schedule',this)">📅 ตารางงานส่วนตัว</button>
   </div>
-</div>
+</nav>
 
-<div class="max-w-7xl mx-auto px-4 py-8">
-  <!-- Page: Calc -->
-  <div id="page-calc" class="page-content">
-    <div class="space-y-6">
-      <input type="text" id="searchInput" placeholder="ค้นหาชื่อเมมเบอร์..." oninput="filterMembers()" class="w-full search-input rounded-xl px-4 py-3">
-      <div class="flex flex-wrap gap-3">
-        <button id="day-all" onclick="setDay('all',this)" class="btn-primary">ทุกวัน</button>
-        <button id="day-24jul" onclick="setDay('24 July',this)" class="btn-secondary bg-gray-800 p-2 rounded-xl">24 July</button>
-        <button id="day-25jul" onclick="setDay('25 July',this)" class="btn-secondary bg-gray-800 p-2 rounded-xl">25 July</button>
-        <button id="day-26jul" onclick="setDay('26 July',this)" class="btn-secondary bg-gray-800 p-2 rounded-xl">26 July</button>
-      </div>
-      <div id="selectedBar" class="selected-bar hidden"><div id="selChips" class="flex flex-wrap gap-2 flex-1"></div><button onclick="clearAll()" class="text-pink-400 font-bold text-sm">ล้างทั้งหมด</button></div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div id="totalPriceBar" class="price-bar hidden">
-          <div><span class="text-gray-400 text-sm block">ยอดเงินรวม</span><span id="totalPriceValue" class="price-bar-value">0 บาท</span></div>
+<main>
+  <!-- 1. INTERACTIVE FAN PLAN & DIRECT SCHEDULE BASKET ON FIRST PAGE -->
+  <section id="page-plan" class="pg on">
+    <div class="two-plan">
+      <!-- Left Main Area: Plan & Map -->
+      <div>
+        <div class="card" style="border-left:4px solid var(--ac)">
+          <h3>
+            <span>🗺️ INTERACTIVE FAN PLAN (ผังบูธแฟนคลับ MCC HALL)</span>
+            <span style="font-size:0.8rem;color:var(--hl);font-weight:700">💡 กดเมมเบอร์หรือเลขบูธเพื่อเลือกกิจกรรมใส่ตารางได้ทันที!</span>
+          </h3>
+          <div class="card-subtitle" style="display:flex;align-items:center;gap:12px;margin-top:6px;flex-wrap:wrap">
+            <span><b>สัญลักษณ์วง:</b></span>
+            <span class="group-tag bnk">🟣 BNK48 (สีม่วง 36 บูธ)</span>
+            <span class="group-tag cgm">🟢 CGM48 (สีเขียว 22 บูธ)</span>
+          </div>
         </div>
-        <div id="totalTicketBar" class="price-bar hidden !bg-blue-900/20 !border-blue-500/40">
-          <div><span class="text-gray-400 text-sm block">จำนวนตั๋วรวมที่ต้องใช้</span><span id="totalTicketValue" class="price-bar-value !text-cyan-400">0 ใบ</span></div>
+
+        <div class="filter-bar">
+          <span style="font-size:0.75rem;font-weight:800;color:var(--mut);margin-right:4px">ตัวกรอง:</span>
+          <span class="filter-chip on" data-filter="all" onclick="setGroupFilter('all', this)">ทั้งหมด (58)</span>
+          <span class="filter-chip" data-filter="bnk" onclick="setGroupFilter('bnk', this)">🟣 BNK48 (36)</span>
+          <span class="filter-chip" data-filter="cgm" onclick="setGroupFilter('cgm', this)">🟢 CGM48 (22)</span>
+          <span class="filter-chip" data-filter="b1-20" onclick="setGroupFilter('b1-20', this)">📍 บูธ 1-20</span>
+          <span class="filter-chip" data-filter="b21-40" onclick="setGroupFilter('b21-40', this)">📍 บูธ 21-40</span>
+          <span class="filter-chip" data-filter="b41-58" onclick="setGroupFilter('b41-58', this)">📍 บูธ 41-58</span>
         </div>
-      </div>
 
-      <div id="memberGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3"></div>
-      <div id="calcResults" class="space-y-4"></div>
-      <div id="klabBtnContainer" class="flex justify-center py-10 hidden"><button onclick="openKlab()" class="btn-klab">สรุปยอด (แกลบ MODE)</button></div>
-    </div>
-  </div>
-
-  <!-- Page: BOD (Conflict Checker) -->
-  <div id="page-bod" class="page-content hidden">
-    <div class="space-y-6">
-      <div class="glass p-6 rounded-2xl mb-6 border-l-4 border-pink-500">
-        <h2 class="text-xl font-bold text-pink-500 mb-2">บด System (Booth Matching)</h2>
-        <p class="text-sm text-gray-400">ระบบจะแจ้งเตือนเมื่อเมมเบอร์ที่คุณเลือกมีกิจกรรม **บูธเดียวกันและเวลาตรงกัน** เท่านั้น</p>
-      </div>
-      
-      <div class="space-y-4">
-        <input type="text" id="bodSearchInput" placeholder="ค้นหาชื่อเมมเบอร์..." oninput="renderBodMemberGrid()" class="w-full search-input rounded-xl px-4 py-3 text-sm">
-        <div id="bodMemberGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 max-h-48 overflow-y-auto p-2 custom-scrollbar"></div>
-        <div id="bodSelectedBar" class="selected-bar hidden !mb-0"><div id="bodSelChips" class="flex flex-wrap gap-2 flex-1"></div></div>
-      </div>
-
-      <div id="bodResults" class="space-y-4"></div>
-    </div>
-  </div>
-
-  <!-- Page: Activities Details -->
-  <div id="page-activities" class="page-content hidden"><div id="activitiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div></div>
-  
-  <!-- Page: Statistics Summary -->
-  <div id="page-summary" class="page-content hidden"><div id="summaryContent" class="space-y-6"></div></div>
-
-  <!-- Page: Schedule (จัดตาราง) -->
-  <div id="page-schedule" class="page-content hidden">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <!-- Left Column: Member List -->
-      <div class="lg:col-span-2 space-y-4">
-        <div class="glass p-6 rounded-2xl border-l-4 border-cyan-500">
-          <h2 class="text-xl font-bold text-cyan-400 mb-2">จัดตารางงานส่วนตัว</h2>
-          <p class="text-sm text-gray-400">กดที่ชื่อเมมเบอร์เพื่อดูคิวงานและเลือกกิจกรรมที่คุณสนใจลงในตะกร้าแผนการเดินงานของคุณ</p>
+        <div class="search-wrapper">
+          <input class="inp" id="planSearchInput" placeholder="🔍 ค้นหาชื่อเมมเบอร์ หรือ เลขบูธ (เช่น Hoop, Paeyah, 39)..." oninput="renderPlanView()">
+          <button class="search-clear" id="searchClearPlan" onclick="document.getElementById('planSearchInput').value='';renderPlanView()">✕</button>
         </div>
-        <input type="text" id="schedSearchInput" placeholder="ค้นหาชื่อเมมเบอร์..." oninput="renderScheduleGrid()" class="w-full search-input rounded-xl px-4 py-3 text-sm">
-        <div id="schedMemberGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3"></div>
-      </div>
-      
-      <!-- Right Column: Cart -->
-      <div class="lg:col-span-1">
-        <div class="sticky top-20 space-y-4" id="cartCaptureArea">
-          <div class="glass p-6 rounded-2xl border border-white/10 flex flex-col gap-4">
-            <div id="printHeader" class="hidden text-center pb-4 border-b border-white/10">
-              <div class="text-xl font-black text-yellow-400 tracking-wider">MY BON ODORI 2026 SCHEDULE</div>
-              <div class="text-[9px] text-gray-400">สร้างด้วยระบบจัดตารางงาน Bon Odori 2026</div>
-            </div>
-            
-            <div class="flex justify-between items-center no-print">
-              <span class="text-base font-black text-white flex items-center gap-1.5"><i class="ti ti-shopping-cart text-cyan-400"></i> ตะกร้าตารางงาน</span>
-              <button onclick="clearCart()" class="text-red-400 hover:text-red-300 text-xs font-bold transition-all"><i class="ti ti-trash"></i> ล้างตะกร้า</button>
-            </div>
-            
-            <div id="cartItemList" class="space-y-3 max-h-[50vh] overflow-y-auto pr-1 custom-scrollbar"></div>
-            
-            <!-- Cart totals and buttons -->
-            <div id="cartSummary" class="border-t border-white/5 pt-4 mt-2 space-y-4">
-              <div class="grid grid-cols-2 gap-2 text-center text-xs">
-                <div class="bg-white/5 p-2 rounded-xl border border-white/5">
-                  <div class="text-gray-400 mb-0.5">ยอดรวมเงิน</div>
-                  <div id="cartTotalPrice" class="font-black text-green-400 text-sm">0฿</div>
-                </div>
-                <div class="bg-white/5 p-2 rounded-xl border border-white/5">
-                  <div class="text-gray-400 mb-0.5">ตั๋วที่ต้องใช้</div>
-                  <div id="cartTotalTickets" class="font-black text-cyan-400 text-sm">0 ใบ</div>
-                </div>
+
+        <div class="plan-container">
+          <!-- Directory -->
+          <div class="card" style="padding:14px">
+            <b style="display:block;font-size:0.88rem;margin-bottom:10px;color:var(--ac)">📋 รายชื่อเมมเบอร์ (1–58)</b>
+            <div id="planDirectoryList" class="plan-directory"></div>
+          </div>
+
+          <!-- Visual Map -->
+          <div class="hall-wrapper">
+            <div class="hall-stage">STAGE</div>
+            <div class="hall-layout-grid">
+              <div class="hall-aisle">
+                <div id="booths-1-5"></div>
+                <div class="hall-entrance-gap">⇄ ทางเข้า</div>
+                <div id="booths-6-12"></div>
               </div>
-              
-              <div class="flex flex-col gap-2 no-print">
-                <div class="flex gap-2">
-                  <button onclick="downloadCartImage()" class="flex-1 bg-cyan-600 hover:bg-cyan-500 text-white text-[11px] font-bold py-2.5 px-2 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1">
-                    <i class="ti ti-download"></i> บันทึกรูป
-                  </button>
-                  <button onclick="copyScheduleLink()" class="flex-1 bg-purple-700 hover:bg-purple-600 text-white text-[11px] font-bold py-2.5 px-2 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1">
-                    <i class="ti ti-link"></i> คัดลอกลิงค์แชร์
-                  </button>
-                </div>
-                <button onclick="printCart()" class="w-full bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold py-2.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1 border border-white/5">
-                  <i class="ti ti-printer"></i> พิมพ์ตารางงาน (Print)
-                </button>
+              <div class="hall-center-island">
+                <div class="hall-aisle" id="booths-13-21"></div>
+                <div class="hall-aisle" id="booths-22-30"></div>
               </div>
+              <div class="hall-aisle" id="booths-31-48"></div>
+            </div>
+            <div class="hall-bottom-row" id="booths-49-58"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: DIRECT LIVE SCHEDULE BASKET ON FIRST PAGE -->
+      <div>
+        <div id="firstPageCartArea" class="card" style="position:sticky;top:70px">
+          <div id="printHeaderFirstPage" class="hid" style="text-align:center;font-weight:900;color:var(--hl);margin-bottom:12px">
+            MY FAN FESTIVAL 2026 SCHEDULE
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center" class="np">
+            <b style="font-size:1.05rem;display:flex;align-items:center;gap:6px">🛒 ตารางงานของคุณ</b>
+            <button class="btn sm danger" onclick="clearCart()">ล้างตาราง</button>
+          </div>
+
+          <div id="firstPageCartItemList" style="max-height:52vh;overflow-y:auto;margin-top:10px;padding-right:4px"></div>
+
+          <div id="firstPageCartSummary" class="hid" style="margin-top:14px;border-top:1px dashed var(--bd);padding-top:12px">
+            <div class="stat" style="text-align:center;margin-bottom:12px;padding:10px 14px">
+              <span>กิจกรรมที่เลือก</span>
+              <b id="firstPageCartTotal" style="font-size:1.8rem;color:var(--ac)">0 รอบ</b>
+            </div>
+
+            <div class="row np" style="margin-bottom:0;display:flex;gap:6px">
+              <button class="btn p" style="flex:1" onclick="downloadCartImage('firstPageCartArea')">📷 บันทึกรูป</button>
+              <button class="btn" style="flex:1" onclick="copyScheduleLink()">🔗 แชร์ลิงก์</button>
+              <button class="btn" style="flex:1" onclick="printCart('printHeaderFirstPage')">🖨️ พิมพ์</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- Modal: KLAB -->
-<div id="klabModal">
-  <div id="klabCaptureArea" class="klab-content">
-  <div id="klabSharedBanner" class="hidden mb-4 bg-yellow-500/15 border border-yellow-500/40 rounded-xl px-4 py-2 text-yellow-400 text-xs font-bold flex items-center gap-2">
-    <i class="ti ti-share"></i> ลิงค์แชร์ — กำลังดูผลสรุปของคนอื่น
-  </div>
-  <div class="klab-title">แกลบ MODE</div>
-    <div class="klab-total-value" id="klabTotalValue">0฿</div>
-    <div id="klabItemList" class="text-left space-y-2 max-h-[30vh] overflow-y-auto my-4 pr-2 custom-scrollbar"></div>
-    <div class="grid grid-cols-2 gap-4 mb-4">
-      <div class="bg-gray-800 p-3 rounded-xl"><div id="klabMamaCount" class="text-xl font-bold text-cyan-400">0</div><div class="text-[10px]">มาม่า (ซอง)</div></div>
-      <div class="bg-gray-800 p-3 rounded-xl"><div id="klabTicketCount" class="text-xl font-bold text-cyan-400">0</div><div class="text-[10px]">ตั๋วรวม (ใบ)</div></div>
-    </div>
-    <div id="klabMessage" class="italic text-yellow-400 text-sm mb-6"></div>
-    <div class="flex flex-col gap-2 no-capture">
-      <div class="flex gap-2">
-        <button onclick="downloadKlabImage()" id="btnDownload" class="flex-1 bg-cyan-600 hover:bg-cyan-500 active:scale-95 p-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-          <i class="ti ti-download"></i> บันทึกรูป
-        </button>
-        <button onclick="copyKlabLink()" id="btnCopyLink" class="flex-1 bg-purple-700 hover:bg-purple-600 active:scale-95 p-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-          <i class="ti ti-link"></i> คัดลอกลิงค์
-        </button>
+  <!-- 2. บด System -->
+  <section id="page-bod" class="pg">
+    <div class="card" style="border-left:4px solid var(--ac2)">
+      <h3 style="color:var(--ac2)">🤝 บด System (Booth Matching Checker)</h3>
+      <div class="card-subtitle">
+        ระบบช่วยตรวจสอบคิวงานที่ <b>"ตรงกันและเวลาเดียวกัน"</b> ของเมมเบอร์ที่คุณสนใจ (ทั้ง BNK48 และ CGM48)
       </div>
-      <button onclick="closeKlab()" class="bg-gray-700 hover:bg-gray-600 p-3 rounded-xl font-bold transition-all w-full text-white mt-1">ปิด</button>
     </div>
-    <div id="klabToast" class="hidden mt-3 text-center text-sm font-bold text-green-400 animate-pulse"></div>
-  </div>
-</div>
 
-<!-- Modal: Activities List (จัดตาราง) -->
-<div id="activitiesModal" class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-50" style="display:none;">
-  <div class="glass max-w-md w-full rounded-2xl p-6 border border-cyan-500/30 text-center relative max-h-[85vh] flex flex-col">
-    <!-- Close button top-right -->
-    <button onclick="closeActivitiesModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-all text-xl font-bold bg-white/5 w-8 h-8 rounded-full flex items-center justify-center border border-white/10 no-print" aria-label="Close">
-      ✕
-    </button>
-    <div id="modalMemberName" class="text-lg font-black text-cyan-400 mb-4 pr-8"></div>
-    <div id="modalActivitiesList" class="flex-1 overflow-y-auto space-y-3 pr-2 custom-scrollbar text-left"></div>
-    <div class="mt-6 pt-4 border-t border-white/5 flex justify-end gap-2 no-print">
-      <button onclick="closeActivitiesModal()" class="w-full bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold py-3 rounded-xl transition-all border border-white/10">ปิดหน้าต่าง</button>
+    <div class="filter-bar">
+      <span class="filter-chip on" data-filter="all" onclick="setBodGroupFilter('all', this)">ทั้งหมด (58)</span>
+      <span class="filter-chip" data-filter="bnk" onclick="setBodGroupFilter('bnk', this)">🟣 BNK48</span>
+      <span class="filter-chip" data-filter="cgm" onclick="setBodGroupFilter('cgm', this)">🟢 CGM48</span>
+      <span class="filter-chip" data-filter="b1-20" onclick="setBodGroupFilter('b1-20', this)">📍 บูธ 1-20</span>
+      <span class="filter-chip" data-filter="b21-40" onclick="setBodGroupFilter('b21-40', this)">📍 บูธ 21-40</span>
+      <span class="filter-chip" data-filter="b41-58" onclick="setBodGroupFilter('b41-58', this)">📍 บูธ 41-58</span>
     </div>
+
+    <div class="search-wrapper">
+      <input class="inp" id="bodSearchInput" placeholder="🔍 ค้นหาเมมเบอร์..." oninput="onSearchInput('bodMemberGrid','bodSearchInput','searchClearBod',1)">
+      <button class="search-clear" id="searchClearBod" onclick="clearSearch('bodMemberGrid','bodSearchInput','searchClearBod',1)">✕</button>
+    </div>
+
+    <div id="bodMemberGrid" class="plan-directory" style="max-height:220px;overflow-y:auto;padding-right:4px"></div>
+    
+    <div id="bodSelBar" class="card hid" style="margin-top:14px;padding:12px 16px"><span id="bodSelChips"></span></div>
+    <div id="bodResults" style="margin-top:14px"></div>
+  </section>
+
+  <!-- 3. รายละเอียดกิจกรรม -->
+  <section id="page-activities" class="pg">
+    <div id="actGrid" style="display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))"></div>
+  </section>
+
+  <!-- 4. สถิติรวม -->
+  <section id="page-summary" class="pg">
+    <div id="summaryContent"></div>
+  </section>
+
+  <!-- 5. ตารางงานส่วนตัว -->
+  <section id="page-schedule" class="pg">
+    <div class="two">
+      <div>
+        <div class="card" style="border-left:4px solid var(--ac)">
+          <h3 style="color:var(--ac)">📅 จัดตารางงานส่วนตัว</h3>
+          <div class="card-subtitle">
+            กดเลือกเมมเบอร์เพื่อดูตารางเวลาและกดใส่ตะกร้าตารางงานของคุณ
+          </div>
+        </div>
+
+        <div class="search-wrapper">
+          <input class="inp" id="schedSearchInput" placeholder="🔍 ค้นหาชื่อเมมเบอร์..." oninput="renderScheduleGrid()">
+        </div>
+
+        <div id="schedMemberGrid" class="plan-directory"></div>
+      </div>
+
+      <div>
+        <div id="cartArea" class="card" style="position:sticky;top:70px">
+          <div id="printHeader" class="hid" style="text-align:center;font-weight:900;color:var(--hl);margin-bottom:12px">
+            MY FAN FESTIVAL 2026 SCHEDULE
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center" class="np">
+            <b style="font-size:1.05rem;display:flex;align-items:center;gap:6px">🛒 ตารางงานของคุณ</b>
+            <button class="btn sm danger" onclick="clearCart()">ล้างตาราง</button>
+          </div>
+
+          <div id="cartItemList" style="max-height:55vh;overflow-y:auto;margin-top:10px;padding-right:4px"></div>
+
+          <div id="cartSummary" class="hid" style="margin-top:14px;border-top:1px dashed var(--bd);padding-top:12px">
+            <div class="stat" style="text-align:center;margin-bottom:12px">
+              <span>กิจกรรมที่เลือก</span>
+              <b id="cartTotal" style="font-size:1.8rem;color:var(--ac)">0 รอบ</b>
+            </div>
+
+            <div class="row np" style="margin-bottom:0;display:flex;gap:6px">
+              <button class="btn p" style="flex:1" onclick="downloadCartImage('cartArea')">📷 บันทึกรูป</button>
+              <button class="btn" style="flex:1" onclick="copyScheduleLink()">🔗 แชร์ลิงก์</button>
+              <button class="btn" style="flex:1" onclick="printCart('printHeader')">🖨️ พิมพ์</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<button class="floating-cart-btn" id="floatingCartBtn" onclick="scrollToCart()">
+  🛒 ตารางงานของคุณ <span id="floatCartCount">0</span>
+</button>
+
+<div id="toast"></div>
+
+<!-- Member Schedule Modal Drawer -->
+<div id="modal">
+  <div class="card">
+    <button class="btn x" onclick="closeModal()">✕</button>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <div id="modalBoothPill" class="dir-num" style="width:36px;height:36px;font-size:1rem;background:var(--ac);color:#fff"></div>
+      <div>
+        <h3 id="modalName" style="margin:0;color:var(--ac)"></h3>
+        <span id="modalSubGroup" class="group-tag"></span>
+      </div>
+    </div>
+    <div id="modalList"></div>
   </div>
 </div>
 
 <script>
-const TICKET_PRICE = 50; // บาทต่อคูปอง 1 ใบ
-const BOOTHS = [
-  { k: "OfficialMerch", s: "Official Merchandise", t: 0, price: 0 },
-  { k: "CenterStage", s: "Bon Odori Center Stage", t: 0, price: 0 },
-  { k: "HachiCha", s: "はちCHA (Hachi Cha)", t: 0, price: 145 },
-  { k: "LuckyRoulette", s: "ラッキールーレット (Lucky Roulette)", t: 5, price: 5 * TICKET_PRICE },
-  { k: "CorkShateki", s: "コルก射적 3発 (Cork Shateki)", t: 5, price: 5 * TICKET_PRICE },
-  { k: "Plinko", s: "プリンコ (Plinko)", t: 5, price: 5 * TICKET_PRICE },
-  { k: "OmikujiSuuji", s: "おみくじ数字バトル (Omikuji Suuji Battle)", t: 5, price: 5 * TICKET_PRICE },
-  { k: "Wanage", s: "輪投げ (Wanage)", t: 5, price: 5 * TICKET_PRICE }
+/* DATASET & CONSTANTS */
+const ACT = [
+  { k: 'appeal', s: 'Appeal Speech (Main Stage)', n: 'กิจกรรมแสดงสปีชบนเวทีหลัก', icon: '🎤' },
+  { k: 'booth', s: 'Booth Visits', n: 'เมมเบอร์เยี่ยมชมบูธแฟนคลับ', icon: '🎪' },
+  { k: 'hitouch', s: 'Group Hi-Touch', n: 'ใช้บัตรซื้อจากเข็มกลัดในงาน', icon: '🤝' },
+  { k: 'hachi', s: 'Hachi Cha', n: 'กิจกรรมเต็ม 1 ชม. ไม่สลับกลุ่ม', icon: '🍵' },
+  { k: 'merch', s: 'Merchandise', n: 'ประจำบูธสินค้าเต็ม 1 ชม.', icon: '🛍️' }
 ];
-const DAYS = ["24 July", "25 July", "26 July"];
-const DATA = {
-  "OfficialMerch":{
-    "24 July":{"13:00-14:00":["Mirin","Cartoon","Mayji"],"15:00-16:00":["Niya","Praifa","Khowjow"],"17:00-18:00":["Wawa","Praew","Mayji"]},
-    "25 July":{"13:00-14:00":["Monet","Jingjing","Janry"],"15:00-16:00":["Luksorn","Satangpound","Lewlew"],"17:00-18:00":["Lewlew","Chifa","Grape"]},
-    "26 July":{"12:00-13:00":["Sindy","Hongyok","Jew"],"14:00-15:00":["Neen","Mail","Inkcha"],"16:00-17:00":["Nammonn","Else","Grape"]}
-  },
-  "CenterStage":{
-    "24 July":{"13:00-14:00":["Hoop","Sindy","Punpon","Fame","Berry"],"15:00-16:00":["Galeya","Satangpound","Nana","Kwan","Prae","Mail"],"17:00-18:00":["Nall","Else","Grape","Nammonn","Lewlew","Praifa"]},
-    "25 July":{"13:00-14:00":["Pancake","Lookked","L","Arlee","Chifa","Yoghurt"],"15:00-16:00":["Lingling","Rose","Valentine","Mint","Tara","Ploen","Emma"],"17:00-18:00":["Patt","Namphet","Janry","Jew","Niya","Ginna"]},
-    "26 July":{"12:00-13:00":["Khaimook","Nisha","Shenae","Wawa","Mayji","Cartoon","Monet"],"14:00-15:00":["Marine","Blythe","Jingjing","Saonoi","Mirin","Praew"],"16:00-17:00":["Neen","Hongyok","Inkcha","Proud","Palmmy","Khowjow","Luksorn"]}
-  },
-  "HachiCha":{
-    "24 July":{"11:00-12:00":["Niya","Saonoi","Khowjow"],"12:00-13:00":["Mayji","Hoop","Cartoon"],"13:00-14:00":["Saonoi","Valentine","L"],"14:00-15:00":["Palmmy","Niya","Galeya"],"15:00-16:00":["Neen","Nisha","Grape"],"16:00-17:00":["Yoghurt","Ginna","Janry"],"17:00-18:00":["Sindy","Ploen","Khaimook"],"18:00-19:00":["Mail","Pancake","Punpon"],"19:00-20:00":["Shenae","Hongyok","Arlee"]},
-    "25 July":{"11:00-12:00":["Neen","Inkcha","Mint"],"12:00-13:00":["Niya","Satangpound","Luksorn"],"13:00-14:00":["Hoop","Lewlew","Blythe"],"14:00-15:00":["Wawa","Prae","Nammonn"],"15:00-16:00":["Mirin","Else","Praew"],"16:00-17:00":["Berry","Kwan","Jew"],"17:00-18:00":["Marine","Lingling","Proud"],"18:00-19:00":["Monet","Jingjing","L"],"19:00-20:00":["Chifa","Lookked","Nall"]},
-    "26 July":{"11:00-12:00":["Hoop","Mail","Praifa"],"12:00-13:00":["Khowjow","Nana","Fame"],"13:00-14:00":["Patt","Emma","Inkcha"],"14:00-15:00":["Rose","Tara","Emmy"],"15:00-16:00":["Namphet","Mint","Niya"],"16:00-17:00":["Blythe","Prae","Nall"]}
-  },
-  "LuckyRoulette":{
-    "24 July":{"11:00-12:00":["Chifa","Tara","Marine"],"12:00-13:00":["Wawa","Chifa","Blythe"],"13:00-14:00":["Praew","Lewlew","Mail"],"14:00-15:00":["Saonoi","Punpon","Arlee"],"15:00-16:00":["Nammonn","Hongyok","Cartoon"],"16:00-17:00":["Hoop","Emma","L"],"17:00-18:00":["Khowjow","Lingling","Jew"],"18:00-19:00":["Luksorn","Valentine","Namphet"],"19:00-20:00":["Else","Lookked","Janry"]},
-    "25 July":{"11:00-12:00":["Sindy","Rose","Khaimook"],"12:00-13:00":["Neen","Praifa","Khowjow"],"13:00-14:00":["Fame","Ginna","Berry"],"14:00-15:00":["Nall","Else","Grape"],"15:00-16:00":["Saonoi","Nisha","Monet"],"16:00-17:00":["L","Jingjing","Mint"],"17:00-18:00":["Palmmy","Ploen","Praew"],"18:00-19:00":["Pancake","Satangpound","Niya"],"19:00-20:00":["Kwan","Lewlew","Mirin"]},
-    "26 July":{"11:00-12:00":["Praew","Nana","Prae"],"12:00-13:00":["Inkcha","Patt","Proud"],"13:00-14:00":["Emmy","Hongyok","Jew"],"14:00-15:00":["Wawa","Galeya","Grape"],"15:00-16:00":["Yoghurt","Jingjing","Janry"],"16:00-17:00":["Fame","Shenae","Mayji"]}
-  },
-  "CorkShateki":{
-    "24 July":{"11:00-12:00":["Pancake","Praew","L"],"12:00-13:00":["Sindy","Namphet","Saonoi"],"13:00-14:00":["Niya","Satangpound","Luksorn"],"14:00-15:00":["Yoghurt","Praifa","Marine"],"15:00-16:00":["Nall","Else","Blythe"],"16:00-17:00":["Tara","Fame","Berry"],"17:00-18:00":["Hoop","Kwan","Galeya"],"18:00-19:00":["Khowjow","Jingjing","Lewlew"],"19:00-20:00":["Wawa","Nisha","Punpon"]},
-    "25 July":{"11:00-12:00":["Lookked","Ploen","Mayji"],"12:00-13:00":["Nammonn","Nisha","Inkcha"],"13:00-14:00":["Rose","Emma","Punpon"],"14:00-15:00":["Patt","Lingling","Jew"],"15:00-16:00":["Proud","Shenae","Mail"],"16:00-17:00":["Wawa","Nana","Neen"],"17:00-18:00":["Saonoi","Hongyok","Cartoon"],"18:00-19:00":["Mirin","Valentine","Praew"],"19:00-20:00":["Monet","Prae","Janry"]},
-    "26 July":{"11:00-12:00":["Arlee","Rose","Grape"],"12:00-13:00":["Mint","Ploen","Palmmy"],"13:00-14:00":["Janry","Chifa","Nammonn"],"14:00-15:00":["Sindy","Nana","Cartoon"],"15:00-16:00":["Pancake","Ginna","Emmy"],"16:00-17:00":["Patt","Satangpound","Khaimook"]}
-  },
-  "Plinko":{
-    "24 July":{"11:00-12:00":["Arlee","Lewlew","Janry"],"12:00-13:00":["Patt","Tara","Jew"],"13:00-14:00":["Neen","Praifa","Khowjow"],"14:00-15:00":["Pancake","Valentine","L"],"15:00-16:00":["Wawa","Yoghurt","Mayji"],"16:00-17:00":["Luksorn","Namphet","Punpon"],"17:00-18:00":["Satangpound","Nana","Arlee"],"18:00-19:00":["Mirin","Else","Chifa"],"19:00-20:00":["Fame","Emma","Berry"]},
-    "25 July":{"11:00-12:00":["Palmmy","Lingling","Mail"],"12:00-13:00":["Nall","Lookked","Grape"],"13:00-14:00":["Inkcha","Else","Praew"],"14:00-15:00":["Marine","Kwan","Khaimook"],"15:00-16:00":["Niya","Hongyok","Cartoon"],"16:00-17:00":["Yoghurt","Ginna","Fame"],"17:00-18:00":["Sindy","Jingjing","Luksorn"],"18:00-19:00":["Mint","Nisha","Shenae"],"19:00-20:00":["Hoop","Ploen","Nammonn"]},
-    "26 July":{"11:00-12:00":["Emmy","Blythe","Else"],"12:00-13:00":["Saonoi","Galeya","Lingling"],"13:00-14:00":["Proud","Lookked","Arlee"],"14:00-15:00":["Palmmy","Prae","Nall"],"15:00-16:00":["Monet","Emma","Rose"],"16:00-17:00":["Mirin","Kwan","Jew"]}
-  },
-  "OmikujiSuuji":{
-    "24 July":{"11:00-12:00":["Hoop","Ginna","Satangpound"],"12:00-13:00":["Palmmy","Mirin","Galeya"],"13:00-14:00":["Nammonn","Jew","Chifa"],"14:00-15:00":["Nall","Tara","Janry"],"15:00-16:00":["Sindy","Ploen","Khaimook"],"16:00-17:00":["Praew","Valentine","Lewlew"],"17:00-18:00":["Prae","Nisha","Marine"],"18:00-19:00":["Saonoi","Hongyok","Grape"],"19:00-20:00":["Hoop","Prae","Jingjing"]},
-    "25 July":{"11:00-12:00":["L","Kwan","Jew"],"12:00-13:00":["Patt","Else","Cartoon"],"13:00-14:00":["Proud","Shenae","Mint"],"14:00-15:00":["Rose","Nana","Mayji"],"15:00-16:00":["Neen","Praifa","Khowjow"],"16:00-17:00":["Pancake","Inkcha","Arlee"],"17:00-18:00":["Monet","Lookked","Blythe"],"18:00-19:00":["Emma","Fame","Berry"],"19:00-20:00":["Wawa","Lingling","Mail"]},
-    "26 July":{"11:00-12:00":["Namphet","Punpon","Luksorn"],"12:00-13:00":["Marine","Kwan","Blythe"],"13:00-14:00":["Niya","Jingjing","Ploen"],"14:00-15:00":["Nammonn","Yoghurt","Mayji"],"15:00-16:00":["Shenae","Valentine","Hoop"],"16:00-17:00":["Emmy","Nana","Galeya"]}
-  },
-  "Wanage":{
-    "24 July":{"11:00-12:00":["Fame","Punpon","Berry"],"12:00-13:00":["Ginna","Praifa","Arlee"],"13:00-14:00":["Nall","Pancake","Grape"],"14:00-15:00":["Hoop","Ginna","Namphet"],"15:00-16:00":["Patt","Lingling","Jew"],"16:00-17:00":["Mirin","Shenae","Chifa"],"17:00-18:00":["Pancake","Jingjing","L"],"18:00-19:00":["Galeya","Nisha","Cartoon"],"19:00-20:00":["Khaimook","Tara","Praew"]},
-    "25 July":{"11:00-12:00":["Khowjow","Proud","Marine"],"12:00-13:00":["Wawa","Lewlew","Blythe"],"13:00-14:00":["Saonoi","Valentine","Mail"],"14:00-15:00":["Palmmy","Ploen","Tara"],"15:00-16:00":["Sindy","Namphet","Inkcha"],"16:00-17:00":["Monet","Lookked","Janry"],"17:00-18:00":["Khaimook","Prae","Yoghurt"],"18:00-19:00":["Rose","Kwan","Hongyok"],"19:00-20:00":["Mayji","Emma","Luksorn"]},
-    "26 July":{"11:00-12:00":["Neen","Satangpound","Nammonn"],"12:00-13:00":["Niya","Else","Emmy"],"13:00-14:00":["Pancake","Nana","Berry"],"14:00-15:00":["Luksorn","Lingling","Mint"],"15:00-16:00":["Nisha","Praifa","Proud"],"16:00-17:00":["Marine","Lookked","Arlee"]}
-  }
+
+const DAYS = ['3 Oct', '4 Oct'];
+
+const RAW = {
+'3 Oct':[
+['11:00','12:00','Praifa,Luksorn,Blythe,Rose|Mirin,Nana,Chifa,Wawa|Fame,Namphet,Lewlew,Satangpound,Lookked,Inkcha,Grape|Emma,Emmy,Tara,Punpon|Hoop,Saonoi,Shenae,Mail'],
+['12:00','13:00','Tara,Ploen,Mirin,Cartoon|Lookked,Shenae,Blythe,Marine||Jingjing,Mayji,Pancake,Rose|Satangpound,Nall,Lingling,Proud'],
+['13:00','14:00','Proud,Lookked,Mail,Shenae|Ploen,Tara,Niya,L|Yoghurt,Blythe,Nall,Arlee,Wawa,Chifa,Valentine|Praifa,Nisha,Hongyok,Neen|Nana,Luksorn,Prae,Khowjow'],
+['14:00','15:00','Marine,Emma,Wawa,Yoghurt|Cartoon,Luksorn,Fame,Mail||Galeya,Patt,Sindy,Prae,Ploen|Emmy,Niya,Khaimook,Jew,Jingjing'],
+['15:00','16:00','L,Chifa,Fame,Niya|Rose,Praifa,Emma,Proud|Lingling,Cartoon,Nammonn,Khaimook,Palmmy,Micha,Pancake,Mayji|Janry,Ginna,Luksorn,Praew|Mint,Yoghurt,Marine,Wawa']],
+'4 Oct':[
+['11:00','12:00','Palmmy,Nall,Punpon,Lewlew,Inkcha|Nisha,Hoop,Galeya,Grape,Ginna|Marine,Else,Jingjing,Tara,Mail,Niya,Praifa|Micha,Lingling,Mirin,Mint|Hongyok,Fame,Rose,Neen'],
+['12:00','13:00','Jew,Nana,Mint,Valentine,Else|Mayji,Lewlew,Nall,Monet,Neen||Khowjow,Wawa,Inkcha,Grape|Praifa,Micha,Janry,Nisha'],
+['13:00','14:00','Ginna,Jingjing,Neen,Hongyok|Micha,Pancake,Berry,Else|Jew,Shenae,Nana,Janry,Emma,Ploen,Kwan|Khaimook,Cartoon,Lookked,Proud|Valentine,Monet,Patt,Inkcha'],
+['14:00','15:00','Janry,Nammonn,Hoop,Emmy|Namphet,Mint,Punpon,Jingjing||Nall,Nana,L,Arlee,Palmmy|Lewlew,Ginna,Lookked,Kwan,Mayji'],
+['15:00','16:00','Lingling,Micha,Khaimook,Sindy|Satangpound,Palmmy,Prae,Nammonn|Neen,Punpon,Emmy,Patt,Monet,Nisha,Berry|Niya,Else,Jew,Fame|Tara,Chifa,Praew,Mirin'],
+['16:00','17:00','Satangpound,Khowjow,Praew,Berry|Valentine,Patt,Saonoi,Hongyok||Blythe,Monet,Namphet,Marine|Cartoon,Else,Punpon,Sindy'],
+['17:00','18:00','Namphet,Monet,Nisha,Mayji|Praew,Sindy,Arlee,Jew|Khowjow,Luksorn,Prae,Saonoi,L,Ginna,Proud,Galeya|Mail,Satangpound,Hoop,Kwan|Ploen,Emma,Pancake,Nammonn'],
+['18:00','19:00','Patt,Galeya,Kwan,Pancake|Khowjow,Emmy,Janry,Lingling||Lewlew,Valentine,Yoghurt,Saonoi|Grape,Arlee,Blythe,Berry'],
+['19:00','20:00','Grape,Prae,Saonoi,Arlee|Khaimook,Inkcha,Yoghurt,Kwan|Rose,Hongyok,Sindy,Praew,Hoop,Mirin,Mint|Chifa,Shenae,Nammonn,Berry|Namphet,Palmmy,Galeya,L']]
 };
 
-let ALL_MEMBERS = [];
-let selected = new Set();
-let currentDay = 'all';
-let slotRounds = {};
-let selectedFanmeetZones = {};
+const B = "Nall,Neen,Arlee,L,Grape,Satangpound,Lewlew,Punpon,Lingling,Patt,Micha,Mint,Mail,Else,Shenae,Nammonn,Pancake,Monet,Praew,Luksorn,Cartoon,Emma,Palmmy,Chifa,Lookked,Ginna,Jingjing,Khaimook,Marine,Janry,Berry,Galeya,Mayji,Praifa,Emmy,Blythe,Mirin,Wawa,Hoop,Sindy,Inkcha,Nisha,Jew,Tara,Nana,Namphet,Kwan,Hongyok,Saonoi,Rose,Niya,Khowjow,Proud,Yoghurt,Fame,Ploen,Prae,Valentine".split(',');
 
-// Scheduler Cart variables
-let selectedActivities = new Set();
+const CGM_SET = new Set("Satangpound,Lewlew,Punpon,Lingling,Else,Shenae,Emma,Chifa,Lookked,Ginna,Jingjing,Praifa,Nisha,Tara,Nana,Namphet,Kwan,Hongyok,Saonoi,Ploen,Prae,Valentine".split(','));
+const isCGM = m => CGM_SET.has(m);
+
+const DATA = {};
+ACT.forEach(a => DATA[a.k] = {});
+DAYS.forEach(d => {
+  ACT.forEach(a => DATA[a.k][d] = {});
+  RAW[d].forEach(([start, end, s]) => {
+    s.split('|').forEach((mList, idx) => {
+      if (mList) DATA[ACT[idx].k][d][start + '-' + end] = mList.split(',');
+    });
+  });
+});
+
+/* STATE */
+const $ = id => document.getElementById(id);
+const ALL = B.slice();
+const bn = m => B.indexOf(m) + 1;
+let selected = new Set();
+let planGroupFilter = 'all';
+let bodGroupFilter = 'all';
+let cart = new Set();
 let activeMember = '';
 
-function initializeApp() {
-  ALL_MEMBERS = Array.from(new Set(Object.values(DATA).flatMap(b => Object.values(b).flatMap(d => Object.values(d).flat())))).sort();
-  renderMemberGrid();
-  renderActivities();
-  loadStateFromURL();
-  loadTheme();
+function acts(m, days = DAYS) {
+  const r = [];
+  ACT.forEach(a => days.forEach(d => {
+    Object.entries(DATA[a.k][d]).forEach(([t, arr]) => {
+      if (arr.includes(m)) r.push({ a, d, t });
+    });
+  }));
+  return r.sort((x, y) => DAYS.indexOf(x.d) - DAYS.indexOf(y.d) || x.t.localeCompare(y.t));
+}
+
+const byDay = list => list.reduce((o, x) => ((o[x.d] = o[x.d] || []).push(x), o), {});
+
+function showToast(msg) {
+  const t = $('toast');
+  t.innerHTML = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2400);
 }
 
 function showPage(p, btn) {
-  document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
-  document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-  document.getElementById('page-' + p).classList.remove('hidden');
-  if (btn) btn.classList.add('active');
-  if (p === 'bod') {
-    renderBodMemberGrid();
-    renderBodSelectedBar();
-    renderBod();
-  }
-  if (p === 'summary') renderSummary();
-  if (p === 'schedule') {
-    renderScheduleGrid();
-    renderCart();
-  }
-  playSynthSound('ui');
+  document.querySelectorAll('.pg').forEach(e => e.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(e => e.classList.remove('on'));
+  $('page-' + p).classList.add('on');
+  if (btn) btn.classList.add('on');
+
+  if (p === 'plan') { renderPlanView(); }
+  if (p === 'bod') { chips('bodMemberGrid', 'bodSearchInput', 1); renderBod(); }
+  if (p === 'activities') { renderActivities(); }
+  if (p === 'summary') { renderSummary(); }
+  if (p === 'schedule') { renderScheduleGrid(); renderCart(); }
 }
 
-function setDay(d, el) {
-  currentDay = d;
-  document.querySelectorAll('#day-all, #day-24jul, #day-25jul, #day-26jul').forEach(b => {
-    b.classList.remove('btn-primary');
-    b.classList.add('btn-secondary', 'bg-gray-800', 'p-2', 'rounded-xl');
-  });
-  el.classList.remove('btn-secondary');
-  el.classList.add('btn-primary');
-  renderCalc();
+function setGroupFilter(filter, el) {
+  planGroupFilter = filter;
+  el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  renderPlanView();
 }
 
-function filterMembers() { renderMemberGrid(); }
+function setBodGroupFilter(filter, el) {
+  bodGroupFilter = filter;
+  el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  chips('bodMemberGrid', 'bodSearchInput', 1);
+}
+
+function filterMembers(m, q, filterType) {
+  const num = bn(m);
+  const matchesSearch = !q || m.toLowerCase().includes(q) || num.toString() === q;
+  if (!matchesSearch) return false;
+
+  if (filterType === 'bnk') return !isCGM(m);
+  if (filterType === 'cgm') return isCGM(m);
+  if (filterType === 'b1-20') return num >= 1 && num <= 20;
+  if (filterType === 'b21-40') return num >= 21 && num <= 40;
+  if (filterType === 'b41-58') return num >= 41 && num <= 58;
+  return true;
+}
+
+/* INTERACTIVE PLAN VIEW */
+function renderPlanView() {
+  const q = ($('planSearchInput') ? $('planSearchInput').value : '').toLowerCase().trim();
+
+  // 1. Render Directory
+  const dirHtml = B.map((m, i) => {
+    if (!filterMembers(m, q, planGroupFilter)) return '';
+    const num = i + 1;
+    const cgm = isCGM(m);
+
+    return `<div class="dir-item ${cgm ? 'teal' : ''}" onclick="openModal('${m}')">
+      <div class="dir-num">${num}</div>
+      <span class="dir-name">${m}</span>
+    </div>`;
+  }).join('');
+  $('planDirectoryList').innerHTML = dirHtml || `<div class="empty" style="grid-column:1/-1">ไม่พบเมมเบอร์</div>`;
+
+  // 2. Render Hall Layout Booth Pills
+  const makeBoothPill = (num, arrow = '') => {
+    const m = B[num - 1];
+    if (!m) return '';
+    const cgm = isCGM(m);
+    const visible = filterMembers(m, q, planGroupFilter);
+    
+    return `<div class="booth-pill ${cgm ? 'cgm' : ''} ${visible ? '' : 'hid'}" 
+      onclick="openModal('${m}')">
+      <span>${arrow} ${num}</span>
+    </div>`;
+  };
+
+  $('booths-1-5').innerHTML = [1,2,3,4,5].map(n => makeBoothPill(n, '▶')).join('');
+  $('booths-6-12').innerHTML = [6,7,8,9,10,11,12].map(n => makeBoothPill(n, '▶')).join('');
+  $('booths-13-21').innerHTML = [13,14,15,16,17,18,19,20,21].map(n => makeBoothPill(n, '◀')).join('');
+  $('booths-22-30').innerHTML = [22,23,24,25,26,27,28,29,30].map(n => makeBoothPill(n, '▶')).join('');
+  $('booths-31-48').innerHTML = [31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48].map(n => makeBoothPill(n, '◀')).join('');
+  $('booths-49-58').innerHTML = [49,50,51,52,53,54,55,56,57,58].map(n => makeBoothPill(n, '▲')).join('');
+}
+
+/* MODAL DRAWER */
+function openModal(m) {
+  activeMember = m;
+  const bNo = bn(m);
+  const cgm = isCGM(m);
+
+  $('modalBoothPill').textContent = '#' + bNo;
+  $('modalName').textContent = m;
+  $('modalSubGroup').textContent = cgm ? '🟢 CGM48 (สีเขียว)' : '🟣 BNK48 (สีม่วง)';
+  $('modalSubGroup').className = `group-tag ${cgm ? 'cgm' : 'bnk'}`;
+
+  const g = byDay(acts(m));
+
+  $('modalList').innerHTML = DAYS.map(d => g[d] ? 
+    `<div style="font-size:0.82rem;font-weight:800;color:var(--ac);margin:14px 0 6px">📅 วัน${d}</div>` + 
+    g[d].map(x => {
+      const id = [m, x.a.k, x.d, x.t].join('|');
+      const on = cart.has(id);
+      return `<div class="slot" style="border-left:3px solid ${on ? 'var(--ok)' : 'var(--ac)'}">
+        <div>
+          <span class="act-badge ${x.a.k}">${x.a.icon} ${x.a.s}</span><br>
+          <small style="font-weight:700">⏰ เวลา ${x.t} น.</small>
+        </div>
+        <button class="btn sm ${on ? '' : 'p'}" onclick="toggleCart('${id}')">
+          ${on ? '✓ ในตาราง' : '+ เลือก'}
+        </button>
+      </div>`;
+    }).join('') : '<div class="empty">ไม่มีกิจกรรมในวันนี้</div>'
+  ).join('');
+
+  $('modal').style.display = 'flex';
+}
+
+function closeModal() {
+  $('modal').style.display = 'none';
+}
+
+/* BOD MATCHING */
+function onSearchInput(gid, iid, cid, small) {
+  const val = $(iid).value;
+  $(cid).classList.toggle('show', val.length > 0);
+  chips(gid, iid, small);
+}
+
+function clearSearch(gid, iid, cid, small) {
+  $(iid).value = '';
+  $(cid).classList.remove('show');
+  chips(gid, iid, small);
+}
+
+function chips(gid, iid, small) {
+  const q = $(iid).value.toLowerCase().trim();
+  const filtered = ALL.filter(m => filterMembers(m, q, bodGroupFilter));
+
+  $(gid).innerHTML = filtered.map(m =>
+    `<div class="dir-item ${isCGM(m) ? 'teal' : ''} ${selected.has(m) ? 'selected-active' : ''}" onclick="toggleMember('${m}')">
+      <div class="dir-num">${bn(m)}</div>
+      <span class="dir-name">${m}</span>
+    </div>`
+  ).join('') || `<div class="empty" style="grid-column:1/-1">ไม่พบเมมเบอร์</div>`;
+}
 
 function toggleMember(m) {
-  if (selected.has(m)) {
-    selected.delete(m);
-  } else {
-    selected.add(m);
-  }
-  renderMemberGrid(); 
-  renderCalc(); 
-  renderSelectedBar(); 
-  updateTotalPrice();
-  if (!document.getElementById('page-bod').classList.contains('hidden')) {
-    renderBodMemberGrid();
-    renderBodSelectedBar();
-    renderBod();
-  }
-  playSynthSound('ui');
+  selected.has(m) ? selected.delete(m) : selected.add(m);
+  refresh();
 }
 
-function clearAll() { 
-  selected.clear(); 
-  slotRounds = {};
-  selectedFanmeetZones = {};
-  renderMemberGrid(); 
-  renderCalc(); 
-  renderSelectedBar(); 
-  updateTotalPrice();
-  if (!document.getElementById('page-bod').classList.contains('hidden')) {
-    renderBodMemberGrid();
-    renderBodSelectedBar();
-    renderBod();
-  }
-  playSynthSound('ui');
-}
-
-function setSlotRound(slotId, delta) {
-  const current = (slotRounds[slotId] !== undefined) ? slotRounds[slotId] : 1;
-  const next = Math.max(0, Math.min(10, current + delta));
-  slotRounds[slotId] = next;
-  renderCalc(); 
-  updateTotalPrice();
-  if (!document.getElementById('page-bod').classList.contains('hidden')) renderBod();
-  playSynthSound('ui');
-}
-
-function setSlotZero(slotId) { 
-  slotRounds[slotId] = 0; 
-  renderCalc(); 
-  updateTotalPrice();
-  if (!document.getElementById('page-bod').classList.contains('hidden')) renderBod();
-  playSynthSound('ui');
-}
-
-function updateTotalPrice() {
-  const priceBar = document.getElementById('totalPriceBar');
-  const ticketBar = document.getElementById('totalTicketBar');
-  const klab = document.getElementById('klabBtnContainer');
-  if (selected.size === 0) { priceBar.classList.add('hidden'); ticketBar.classList.add('hidden'); klab.classList.add('hidden'); return; }
-  priceBar.classList.remove('hidden'); ticketBar.classList.remove('hidden'); klab.classList.remove('hidden');
-
-  let totalMoney = 0, totalTickets = 0;
-  selected.forEach(m => {
-    BOOTHS.forEach(b => {
-      if (b.isFanmeet) return;
-      DAYS.forEach(d => {
-        const dayData = DATA[b.k] && DATA[b.k][d];
-        if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
-          if (arr.includes(m)) {
-            const sid = `${m}|${b.k}|${d}|${t}`;
-            const r = slotRounds[sid] !== undefined ? slotRounds[sid] : 1;
-            totalMoney += b.price * r; totalTickets += b.t * r;
-          }
-        });
-      });
-    });
-  });
-  document.getElementById('totalPriceValue').textContent = totalMoney.toLocaleString() + ' บาท';
-  document.getElementById('totalTicketValue').textContent = totalTickets.toLocaleString() + ' ใบ';
-}
-
-function renderMemberGrid() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const filtered = ALL_MEMBERS.filter(m => m.toLowerCase().includes(q));
-  document.getElementById('memberGrid').innerHTML = filtered.map(m =>
-    `<div class="member-chip ${selected.has(m) ? 'selected' : ''}" onclick="toggleMember('${m}')">${m}</div>`
-  ).join('');
-}
-
-function renderSelectedBar() {
-  const bar = document.getElementById('selectedBar');
-  if (selected.size === 0) { bar.classList.add('hidden'); return; }
-  bar.classList.remove('hidden');
-  document.getElementById('selChips').innerHTML = Array.from(selected).sort().map(m =>
-    `<span class="selected-chip">${m}<span onclick="toggleMember('${m}')" class="cursor-pointer ml-1 opacity-70">×</span></span>`
-  ).join('');
-}
-
-// BOD SYSTEM - MATCH ONLY SAME ACTIVITY AND SAME TIME
-function renderBodMemberGrid() {
-  const q = document.getElementById('bodSearchInput').value.toLowerCase();
-  const filtered = ALL_MEMBERS.filter(m => m.toLowerCase().includes(q));
-  document.getElementById('bodMemberGrid').innerHTML = filtered.map(m =>
-    `<div class="member-chip !py-1 !px-2 !text-[10px] ${selected.has(m) ? 'selected' : ''}" onclick="toggleMember('${m}')">${m}</div>`
-  ).join('');
-}
-
-// BOD Selected Bar Rendering
-function renderBodSelectedBar() {
-  const bar = document.getElementById('bodSelectedBar');
-  if (selected.size === 0) { bar.classList.add('hidden'); return; }
-  bar.classList.remove('hidden');
-  document.getElementById('bodSelChips').innerHTML = Array.from(selected).sort().map(m =>
-    `<span class="selected-chip !py-1 !px-2 !text-[10px]">${m}<span onclick="toggleMember('${m}')" class="cursor-pointer ml-1 opacity-70">×</span></span>`
-  ).join('');
+function refresh() {
+  chips('bodMemberGrid', 'bodSearchInput', 1);
+  const list = [...selected].sort();
+  const html = list.map(m => `<span class="tag" style="border-color:var(--ac);color:var(--fg)"><b>${m}</b> (${isCGM(m) ? 'CGM' : 'BNK'} · #${bn(m)}) <i style="cursor:pointer" onclick="toggleMember('${m}')">×</i></span>`).join(' ');
+  
+  $('bodSelChips').innerHTML = html;
+  $('bodSelBar').classList.toggle('hid', !list.length);
+  renderBod();
 }
 
 function renderBod() {
-  const el = document.getElementById('bodResults');
-  if (selected.size === 0) { 
-    el.innerHTML = '<div class="empty-state text-center py-10 opacity-50">เลือกเมมเบอร์เพื่อตรวจสอบการชนกันในบูธเดียวกัน (Booth Match Checker)</div>'; 
-    return; 
+  const el = $('bodResults');
+  if (!selected.size) {
+    el.innerHTML = '<div class="card empty">กรุณาเลือกเมมเบอร์ด้านบน เพื่อตรวจสอบคิวงานที่ตรงกันและเวลาเดียวกัน</div>';
+    return;
   }
 
   let html = '';
   DAYS.forEach(d => {
-    const activitySlots = {}; 
-    
-    selected.forEach(m => {
-      BOOTHS.forEach(b => {
-        const dayData = DATA[b.k] && DATA[b.k][d];
-        if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
-          if (arr.includes(m)) {
-            const sid = `${m}|${b.k}|${d}|${t}`;
-            const rounds = (slotRounds[sid] !== undefined ? slotRounds[sid] : 1);
-            if (rounds > 0) {
-              const key = `${t} @ ${b.s}`;
-              if (!activitySlots[key]) activitySlots[key] = [];
-              activitySlots[key].push(m);
-            }
-          }
-        });
-      });
-    });
+    const slots = {};
+    selected.forEach(m => acts(m, [d]).forEach(x => {
+      const k = x.t + ' @ ' + x.a.s;
+      (slots[k] = slots[k] || []).push(m);
+    }));
 
-    const conflicts = Object.entries(activitySlots).filter(([key, members]) => members.length > 1);
-    
-    if (conflicts.length > 0) {
-      html += `<div class="result-card border-pink-500/50">
-        <div class="text-pink-400 font-bold mb-3 flex items-center gap-2">
-          <i class="ti ti-users"></i> วันที่ ${d} 
-          <span class="text-[10px] bg-pink-500/20 px-2 py-0.5 rounded">พบบูธเดียวกัน-เวลาเดียวกัน</span>
-        </div>`;
-      
-      conflicts.forEach(([key, members]) => {
-        const [time, boothName] = key.split(' @ ');
-        html += `<div class="conflict-item !bg-pink-500/5 !border-pink-500/20">
-          <div class="flex items-center justify-between mb-3 border-b border-white/5 pb-2">
-            <span class="text-sm font-bold text-white"><i class="ti ti-clock"></i> ${time}</span>
-            <span class="text-xs font-bold text-pink-400 uppercase">${boothName}</span>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            ${members.map(name => `
-              <div class="bg-gray-800/80 px-3 py-1.5 rounded-lg border border-pink-500/30 text-xs font-bold text-cyan-400">
-                ${name}
-              </div>
-            `).join('')}
-          </div>
-        </div>`;
-      });
-      html += `</div>`;
-    }
-  });
+    const cf = Object.entries(slots).filter(([, ms]) => ms.length > 1).sort();
+    if (!cf.length) return;
 
-  el.innerHTML = html || '<div class="text-center py-10 text-green-400 font-bold"><i class="ti ti-circle-check"></i> ไม่พบเมมเบอร์ที่ "ชนกันในกิจกรรมเดียวกัน" (Safe!)</div>';
-}
+    html += `<div class="card">
+      <h3 style="color:var(--ac2)">📅 วันที่ ${d}</h3>
+      <div style="font-size:0.8rem;color:var(--mut);margin-top:2px">พบกิจกรรมเดียวกันและเวลาตรงกัน ดังนี้:</div>`;
 
-function renderCalc() {
-  const el = document.getElementById('calcResults');
-  if (selected.size === 0) { el.innerHTML = ''; return; }
-  let html = '';
-
-  Array.from(selected).sort().forEach(m => {
-    const regularSlots = [];
-    BOOTHS.forEach(b => {
-      if (b.isFanmeet) return;
-      (currentDay === 'all' ? DAYS : [currentDay]).forEach(d => {
-        const dayData = DATA[b.k] && DATA[b.k][d];
-        if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
-          if (arr.includes(m)) regularSlots.push({ b, d, t, id:`${m}|${b.k}|${d}|${t}` });
-        });
-      });
-    });
-
-    let mTotalMoney = 0, mTotalTickets = 0;
-    regularSlots.forEach(s => {
-      const r = slotRounds[s.id] !== undefined ? slotRounds[s.id] : 1;
-      mTotalMoney += s.b.price * r; mTotalTickets += s.b.t * r;
-    });
-
-    html += `<div class="result-card neon-glow">
-      <div class="flex justify-between items-center mb-4">
-        <div>
-          <div class="result-name">${m}</div>
-          <div class="text-[10px] text-cyan-400 font-bold uppercase tracking-tight">คูปองรวม: ${mTotalTickets} ใบ</div>
+    cf.forEach(([k, ms]) => {
+      const [t, a] = k.split(' @ ');
+      const actObj = ACT.find(x => x.s === a);
+      html += `<div class="cf">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:0.85rem;margin-bottom:6px">
+          <span>⏰ เวลา ${t} น.</span>
+          <span class="act-badge ${actObj ? actObj.k : ''}">${actObj ? actObj.icon : ''} ${a}</span>
         </div>
-        <div class="text-green-400 font-bold text-xl">${mTotalMoney.toLocaleString()}฿</div>
+        <div>
+          ${ms.sort().map(n => `<span class="tag" style="border-color:var(--ac);color:var(--fg)"><b>${n}</b> (${isCGM(n) ? 'CGM' : 'BNK'} · #${bn(n)})</span>`).join('')}
+        </div>
       </div>`;
-
-    const daysToShow = currentDay === 'all' ? DAYS : [currentDay];
-    let hasAnything = false;
-
-    daysToShow.forEach(d => {
-      const dRegular = regularSlots.filter(s => s.d === d);
-      if (dRegular.length === 0) return;
-      hasAnything = true;
-
-      const allItems = dRegular.map(s => ({ type:'regular', s, sortKey: s.t.split('-')[0] })).sort((a, b) => a.sortKey.localeCompare(b.sortKey));
-
-      html += `<div class="mb-4"><div class="text-[10px] font-bold text-yellow-500 uppercase mb-2 border-b border-yellow-500/20 pb-1">${d}</div>`;
-
-      allItems.forEach(item => {
-        const s = item.s;
-        const r = slotRounds[s.id] !== undefined ? slotRounds[s.id] : 1;
-        html += `<div class="slot-item ${r===0?'zero-round':''}">
-          <div class="slot-info">
-            <div class="text-sm font-bold flex items-center gap-2">
-              ${s.t} — ${s.b.s}
-            </div>
-            <div class="text-[10px] text-gray-400">
-              <span class="text-white">${(s.b.price*r).toLocaleString()}฿</span> | <span class="text-cyan-400">${s.b.t*r} ตั๋ว</span>
-            </div>
-          </div>
-          <div class="flex items-center gap-2">
-            <button class="round-btn" onclick="setSlotRound('${s.id}',-1)">-</button>
-            <div class="flex flex-col items-center min-w-[20px]"><span class="text-xs font-bold text-white">${r}</span><span class="text-[8px] text-gray-500">ครั้ง</span></div>
-            <button class="round-btn" onclick="setSlotRound('${s.id}',1)">+</button>
-            <button class="btn-set-zero" onclick="setSlotZero('${s.id}')"><i class="ti ti-trash"></i></button>
-          </div>
-        </div>`;
-      });
-
-      html += `</div>`;
     });
 
-    if (!hasAnything) html += `<p class="text-xs italic opacity-50">ไม่มีกิจกรรมในวันที่เลือก</p>`;
-    html += `</div>`;
+    html += '</div>';
   });
 
-  el.innerHTML = html;
+  el.innerHTML = html || `<div class="card empty" style="color:var(--ok);font-weight:700">
+    ✓ ไม่พบเมมเบอร์ที่คุณเลือกที่มีกิจกรรมและเวลาตรงกัน (ไม่มีคิวชนกัน)
+  </div>`;
 }
 
-function openKlab() {
-  let totalMoney = 0, totalTickets = 0, items = '';
-  selected.forEach(m => {
-    BOOTHS.forEach(b => {
-      if (b.isFanmeet) return;
-      DAYS.forEach(d => {
-        const dayData = DATA[b.k] && DATA[b.k][d];
-        if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
-          if (arr.includes(m)) {
-            const sid = `${m}|${b.k}|${d}|${t}`, r = slotRounds[sid] !== undefined ? slotRounds[sid] : 1;
-            if (r > 0) {
-              const cost = b.price * r, tix = b.t * r;
-              totalMoney += cost; totalTickets += tix;
-              items += `<div class="flex justify-between text-[10px] border-b border-white/5 pb-1"><span>${m} - ${b.s} (x${r})</span><span class="font-bold text-cyan-400">${tix} ใบ / ${cost}฿</span></div>`;
-            }
-          }
-        });
-      });
-    });
+function renderActivities() {
+  $('actGrid').innerHTML = ACT.map(a => {
+    const rows = DAYS.map(d => {
+      const s = Object.entries(DATA[a.k][d]);
+      const totalP = s.reduce((n, [, x]) => n + x.length, 0);
+      return `<div class="slot">
+        <span style="font-weight:700">📅 ${d}</span>
+        <span class="act-badge ${a.k}">${s.length} รอบ · รวม ${totalP} คิว</span>
+      </div>`;
+    }).join('');
+
+    return `<div class="card" style="border-top:3px solid var(--ac);margin:0">
+      <h3><span>${a.icon} ${a.s}</span></h3>
+      <p style="font-size:0.8rem;color:var(--mut);margin:4px 0 10px">${a.n}</p>
+      ${rows}
+    </div>`;
+  }).join('');
+}
+
+function renderSummary() {
+  const st = ALL.map(m => ({ m, l: acts(m) })).sort((a, b) => b.l.length - a.l.length);
+  const max = st[0].l.length || 1;
+  const total = st.reduce((n, x) => n + x.l.length, 0);
+
+  let html = `<div class="card" style="text-align:center;margin-bottom:16px">
+    <span style="font-size:0.8rem;color:var(--mut);font-weight:700">จำนวนคิวกิจกรรมทั้งหมดในงาน</span>
+    <b style="display:block;font-size:2.8rem;color:var(--ac);margin:2px 0">${total}</b>
+    <span style="font-size:0.85rem;color:var(--mut)">เมมเบอร์เข้าร่วมทั้งหมด ${st.length} คน (BNK48 36 คน · CGM48 22 คน)</span>
+  </div>`;
+
+  st.forEach((x, i) => {
+    const rankClass = i === 0 ? 'top1' : (i === 1 ? 'top2' : (i === 2 ? 'top3' : ''));
+    const rankBadge = i === 0 ? '👑' : (i === 1 ? '🥈' : (i === 2 ? '🥉' : i + 1));
+    const g = byDay(x.l);
+    const cgm = isCGM(x.m);
+
+    const det = DAYS.map(d => g[d] ? `<div style="font-size:0.8rem;font-weight:800;color:var(--ac);margin:10px 0 4px">📅 วัน${d}</div>` + g[d].map(y =>
+      `<div class="slot">
+        <span>⏰ ${y.t}</span>
+        <span class="act-badge ${y.a.k}">${y.a.icon} ${y.a.s}</span>
+      </div>`
+    ).join('') : '').join('');
+
+    html += `<div class="card" style="padding:14px 18px;margin-bottom:10px" onclick="this.classList.toggle('open')">
+      <div style="display:flex;align-items:center;gap:12px;cursor:pointer">
+        <div class="dir-num" style="width:30px;height:30px;font-size:0.8rem">${rankBadge}</div>
+        <div style="flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <b>${x.m} <span class="group-tag ${cgm ? 'cgm' : 'bnk'}">${cgm ? 'CGM48' : 'BNK48'}</span> <small style="color:var(--mut)">📍 บูธ #${bn(x.m)}</small></b>
+            <b style="color:var(--ac2);font-size:0.88rem">${x.l.length} คิว <span style="font-size:0.75rem;color:var(--mut)">▼</span></b>
+          </div>
+          <div style="height:8px;border-radius:8px;background:var(--bd);overflow:hidden;margin-top:4px">
+            <i style="display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--ac2));width:${(x.l.length / max) * 100}%"></i>
+          </div>
+        </div>
+      </div>
+      <div class="det">${det}</div>
+    </div>`;
   });
-  document.getElementById('klabTotalValue').textContent = totalMoney.toLocaleString() + '฿';
-  document.getElementById('klabMamaCount').textContent = Math.ceil(totalMoney / 7).toLocaleString();
-  document.getElementById('klabTicketCount').textContent = totalTickets.toLocaleString();
-  document.getElementById('klabItemList').innerHTML = items;
+
+  $('summaryContent').innerHTML = html;
+}
+
+function renderScheduleGrid() {
+  const q = $('schedSearchInput').value.toLowerCase().trim();
+  $('schedMemberGrid').innerHTML = ALL.filter(m => m.toLowerCase().includes(q)).map(m =>
+    `<div class="dir-item ${isCGM(m) ? 'teal' : ''}" onclick="openModal('${m}')">
+      <div class="dir-num">${bn(m)}</div>
+      <span class="dir-name">${m}</span>
+    </div>`
+  ).join('');
+}
+
+function toggleCart(id) {
+  cart.has(id) ? cart.delete(id) : cart.add(id);
+  renderCart();
+  openModal(activeMember);
+}
+
+function removeFromCart(id) {
+  cart.delete(id);
+  renderCart();
+  if ($('modal').style.display === 'flex') openModal(activeMember);
+}
+
+function clearCart() {
+  if (!cart.size) return;
+  cart.clear();
+  renderCart();
+  if ($('modal').style.display === 'flex') openModal(activeMember);
+  showToast('ล้างตารางงานเรียบร้อยแล้ว');
+}
+
+/* RENDER CART ON BOTH FIRST PAGE & SCHEDULE PAGE SIMULTANEOUSLY */
+function renderCart() {
+  const elPage1 = $('firstPageCartItemList');
+  const elSched = $('cartItemList');
   
-  // Set funny status message
-  let msg = '';
-  if (totalMoney === 0) msg = "ยังไม่ได้ใช้เงินเลย เซฟเงินไว้เต็มกระเป๋า!";
-  else if (totalMoney <= 500) msg = "ระดับความแกลบ: ระดับเริ่มต้น ยังพอมีเงินซื้อข้าวกะเพรากินได้!";
-  else if (totalMoney <= 1500) msg = "ระดับความแกลบ: ระดับต้มมาม่าประทังชีวิต เริ่มต้มมาม่ากินทีละครึ่งซองแล้ว!";
-  else if (totalMoney <= 3500) msg = "ระดับความแกลบ: ดื่มน้ำเปล่าลูบท้อง กลิ่นหอมจากร้านข้าวข้างทางคืออาหารหลักของคุณ!";
-  else msg = "ระดับความแกลบ: สังเคราะห์แสงประทังชีวิต หายใจเข้าออกเป็นอากาศบริสุทธิ์เพื่อความอยู่รอด!";
-  document.getElementById('klabMessage').textContent = msg;
+  $('firstPageCartSummary').classList.toggle('hid', !cart.size);
+  $('cartSummary').classList.toggle('hid', !cart.size);
+  $('floatCartCount').textContent = cart.size;
+  $('floatingCartBtn').classList.toggle('show', cart.size > 0);
 
-  const isSharedLink = new URLSearchParams(location.search).get('share') === '1';
-  const banner = document.getElementById('klabSharedBanner');
-  if (banner) banner.classList.toggle('hidden', !isSharedLink);
-  document.getElementById('klabModal').style.display = 'flex';
-  playSynthSound('ui');
+  if (!cart.size) {
+    const emptyHtml = '<div class="empty" style="padding:20px">ยังไม่มีกิจกรรมในตาราง<br><small>กดเลือกเมมเบอร์หรือตำแหน่งบูธด้านซ้ายเพื่อเลือกกิจกรรมใส่ตาราง</small></div>';
+    elPage1.innerHTML = emptyHtml;
+    elSched.innerHTML = emptyHtml;
+    return;
+  }
+
+  const items = [...cart].map(id => {
+    const [m, k, d, t] = id.split('|');
+    return { id, m, a: ACT.find(x => x.k === k), d, t };
+  });
+
+  const g = byDay(items);
+  const cartHtml = DAYS.map(d => g[d] ? `<div style="font-size:0.8rem;font-weight:800;color:var(--ac);margin:10px 0 4px">📅 วัน${d}</div>` + g[d].sort((x, y) => x.t.localeCompare(y.t)).map(x =>
+    `<div class="slot" style="border-left:3px solid var(--ac)">
+      <div>
+        <span class="act-badge ${x.a.k}">${x.a.icon} ${x.a.s}</span><br>
+        <b style="font-size:0.88rem">${x.m}</b> <span class="group-tag ${isCGM(x.m) ? 'cgm' : 'bnk'}">${isCGM(x.m) ? 'CGM' : 'BNK'}</span> <small>📍 บูธ #${bn(x.m)} · ⏰ ${x.t} น.</small>
+      </div>
+      <button class="btn sm np danger" onclick="removeFromCart('${x.id}')">✕</button>
+    </div>`
+  ).join('') : '').join('');
+
+  elPage1.innerHTML = cartHtml;
+  elSched.innerHTML = cartHtml;
+
+  $('firstPageCartTotal').textContent = cart.size + ' รอบ';
+  $('cartTotal').textContent = cart.size + ' รอบ';
 }
 
-function closeKlab() { 
-  document.getElementById('klabModal').style.display = 'none'; 
-  playSynthSound('ui');
+function scrollToCart() {
+  const target = document.getElementById('firstPageCartArea');
+  if (target) target.scrollIntoView({ behavior: 'smooth' });
 }
 
-function showKlabToast(msg, color = 'text-green-400') {
-  const t = document.getElementById('klabToast');
-  t.textContent = msg;
-  t.className = `mt-3 text-center text-sm font-bold ${color}`;
-  t.classList.remove('hidden');
-  setTimeout(() => t.classList.add('hidden'), 2800);
-}
-
-async function downloadKlabImage() {
-  const btn = document.getElementById('btnDownload');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="ti ti-loader animate-spin"></i> กำลังสร้างรูป...';
+async function downloadCartImage(targetId = 'firstPageCartArea') {
+  if (!cart.size) return;
+  const area = $(targetId) || $('firstPageCartArea') || $('cartArea');
+  const printHeader = area.querySelector('.hid') || $('printHeaderFirstPage') || $('printHeader');
+  
+  if (printHeader) printHeader.classList.remove('hid');
+  const list = area.querySelector('#firstPageCartItemList') || area.querySelector('#cartItemList');
+  const mh = list ? list.style.maxHeight : '';
+  if (list) list.style.maxHeight = 'none';
 
   try {
-    const area = document.getElementById('klabCaptureArea');
-    const clone = area.cloneNode(true);
-    clone.style.cssText = `
-      position: fixed; left: -9999px; top: 0;
-      width: 480px; max-height: none; overflow: visible;
-      border-radius: 24px; padding: 40px;
-      background: #1a1f3a;
-    `;
-    const itemList = clone.querySelector('#klabItemList');
-    if (itemList) { itemList.style.maxHeight = 'none'; itemList.style.overflow = 'visible'; }
-    const noCap = clone.querySelector('.no-capture');
-    if (noCap) noCap.remove();
-    const toast = clone.querySelector('#klabToast');
-    if (toast) toast.remove();
-
-    document.body.appendChild(clone);
-    await new Promise(r => setTimeout(r, 80));
-
-    const canvas = await html2canvas(clone, {
-      backgroundColor: '#1a1f3a',
+    const c = await html2canvas(area, {
       scale: 2,
-      useCORS: true,
-      logging: false,
-      windowWidth: 560,
+      backgroundColor: document.body.classList.contains('light-theme') ? '#f1f5f9' : '#0f172a',
+      ignoreElements: e => e.classList && e.classList.contains('np')
     });
-    document.body.removeChild(clone);
-
-    const link = document.createElement('a');
-    link.download = 'klab-summary-bonodori2026.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-    showKlabToast('✅ บันทึกรูปสำเร็จ!');
-    playSynthSound('ui');
-  } catch(e) {
-    showKlabToast('❌ เกิดข้อผิดพลาด: ' + e.message, 'text-red-400');
-    console.error('Download error:', e);
+    const a = document.createElement('a');
+    a.download = 'my-fanfestival-2026-schedule.png';
+    a.href = c.toDataURL('image/png');
+    a.click();
+    showToast('ดาวน์โหลดรูปภาพตารางงานสำเร็จ');
+  } catch (e) {
+    showToast('ไม่สามารถสร้างรูปภาพได้');
   } finally {
-    btn.disabled = false;
-    btn.innerHTML = '<i class="ti ti-download"></i> บันทึกรูป';
+    if (printHeader) printHeader.classList.add('hid');
+    if (list) list.style.maxHeight = mh;
   }
 }
 
-function copyKlabLink() {
-  try {
-    const params = new URLSearchParams();
-    params.set('members', Array.from(selected).sort().join(','));
-    params.set('day', currentDay);
-    params.set('share', '1');
-
-    const allRounds = {};
-    selected.forEach(m => {
-      BOOTHS.forEach(b => DAYS.forEach(d => {
-        const dayData = DATA[b.k] && DATA[b.k][d];
-        if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
-          if (arr.includes(m)) {
-            const sid = `${m}|${b.k}|${d}|${t}`;
-            const r = (slotRounds[sid] !== undefined) ? slotRounds[sid] : 1;
-            if (r !== 1) allRounds[sid] = r;
-          }
-        });
-      }));
-    });
-
-    if (Object.keys(allRounds).length > 0) {
-      params.set('rounds', JSON.stringify(allRounds));
-    }
-
-    const url = `${location.origin}${location.pathname}?${params.toString()}`;
-    fallbackCopy(url);
-    playSynthSound('ui');
-  } catch(e) {
-    showKlabToast('❌ ไม่สามารถคัดลอกลิงค์ได้', 'text-red-400');
-  }
+function printCart(headerId = 'printHeaderFirstPage') {
+  const header = $(headerId) || $('printHeaderFirstPage') || $('printHeader');
+  if (header) header.classList.remove('hid');
+  window.print();
+  if (header) header.classList.add('hid');
 }
 
-function fallbackCopy(text) {
-  const ta = document.createElement('textarea');
-  ta.value = text;
-  ta.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0';
-  document.body.appendChild(ta);
-  ta.focus(); ta.select();
-  try {
-    document.execCommand('copy');
-    showKlabToast('✅ คัดลอกลิงค์แล้ว! ส่งต่อให้เพื่อนดูได้เลย');
-  } catch(e) {
-    showKlabToast('❌ ไม่สามารถคัดลอกได้', 'text-red-400');
+function copyScheduleLink() {
+  const p = new URLSearchParams();
+  p.set('timetable', JSON.stringify([...cart]));
+  p.set('share', '3');
+  const url = location.origin + location.pathname + '?' + p.toString();
+  
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => showToast('คัดลอกลิงก์ตารางงานเรียบร้อยแล้ว')).catch(() => prompt('คัดลอกลิงก์นี้:', url));
+  } else {
+    prompt('คัดลอกลิงก์นี้:', url);
   }
-  document.body.removeChild(ta);
 }
 
 function loadStateFromURL() {
   try {
-    const params = new URLSearchParams(location.search);
-    const membersParam = params.get('members');
-    const dayParam = params.get('day');
-    const roundsParam = params.get('rounds');
-    const isShare = params.get('share') === '1';
-    const timetableParam = params.get('timetable');
-    const isScheduleShare = params.get('share') === '3';
-
-    if (membersParam) {
-      membersParam.split(',').forEach(m => {
-        const trimmed = m.trim();
-        if (trimmed && ALL_MEMBERS.includes(trimmed)) selected.add(trimmed);
-      });
+    const p = new URLSearchParams(location.search);
+    const t = p.get('timetable');
+    if (t) {
+      const a = JSON.parse(t);
+      if (Array.isArray(a)) cart = new Set(a);
     }
-
-    if (roundsParam) {
-      const parsed = JSON.parse(roundsParam);
-      Object.assign(slotRounds, parsed);
-    }
-
-    if (timetableParam) {
-      const parsed = JSON.parse(timetableParam);
-      if (Array.isArray(parsed)) {
-        selectedActivities = new Set(parsed);
-      }
-    }
-
-    if (dayParam && ['all','24 July','25 July','26 July'].includes(dayParam)) {
-      currentDay = dayParam;
-      const dayBtnMap = { 'all':'day-all', '24 July':'day-24jul', '25 July':'day-25jul', '26 July':'day-26jul' };
-      document.querySelectorAll('#day-all, #day-24jul, #day-25jul, #day-26jul').forEach(b => {
-        b.classList.remove('btn-primary');
-        b.classList.add('btn-secondary', 'bg-gray-800', 'p-2', 'rounded-xl');
-      });
-      const activeBtn = document.getElementById(dayBtnMap[dayParam]);
-      if (activeBtn) {
-        activeBtn.classList.remove('btn-secondary');
-        activeBtn.classList.add('btn-primary');
-      }
-    }
-
-    if (selected.size > 0) {
-      renderMemberGrid();
-      renderCalc();
-      renderSelectedBar();
-      updateTotalPrice();
-      if (isShare) {
-        setTimeout(() => openKlab(), 300);
-      }
-    }
-
-    if (selectedActivities.size > 0) {
-      renderCart();
-      if (isScheduleShare) {
-        setTimeout(() => {
-          const btn = document.querySelector('button[onclick="showPage(\'schedule\',this)"]');
-          showPage('schedule', btn);
-        }, 100);
-      }
-    }
-  } catch(e) { console.warn('Could not load URL state:', e); }
-}
-
-function renderActivities() {
-  const regularHtml = BOOTHS.map(b => `
-    <div class="glass p-4 rounded-xl border-l-4 border-cyan-500">
-      <div class="flex justify-between mb-2">
-        <div class="font-bold text-cyan-400">${b.s}</div>
-        <div class="text-white font-bold">${b.price > 0 ? b.price.toLocaleString() + '฿' : 'ฟรี'}</div>
-      </div>
-      <p class="text-[10px] text-gray-400">${b.t > 0 ? `ใช้ตั๋วคูปอง: <span class="text-yellow-400">${b.t} ใบ</span>/รอบ` : 'ไม่ใช้คูปอง'}</p>
-    </div>`).join('');
-
-  document.getElementById('activitiesGrid').innerHTML = `
-    <div class="col-span-full text-xs font-bold text-cyan-400 uppercase tracking-widest mb-1 mt-2">📍 บูธกิจกรรมในงาน BON ODORI 2026</div>
-    ${regularHtml}
-  `;
-}
-
-function renderSummary() {
-  const el = document.getElementById('summaryContent');
-
-  const statsMap = {};
-  ALL_MEMBERS.forEach(m => {
-    const detail = {};
-    let totalTickets = 0, totalActivities = 0;
-    DAYS.forEach(d => {
-      BOOTHS.forEach(b => {
-        const dayData = DATA[b.k] && DATA[b.k][d];
-        if (!dayData) return;
-        Object.entries(dayData).forEach(([t, arr]) => {
-          if (arr.includes(m)) {
-            if (!detail[d]) detail[d] = [];
-            detail[d].push({ booth: b.s, time: t, tickets: b.t });
-            totalTickets += b.t;
-            totalActivities++;
-          }
-        });
-      });
-    });
-    statsMap[m] = { totalTickets, totalActivities, detail };
-  });
-
-  const sorted = Object.entries(statsMap).sort((a, b) => b[1].totalTickets - a[1].totalTickets);
-  const grandTotal = sorted.reduce((sum, [, v]) => sum + v.totalTickets, 0);
-  const maxTickets = sorted.length > 0 ? sorted[0][1].totalTickets : 1;
-
-  const rankClass = i => i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : 'rank-other';
-  const rankLabel = i => i === 0 ? '👑' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i + 1);
-
-  let html = `
-    <div class="summary-banner">
-      <div class="text-gray-400 text-sm font-medium mb-1">จำนวนคูปองรวมของเมมเบอร์ทุกคนในงาน</div>
-      <div class="summary-number">${grandTotal.toLocaleString()} ใบ</div>
-      <div class="text-[10px] text-cyan-400 font-bold uppercase tracking-wider mt-2">รวมทั้งหมด ${sorted.length} เมมเบอร์</div>
-    </div>
-    <div class="space-y-3">
-  `;
-
-  sorted.forEach(([m, v], idx) => {
-    const pct = maxTickets > 0 ? (v.totalTickets / maxTickets) * 100 : 0;
-    
-    let detailHtml = '';
-    DAYS.forEach(d => {
-      const items = v.detail[d] || [];
-      if (items.length === 0) return;
-      detailHtml += `<div class="detail-day-label">${d}</div>`;
-      items.forEach(item => {
-        detailHtml += `
-          <div class="detail-activity-row">
-            <span class="text-gray-300 font-medium">${item.time} — ${item.booth}</span>
-            <span class="text-cyan-400 font-bold">${item.tickets} ใบ</span>
-          </div>
-        `;
-      });
-    });
-
-    html += `
-      <div class="stat-row" onclick="this.classList.toggle('open')">
-        <div class="stat-row-header">
-          <div class="rank-badge ${rankClass(idx)}">${rankLabel(idx)}</div>
-          <div class="flex-1 min-w-0">
-            <div class="flex justify-between items-center mb-1">
-              <span class="font-bold text-white text-sm truncate">${m}</span>
-              <span class="text-xs font-bold text-pink-400">${v.totalTickets} ใบ</span>
-            </div>
-            <div class="flex items-center">
-              <div class="bar-wrap">
-                <div class="bar-fill" style="width: ${pct}%"></div>
-              </div>
-              <span class="text-[10px] text-gray-500 font-medium w-8 text-right">${v.totalActivities} บูธ</span>
-            </div>
-          </div>
-          <i class="ti ti-chevron-down stat-chevron text-lg"></i>
-        </div>
-        <div class="stat-row-detail">
-          ${detailHtml || '<div class="text-[10px] text-gray-500 italic">ไม่มีข้อมูลกิจกรรม</div>'}
-        </div>
-      </div>
-    `;
-  });
-
-  html += '</div>';
-  el.innerHTML = html;
-}
-
-// Personal Timetable Scheduler Cart functions
-function renderScheduleGrid() {
-  const q = document.getElementById('schedSearchInput').value.toLowerCase();
-  const filtered = ALL_MEMBERS.filter(m => m.toLowerCase().includes(q));
-  document.getElementById('schedMemberGrid').innerHTML = filtered.map(m =>
-    `<div class="member-chip transition-all duration-200 transform hover:scale-[1.03] active:scale-[0.97]" onclick="openActivitiesModal('${m}')">${m}</div>`
-  ).join('');
-}
-
-function getMemberActivities(m) {
-  const activities = [];
-  BOOTHS.forEach(b => {
-    DAYS.forEach(d => {
-      const dayData = DATA[b.k] && DATA[b.k][d];
-      if (dayData) Object.entries(dayData).forEach(([t, arr]) => {
-        if (arr.includes(m)) {
-          activities.push({ booth: b, day: d, time: t });
-        }
-      });
-    });
-  });
-  return activities;
-}
-
-function openActivitiesModal(m) {
-  activeMember = m;
-  const nameEl = document.getElementById('modalMemberName');
-  if (nameEl) nameEl.textContent = m + " — กิจกรรมในงาน";
-
-  const listEl = document.getElementById('modalActivitiesList');
-  if (!listEl) return;
-
-  const activities = getMemberActivities(m);
-  if (activities.length === 0) {
-    listEl.innerHTML = '<div class="text-center py-6 text-gray-500 italic text-sm">ไม่มีข้อมูลกิจกรรมในงานของเมมเบอร์คนนี้</div>';
-  } else {
-    let html = '';
-    const daysGroup = {};
-    activities.forEach(act => {
-      if (!daysGroup[act.day]) daysGroup[act.day] = [];
-      daysGroup[act.day].push(act);
-    });
-
-    Object.entries(daysGroup).forEach(([day, list]) => {
-      html += `<div class="text-xs font-black text-yellow-400 border-b border-white/5 pb-1 mt-3 uppercase tracking-widest text-left">${day}</div>`;
-      list.forEach(act => {
-        const slotId = `${m}|${act.booth.k}|${act.day}|${act.time}`;
-        const isAdded = selectedActivities.has(slotId);
-        
-        html += `
-          <div class="slot-item border-l-4 ${isAdded ? 'border-green-500 bg-green-500/5' : 'border-cyan-500 bg-cyan-500/5'} p-3 flex justify-between items-center gap-4 mt-2">
-            <div class="text-left">
-              <div class="text-sm font-bold text-white">${act.booth.s}</div>
-              <div class="text-[10px] text-gray-400 mt-0.5"><i class="ti ti-clock"></i> ${act.time} น. | ${act.booth.price > 0 ? act.booth.price + '฿' : 'ฟรี'}</div>
-            </div>
-            <button onclick="toggleCartActivity('${slotId}')" class="text-xs font-bold px-3 py-1.5 rounded-lg active:scale-95 transition-all text-white ${isAdded ? 'bg-red-600/70 hover:bg-red-600' : 'bg-cyan-600 hover:bg-cyan-500'}">
-              ${isAdded ? 'ลบออก' : 'เลือก'}
-            </button>
-          </div>
-        `;
-      });
-    });
-    listEl.innerHTML = html;
-  }
-
-  document.getElementById('activitiesModal').style.display = 'flex';
-  playSynthSound('ui');
-}
-
-function closeActivitiesModal() {
-  document.getElementById('activitiesModal').style.display = 'none';
-  playSynthSound('ui');
-}
-
-function toggleCartActivity(slotId) {
-  if (selectedActivities.has(slotId)) {
-    selectedActivities.delete(slotId);
-  } else {
-    selectedActivities.add(slotId);
-  }
-  renderCart();
-  if (activeMember) openActivitiesModal(activeMember);
-  playSynthSound('ui');
-}
-
-function renderCart() {
-  const listEl = document.getElementById('cartItemList');
-  if (!listEl) return;
-
-  if (selectedActivities.size === 0) {
-    listEl.innerHTML = '<div class="text-center py-10 text-gray-500 italic text-xs">ตะกร้าว่างเปล่า — กรุณาเลือกกิจกรรม</div>';
-    document.getElementById('cartSummary').classList.add('hidden');
-    updateCartTotals(0, 0);
-    return;
-  }
-  document.getElementById('cartSummary').classList.remove('hidden');
-
-  let html = '';
-  let totalPrice = 0;
-  let totalTickets = 0;
-
-  const daysGroup = {};
-  Array.from(selectedActivities).forEach(slotId => {
-    const [member, boothKey, day, time] = slotId.split('|');
-    const booth = BOOTHS.find(b => b.k === boothKey);
-    if (!daysGroup[day]) daysGroup[day] = [];
-    daysGroup[day].push({ slotId, member, booth, time });
-  });
-
-  Object.entries(daysGroup).forEach(([day, list]) => {
-    list.sort((a, b) => a.time.localeCompare(b.time));
-    html += `<div class="text-xs font-bold text-yellow-400 mt-4 border-b border-white/5 pb-1 uppercase tracking-wider text-left">${day}</div>`;
-    list.forEach(item => {
-      const price = item.booth ? item.booth.price : 0;
-      const tickets = item.booth ? item.booth.t : 0;
-      totalPrice += price;
-      totalTickets += tickets;
-      html += `
-        <div class="slot-item border-l-4 border-cyan-500 !bg-cyan-500/5 p-3 flex justify-between items-center gap-4 mt-2">
-          <div class="text-left">
-            <span class="text-[9px] bg-cyan-900/60 text-cyan-300 px-1.5 py-0.5 rounded-full font-bold">${item.booth.s}</span>
-            <div class="text-sm font-black text-white mt-1">${item.member}</div>
-            <div class="text-[10px] text-gray-400 mt-0.5"><i class="ti ti-clock"></i> ${item.time} น. | ${price > 0 ? price.toLocaleString() + '฿' : 'ฟรี'}</div>
-          </div>
-          <button onclick="removeFromCart('${item.slotId}')" class="text-red-400 hover:text-red-300 p-2 rounded-lg text-xs font-bold transition-all no-print"><i class="ti ti-trash"></i></button>
-        </div>
-      `;
-    });
-  });
-  listEl.innerHTML = html;
-  updateCartTotals(totalPrice, totalTickets);
-}
-
-function removeFromCart(slotId) {
-  selectedActivities.delete(slotId);
-  renderCart();
-  if (activeMember) openActivitiesModal(activeMember);
-  playSynthSound('ui');
-}
-
-function clearCart() {
-  selectedActivities.clear();
-  renderCart();
-  if (activeMember) openActivitiesModal(activeMember);
-  playSynthSound('ui');
-}
-
-function updateCartTotals(price, tickets) {
-  document.getElementById('cartTotalPrice').textContent = price.toLocaleString() + '฿';
-  document.getElementById('cartTotalTickets').textContent = tickets.toLocaleString() + ' ใบ';
-}
-
-async function downloadCartImage() {
-  if (selectedActivities.size === 0) return;
-  const header = document.getElementById('printHeader');
-  header.classList.remove('hidden');
-  const btn = document.querySelector('[onclick="downloadCartImage()"]');
-  const originalHtml = btn.innerHTML;
-  btn.disabled = true;
-  btn.innerHTML = '<i class="ti ti-loader animate-spin"></i> สร้างรูป...';
-
-  try {
-    const area = document.getElementById('cartCaptureArea');
-    const clone = area.cloneNode(true);
-    clone.style.cssText = `
-      position: fixed; left: -9999px; top: 0;
-      width: 480px; max-height: none; overflow: visible;
-      border-radius: 24px; padding: 40px;
-      background: ${document.body.classList.contains('theme-sakura') ? '#320a18' : '#0a0e27'};
-      border: 3px solid #F5C842;
-      box-shadow: 0 0 50px rgba(245, 200, 66, 0.4);
-    `;
-    clone.querySelectorAll('.no-print').forEach(el => el.remove());
-    const cartList = clone.querySelector('#cartItemList');
-    if (cartList) { cartList.style.maxHeight = 'none'; cartList.style.overflow = 'visible'; }
-
-    document.body.appendChild(clone);
-    await new Promise(r => setTimeout(r, 80));
-    const canvas = await html2canvas(clone, { 
-      scale: 2, 
-      backgroundColor: document.body.classList.contains('theme-sakura') ? '#320a18' : '#0a0e27' 
-    });
-    document.body.removeChild(clone);
-
-    const link = document.createElement('a');
-    link.download = 'my-bonodori-schedule.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-    playSynthSound('ui');
-  } finally {
-    header.classList.add('hidden');
-    btn.disabled = false;
-    btn.innerHTML = originalHtml;
+  } catch (e) {
+    console.warn(e);
   }
 }
 
-function printCart() {
-  const header = document.getElementById('printHeader');
-  header.classList.remove('hidden');
-  window.print();
-  header.classList.add('hidden');
+function applyTheme(isLight) {
+  document.body.classList.toggle('light-theme', isLight);
+  $('themeBtn').textContent = isLight ? '🌙 ธีมเข้ม' : '☀️ ธีมสว่าง';
 }
 
-function copyScheduleLink() {
-  try {
-    const params = new URLSearchParams();
-    params.set('timetable', JSON.stringify(Array.from(selectedActivities)));
-    params.set('share', '3');
-    const url = `${location.origin}${location.pathname}?${params.toString()}`;
-
-    const ta = document.createElement('textarea');
-    ta.value = url;
-    ta.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0';
-    document.body.appendChild(ta);
-    ta.focus(); ta.select();
-    try {
-      document.execCommand('copy');
-      alert("คัดลอกลิงค์แชร์ตะกร้าตารางงานของคุณสำเร็จแล้ว!");
-    } catch(e) {
-      alert("ไม่สามารถคัดลอกลิงค์ได้อัตโนมัติ กรุณาคัดลอกด้วยตนเอง");
-    }
-    document.body.removeChild(ta);
-    playSynthSound('ui');
-  } catch(e) {
-    console.error(e);
-  }
-}
-
-// Particle canvas systems
-let canvas, ctx, particles = [], animId = null, currentTheme = 'cyberpunk';
-function initParticles(theme) {
-  currentTheme = theme;
-  canvas = document.getElementById('effectCanvas');
-  ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-  particles = [];
-  for (let i = 0; i < 30; i++) particles.push(createParticle(true));
-  if (animId) cancelAnimationFrame(animId);
-  drawParticles();
-}
-
-function createParticle(randomY) {
-  return { 
-    x: Math.random() * canvas.width, 
-    y: randomY ? Math.random() * canvas.height : canvas.height + 20, 
-    size: Math.random() * 4 + 2, 
-    speedX: Math.random() * 0.5 - 0.25, 
-    speedY: -(Math.random() * 0.8 + 0.4), 
-    opacity: Math.random() * 0.6 + 0.2 
-  };
-}
-
-function drawParticles() {
-  // Static page, no animation loop needed
-}
-
-// Theme switch functions
 function toggleTheme() {
-  const isSakura = document.body.classList.toggle('theme-sakura');
-  localStorage.setItem('theme', isSakura ? 'sakura' : 'cyberpunk');
-  const icon = document.getElementById('theme-icon');
-  const text = document.getElementById('theme-text');
-  if (icon) {
-    icon.className = isSakura ? 'ti ti-sun text-sm text-cyan-400' : 'ti ti-moon text-sm text-red-500';
-  }
-  if (text) {
-    text.textContent = isSakura ? 'เปลี่ยนเป็นธีมหลัก (ฟ้า)' : 'เปลี่ยนเป็นธีมแดงดำ';
-  }
-  playSynthSound('theme');
+  const isLight = !document.body.classList.contains('light-theme');
+  applyTheme(isLight);
+  try { localStorage.setItem('theme', isLight ? 'light' : 'dark'); } catch (e) {}
 }
 
-function loadTheme() {
-  const theme = localStorage.getItem('theme');
-  if (theme === 'sakura') {
-    document.body.classList.add('theme-sakura');
-    const icon = document.getElementById('theme-icon');
-    const text = document.getElementById('theme-text');
-    if (icon) icon.className = 'ti ti-sun text-sm text-cyan-400';
-    if (text) text.textContent = 'เปลี่ยนเป็นธีมหลัก (ฟ้า)';
-  } else {
-    const icon = document.getElementById('theme-icon');
-    const text = document.getElementById('theme-text');
-    if (icon) icon.className = 'ti ti-moon text-sm text-red-500';
-    if (text) text.textContent = 'เปลี่ยนเป็นธีมแดงดำ';
-  }
-}
-
-// Audio synth functions
-let audioCtx = null, soundEnabled = false;
-function toggleAudio() {
-  soundEnabled = !soundEnabled;
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  const icon = document.getElementById('audio-icon');
-  const text = document.getElementById('audio-text');
-  icon.className = soundEnabled ? 'ti ti-volume text-sm text-cyan-400' : 'ti ti-volume-off text-sm text-gray-400';
-  text.textContent = soundEnabled ? 'ปิดเสียง' : 'เปิดเสียง';
-  if (soundEnabled && audioCtx.state === 'suspended') audioCtx.resume();
-  playSynthSound('ui');
-}
-
-function playSynthSound(type) {
-  if (!soundEnabled || !audioCtx) return;
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  const dest = audioCtx.destination;
-
-  if (type === 'ui') {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = 'triangle';
-    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(1046.50, audioCtx.currentTime + 0.08);
-    gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
-    osc.connect(gain);
-    gain.connect(dest);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.12);
-  }
-  else if (type === 'theme') {
-    const now = audioCtx.currentTime;
-    [261.63, 329.63, 392.00, 523.25].forEach((freq, idx) => {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, now + idx * 0.05);
-      gain.gain.setValueAtTime(0.06, now + idx * 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.05 + 0.3);
-      osc.connect(gain);
-      gain.connect(dest);
-      osc.start(now + idx * 0.05);
-      osc.stop(now + idx * 0.05 + 0.3);
-    });
-  }
-}
-
-// Call initialization
-initializeApp();
+(function() {
+  let isLight = false;
+  try { isLight = localStorage.getItem('theme') === 'light'; } catch (e) {}
+  applyTheme(isLight);
+  renderPlanView();
+  renderActivities();
+  loadStateFromURL();
+  renderCart();
+})();
 </script>
 </body>
 </html>
