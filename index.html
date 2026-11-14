@@ -2,1479 +2,341 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FAN FESTIVAL 2026 - BNK48 × CGM48 Schedule & Plan Tool</title>
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HEART TO HEART 15 NOV 2026 - Planner (v9)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&family=Michroma&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Thai:wght@400;500;600;700;800;900&display=swap');
-
-:root {
-  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-  --fg: #f8fafc;
-  --fg-soft: #cbd5e1;
-  --mut: #94a3b8;
-  --card-bg: rgba(30, 41, 59, 0.78);
-  --card-hover: rgba(45, 55, 72, 0.92);
-  --bd: rgba(99, 102, 241, 0.25);
-  --bd-hover: rgba(99, 102, 241, 0.5);
-  --ac: #6366f1;
-  --ac-dark: #4f46e5;
-  --ac-light: rgba(99, 102, 241, 0.18);
-  --ac2: #f43f5e;
-  --ac2-light: rgba(244, 63, 94, 0.18);
-  --ok: #10b981;
-  --ok-light: rgba(16, 185, 129, 0.18);
-  --hl: #f59e0b;
-  --in-bg: rgba(15, 23, 42, 0.85);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.6);
-  --glass: blur(16px);
-  
-  --purple-pill: #b57edc;
-  --purple-bg: rgba(181, 126, 220, 0.22);
-  --purple-border: rgba(181, 126, 220, 0.5);
-  --purple-text: #e9d5ff;
-
-  --teal-pill: #2dd4bf;
-  --teal-bg: rgba(45, 212, 191, 0.22);
-  --teal-border: rgba(45, 212, 191, 0.5);
-  --teal-text: #99f6e4;
-  
-  --hall-bg: #eddcc9;
-  --hall-bd: #c4a482;
-  --hall-fg: #1e1008;
-}
-
-body.light-theme {
-  --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-  --fg: #0f172a;
-  --fg-soft: #334155;
-  --mut: #64748b;
-  --card-bg: rgba(255, 255, 255, 0.9);
-  --card-hover: #ffffff;
-  --bd: rgba(148, 163, 184, 0.3);
-  --ac: #2563eb;
-  --ac-dark: #1d4ed8;
-  --ac-light: #eff6ff;
-  --in-bg: #ffffff;
-  --shadow-sm: 0 2px 6px rgba(0,0,0,0.05);
-  --purple-pill: #a855f7;
-  --purple-bg: rgba(168, 85, 247, 0.12);
-  --purple-text: #7e22ce;
-  --teal-pill: #0d9488;
-  --teal-bg: rgba(13, 148, 136, 0.12);
-  --teal-text: #0f766e;
-}
-
-* {
-  box-sizing: border-box;
-  font-family: 'Outfit', 'Noto Sans Thai', sans-serif;
-  transition: background-color .15s ease, border-color .15s ease, transform .12s ease, box-shadow .15s ease;
-}
-
-body {
-  margin: 0;
-  color: var(--fg);
-  background: var(--bg-gradient) fixed;
-  min-height: 100vh;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Header */
-.hd {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 20px 20px 12px;
-}
-
-.logo-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.logo {
-  font-weight: 900;
-  font-size: 2.2rem;
-  letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #f43f5e, #fb7185 40%, #fbbf24);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1.1;
-  text-transform: uppercase;
-}
-
-.sub {
-  font-size: 0.75rem;
-  letter-spacing: 2px;
-  color: var(--mut);
-  font-weight: 800;
-  text-transform: uppercase;
-  margin-top: 2px;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.date-pill {
-  background: var(--card-bg);
-  border: 1px solid var(--bd);
-  backdrop-filter: var(--glass);
-  padding: 6px 14px;
-  border-radius: 20px;
-  color: var(--hl);
-  font-size: 0.85rem;
-  font-weight: 800;
-  box-shadow: var(--shadow-sm);
-}
-
-.tbtn, .btn {
-  font-weight: 700;
-  border: 1px solid var(--bd);
-  background: var(--card-bg);
-  color: var(--fg);
-  padding: 8px 14px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 0.82rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  user-select: none;
-  box-shadow: var(--shadow-sm);
-}
-
-.btn.p {
-  background: linear-gradient(135deg, var(--ac), var(--ac-dark));
-  border: 0;
-  color: #ffffff;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
-}
-
-.btn.danger {
-  background: linear-gradient(135deg, var(--ac2), #be123c);
-  border: 0;
-  color: #ffffff;
-}
-
-.btn.sm {
-  padding: 4px 10px;
-  font-size: 0.75rem;
-  border-radius: 8px;
-}
-
-.btn.subtle {
-  background: transparent;
-  border-color: transparent;
-  box-shadow: none;
-  color: var(--mut);
-}
-
-.btn.subtle:hover {
-  background: var(--card-bg);
-  color: var(--fg);
-}
-
-.btn:hover, .tbtn:hover {
-  transform: translateY(-1px);
-  border-color: var(--ac);
-}
-
-/* Navigation */
-nav.np {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  background: var(--card-bg);
-  backdrop-filter: var(--glass);
-  border-bottom: 1px solid var(--bd);
-  box-shadow: var(--shadow-sm);
-}
-
-nav div.nav-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 6px 16px;
-  display: flex;
-  gap: 6px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-nav div.nav-inner::-webkit-scrollbar {
-  display: none;
-}
-
-.nb {
-  border: 1px solid transparent;
-  background: transparent;
-  color: var(--mut);
-  font-weight: 700;
-  padding: 9px 18px;
-  border-radius: 12px;
-  cursor: pointer;
-  white-space: nowrap;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.nb:hover {
-  color: var(--fg);
-  background: var(--ac-light);
-}
-
-.nb.on {
-  color: #ffffff;
-  background: linear-gradient(135deg, var(--ac), var(--ac-dark));
-  border-color: transparent;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
-}
-
-/* Main Container */
-main {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 20px 16px 80px;
-}
-
-.pg {
-  display: none;
-  animation: fadeIn 0.2s ease-in-out;
-}
-
-.pg.on {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Cards */
-.card {
-  background: var(--card-bg);
-  backdrop-filter: var(--glass);
-  border: 1px solid var(--bd);
-  border-radius: 18px;
-  padding: 20px;
-  margin-bottom: 18px;
-  box-shadow: var(--shadow-sm);
-}
-
-.card h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.card-subtitle {
-  font-size: 0.82rem;
-  color: var(--mut);
-  margin-top: 2px;
-}
-
-/* Multi Column Layout for Page 1 */
-.two-plan {
-  display: grid;
-  grid-template-columns: 2.2fr 1.1fr;
-  gap: 20px;
-  align-items: start;
-}
-
-@media (max-width: 1080px) {
-  .two-plan {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Filter Bar */
-.filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.filter-chip {
-  padding: 5px 12px;
-  border-radius: 20px;
-  border: 1px solid var(--bd);
-  background: var(--card-bg);
-  color: var(--fg-soft);
-  font-size: 0.78rem;
-  font-weight: 700;
-  cursor: pointer;
-  user-select: none;
-}
-
-.filter-chip:hover {
-  border-color: var(--ac);
-  color: var(--ac);
-}
-
-.filter-chip.on {
-  background: var(--ac);
-  color: #ffffff;
-  border-color: var(--ac);
-}
-
-/* Search Input */
-.search-wrapper {
-  position: relative;
-  margin-bottom: 12px;
-}
-
-.inp {
-  width: 100%;
-  padding: 12px 18px;
-  padding-right: 40px;
-  border-radius: 12px;
-  border: 1.5px solid var(--bd);
-  background: var(--in-bg);
-  color: var(--fg);
-  font-size: 0.95rem;
-  font-weight: 500;
-  outline: none;
-  box-shadow: var(--shadow-sm);
-}
-
-.inp:focus {
-  border-color: var(--ac);
-  box-shadow: 0 0 0 3px var(--ac-light);
-}
-
-.search-clear {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: var(--mut);
-  cursor: pointer;
-  font-size: 1.1rem;
-  padding: 2px;
-  display: none;
-}
-
-.search-clear.show {
-  display: block;
-}
-
-/* INTERACTIVE FAN PLAN GRAPHIC LAYOUT */
-.plan-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  align-items: start;
-}
-
-@media (max-width: 768px) {
-  .plan-container {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Directory List (Left Column) */
-.plan-directory {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 6px;
-}
-
-@media (max-width: 500px) {
-  .plan-directory {
-    grid-template-columns: 1fr;
-  }
-}
-
-.dir-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  border-radius: 20px;
-  border: 1.5px solid var(--purple-border);
-  background: var(--purple-bg);
-  color: var(--purple-text);
-  font-weight: 700;
-  font-size: 0.82rem;
-  cursor: pointer;
-  user-select: none;
-}
-
-.dir-item.teal {
-  border-color: var(--teal-border);
-  background: var(--teal-bg);
-  color: var(--teal-text);
-}
-
-.dir-item:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  filter: brightness(1.15);
-}
-
-.dir-item.selected-active {
-  background: var(--hl) !important;
-  color: #000000 !important;
-  border-color: #ffffff !important;
-  box-shadow: 0 0 16px rgba(245, 158, 11, 0.8);
-}
-
-.dir-num {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  color: #1e1008;
-  font-weight: 900;
-  font-size: 0.7rem;
-  display: grid;
-  place-items: center;
-  flex: none;
-}
-
-.dir-name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* MCC Hall Visual Floor Map (Right Column) */
-.hall-wrapper {
-  background: var(--hall-bg);
-  border: 4px solid var(--hall-bd);
-  border-radius: 20px;
-  padding: 14px;
-  color: var(--hall-fg);
-  box-shadow: var(--shadow-lg);
-  position: relative;
-}
-
-.hall-stage {
-  background: #000000;
-  color: #ffffff;
-  font-weight: 900;
-  font-size: 0.95rem;
-  letter-spacing: 2px;
-  text-align: center;
-  padding: 8px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.hall-layout-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.hall-aisle {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.hall-entrance-gap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  font-weight: 900;
-  padding: 6px 0;
-  color: #78350f;
-}
-
-.booth-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 4px 7px;
-  border-radius: 12px;
-  background: #000000;
-  color: #ffffff;
-  font-weight: 800;
-  font-size: 0.75rem;
-  cursor: pointer;
-  user-select: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-}
-
-.booth-pill.cgm {
-  border: 1px solid #2dd4bf;
-  color: #99f6e4;
-}
-
-.booth-pill:hover {
-  transform: scale(1.05);
-  background: var(--ac);
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.6);
-}
-
-.booth-pill.selected-active {
-  background: var(--hl) !important;
-  color: #000000 !important;
-  box-shadow: 0 0 16px rgba(245, 158, 11, 0.9);
-}
-
-.hall-center-island {
-  display: flex;
-  gap: 3px;
-  justify-content: center;
-}
-
-.hall-bottom-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  justify-content: center;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 2px dashed #c4a482;
-}
-
-.hall-bottom-row .booth-pill {
-  padding: 5px 6px;
-  border-radius: 50%;
-  width: 26px;
-  height: 26px;
-  justify-content: center;
-  font-size: 0.7rem;
-}
-
-/* Slots & Badges */
-.slot {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  margin-bottom: 8px;
-  border: 1px solid var(--bd);
-  border-radius: 12px;
-  font-size: 0.85rem;
-  background: var(--card-bg);
-}
-
-.slot:hover {
-  border-color: var(--ac);
-  background: var(--card-hover);
-}
-
-.act-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  border: 1px solid var(--bd);
-  background: var(--ac-light);
-  color: var(--ac);
-}
-
-.act-badge.appeal { background: rgba(99, 102, 241, 0.15); color: #818cf8; border-color: rgba(99, 102, 241, 0.3); }
-.act-badge.booth { background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.3); }
-.act-badge.hitouch { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border-color: rgba(245, 158, 11, 0.3); }
-.act-badge.hachi { background: rgba(168, 85, 247, 0.15); color: #c084fc; border-color: rgba(168, 85, 247, 0.3); }
-.act-badge.merch { background: rgba(244, 63, 94, 0.15); color: #fb7185; border-color: rgba(244, 63, 94, 0.3); }
-
-.group-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 800;
-}
-.group-tag.bnk { background: var(--purple-bg); color: var(--purple-text); border: 1px solid var(--purple-border); }
-.group-tag.cgm { background: var(--teal-bg); color: var(--teal-text); border: 1px solid var(--teal-border); }
-
-/* Overlap Conflict */
-.cf {
-  border: 1px solid var(--ac2);
-  border-radius: 14px;
-  padding: 14px;
-  margin-top: 10px;
-  background: var(--ac2-light);
-}
-
-.tag {
-  display: inline-block;
-  padding: 3px 8px;
-  border: 1px solid var(--bd);
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  margin: 2px 2px 0 0;
-  background: var(--card-bg);
-}
-
-/* Two Column Layout */
-.two {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: 2fr 1fr;
-}
-
-/* Modal Drawer */
-#modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(12px);
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-}
-
-#modal .card {
-  width: 100%;
-  max-width: 500px;
-  max-height: 88vh;
-  overflow-y: auto;
-  margin: 0;
-  position: relative;
-  box-shadow: var(--shadow-lg);
-  border-color: var(--ac);
-}
-
-.x {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  padding: 0;
-  display: grid;
-  place-items: center;
-  font-size: 1rem;
-}
-
-.empty {
-  text-align: center;
-  padding: 30px 16px;
-  color: var(--mut);
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.hid {
-  display: none !important;
-}
-
-/* Floating Mobile Cart Button */
-.floating-cart-btn {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 50;
-  background: linear-gradient(135deg, var(--ac), var(--ac-dark));
-  color: #fff;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 30px;
-  font-weight: 800;
-  font-size: 0.88rem;
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
-  cursor: pointer;
-  align-items: center;
-  gap: 8px;
-}
-
-.floating-cart-btn span {
-  background: #ffffff;
-  color: var(--ac-dark);
-  border-radius: 20px;
-  padding: 2px 8px;
-  font-size: 0.75rem;
-  font-weight: 900;
-}
-
-#toast {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  background: #0f172a;
-  color: #ffffff;
-  padding: 10px 20px;
-  border-radius: 30px;
-  font-weight: 700;
-  font-size: 0.85rem;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-  z-index: 200;
-  opacity: 0;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
-  pointer-events: none;
-}
-
-#toast.show {
-  transform: translateX(-50%) translateY(0);
-  opacity: 1;
-}
-
-@media(max-width: 800px) {
-  .two { grid-template-columns: 1fr; }
-  .hd { padding: 14px 16px 8px; }
-  .logo { font-size: 1.6rem; }
-  .floating-cart-btn.show { display: flex; }
-}
-
-@media print {
-  .np, .floating-cart-btn { display: none !important; }
-  body { background: #ffffff !important; color: #000000 !important; }
-}
+:root{--bg:#0b0906;--panel:#17130c;--panel2:#211b0f;--line:#3a2f17;--gold:#d6b25e;--gold-hi:#f1d98a;--green:#1f3b2a;--green-hi:#4f9a6a;--ink:#efe6d0;--mute:#a39a82;--red:#d4654d;--amber:#e0a030}
+*{box-sizing:border-box;font-family:'Noto Sans Thai',sans-serif}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--bg);color:var(--ink);overflow-x:hidden}
+body{background:radial-gradient(1200px 500px at 50% -10%,#2b220d 0%,transparent 70%),var(--bg);min-height:100vh}
+button{cursor:pointer;color:inherit;font:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:16px}
+header{padding:24px 16px 12px;text-align:center;border-bottom:1px solid var(--line)}
+.logo{font-family:'Michroma',sans-serif;font-size:clamp(1.3rem,5vw,2.2rem);color:var(--gold);letter-spacing:.08em;margin:0}
+.sub{color:var(--mute);font-size:.8rem;margin-top:6px}
+nav{position:sticky;top:0;z-index:20;background:rgba(11,9,6,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding:0 8px}
+nav button{background:none;border:0;border-bottom:3px solid transparent;padding:12px 14px;font-weight:600;color:var(--mute);white-space:nowrap}
+nav button.on{color:var(--gold-hi);border-color:var(--gold)}
+.search{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:12px 14px;outline:none;margin-bottom:12px}
+.search:focus{border-color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-bottom:14px}
+.grid.scroll{max-height:200px;overflow-y:auto}
+.chip{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 6px;text-align:center;font-size:.85rem}
+.chip.on{background:var(--gold);border-color:var(--gold-hi);color:#1a1405;font-weight:700}
+.bar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.stat{flex:1 1 180px;background:var(--green);border:1px solid var(--green-hi);border-radius:12px;padding:14px 16px}
+.stat small{color:#bcd9c6;display:block}
+.stat b{font-size:1.7rem;color:var(--gold-hi)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+.card h3{margin:0 0 10px;color:var(--gold-hi);font-size:1.1rem}
+.slot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;border-radius:10px;background:var(--panel2);margin-bottom:6px}
+.slot.zero{opacity:.4}
+.slot .t{font-size:.75rem;color:var(--mute)}
+.tag{display:inline-block;font-size:.68rem;padding:2px 8px;border-radius:99px;margin-right:6px;border:1px solid var(--line)}
+.tag.AP{background:#1f3b2a;color:#bcd9c6}.tag.HH{background:#4a3a10;color:var(--gold-hi)}.tag.HC{background:#2a2a3a;color:#c9c9ee}.tag.MC{background:#3a2420;color:#f0c0b0}
+.ctl{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.ctl button{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--bg);font-weight:700}
+.ctl .z{color:var(--red)}
+.btn{background:var(--gold);color:#1a1405;border:0;border-radius:99px;padding:12px 26px;font-weight:800}
+.btn.alt{background:var(--panel2);color:var(--ink);border:1px solid var(--line)}
+.center{text-align:center;padding:20px 0}
+.warn{border-left:4px solid var(--red);background:#2a1712}
+.good{border-left:4px solid var(--green-hi);background:#13241a}
+.note{border-left:4px solid var(--gold);background:var(--panel);padding:12px 14px;border-radius:10px;color:var(--mute);font-size:.85rem;margin-bottom:14px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-bottom:18px}
+table{border-collapse:collapse;width:100%;font-size:.78rem;min-width:520px}
+th,td{border:1px solid var(--line);padding:7px 8px;text-align:center;white-space:nowrap}
+th{background:var(--panel2);color:var(--gold-hi)}
+th.hh{background:#4a3a10}th.ap{background:var(--green)}
+td.ap{background:rgba(31,59,42,.55)}td.hh{background:rgba(74,58,16,.5)}
+td.me{outline:2px solid var(--gold-hi);outline-offset:-2px;font-weight:800;color:var(--gold-hi)}
+td.lane{background:var(--panel2);font-weight:700;color:var(--gold)}
+h2{color:var(--gold);font-size:1.05rem;margin:18px 0 10px}
+.row{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer}
+.row .n{width:28px;height:28px;border-radius:8px;background:var(--panel2);display:grid;place-items:center;font-size:.75rem;font-weight:800;color:var(--gold)}
+.row .n.top{background:var(--gold);color:#1a1405}
+.row .bar2{flex:1;height:6px;background:#2a2312;border-radius:9px;overflow:hidden}
+.row .bar2 i{display:block;height:100%;background:linear-gradient(90deg,var(--green-hi),var(--gold))}
+.detail{display:none;padding:0 14px 12px;font-size:.8rem;color:var(--mute)}
+.open .detail{display:block}
+.hero{text-align:center;border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:16px;background:var(--panel)}
+.hero b{font-family:'Michroma',sans-serif;font-size:2.6rem;color:var(--gold-hi);display:block}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:50;display:none;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
+#modal.show{display:flex}
+.mc{background:var(--panel);border:2px solid var(--gold);border-radius:20px;padding:26px;width:100%;max-width:480px;max-height:92vh;overflow-y:auto;text-align:center}
+.mc .big{font-family:'Michroma',sans-serif;font-size:2rem;color:var(--gold-hi)}
+.mc .list{text-align:left;margin:12px 0;font-size:.85rem}
+.mc .list div{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--line)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.two div{background:var(--panel2);border-radius:10px;padding:10px}
+.two b{font-size:1.3rem;color:var(--gold-hi);display:block}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.acts .btn{flex:1;padding:11px 12px}
+#toast{color:var(--green-hi);font-weight:700;font-size:.85rem;margin-top:8px}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
 </style>
 </head>
 <body>
-
-<div class="hd">
-  <div class="logo-group">
-    <div class="logo">FAN FESTIVAL 2026</div>
-    <div class="sub">BNK48 × CGM48 · SENBATSU GENERAL ELECTION</div>
-  </div>
-  <div class="header-right np">
-    <button class="tbtn" id="themeBtn" onclick="toggleTheme()">☀️ ธีมสว่าง</button>
-    <div class="date-pill">📍 3 – 4 OCT 2026 @ MCC HALL</div>
-  </div>
-</div>
-
-<nav class="np">
-  <div class="nav-inner">
-    <button class="nb on" onclick="showPage('plan',this)">🗺️ ผังบูธ Interactive</button>
-    <button class="nb" onclick="showPage('bod',this)">🤝 บด System</button>
-    <button class="nb" onclick="showPage('activities',this)">📋 รายละเอียดกิจกรรม</button>
-    <button class="nb" onclick="showPage('summary',this)">📊 สถิติรวม</button>
-    <button class="nb" onclick="showPage('schedule',this)">📅 ตารางงานส่วนตัว</button>
-  </div>
+<header>
+  <h1 class="logo">HEART TO HEART</h1>
+  <div class="sub">15 NOV 2026 · MCC Hall, The Mall Lifestore Bangkapi</div>
+</header>
+<nav>
+  <button class="on" data-p="calc">คำนวณบัตร</button>
+  <button data-p="bod">บด System</button>
+  <button data-p="sched">ตารางกิจกรรม</button>
+  <button data-p="stats">สถิติรวม</button>
 </nav>
 
-<main>
-  <!-- 1. INTERACTIVE FAN PLAN & DIRECT SCHEDULE BASKET ON FIRST PAGE -->
-  <section id="page-plan" class="pg on">
-    <div class="two-plan">
-      <!-- Left Main Area: Plan & Map -->
-      <div>
-        <div class="card" style="border-left:4px solid var(--ac)">
-          <h3>
-            <span>🗺️ INTERACTIVE FAN PLAN (ผังบูธแฟนคลับ MCC HALL)</span>
-            <span style="font-size:0.8rem;color:var(--hl);font-weight:700">💡 กดเมมเบอร์หรือเลขบูธเพื่อเลือกกิจกรรมใส่ตารางได้ทันที!</span>
-          </h3>
-          <div class="card-subtitle" style="display:flex;align-items:center;gap:12px;margin-top:6px;flex-wrap:wrap">
-            <span><b>สัญลักษณ์วง:</b></span>
-            <span class="group-tag bnk">🟣 BNK48 (สีม่วง 36 บูธ)</span>
-            <span class="group-tag cgm">🟢 CGM48 (สีเขียว 22 บูธ)</span>
-          </div>
-        </div>
-
-        <div class="filter-bar">
-          <span style="font-size:0.75rem;font-weight:800;color:var(--mut);margin-right:4px">ตัวกรอง:</span>
-          <span class="filter-chip on" data-filter="all" onclick="setGroupFilter('all', this)">ทั้งหมด (58)</span>
-          <span class="filter-chip" data-filter="bnk" onclick="setGroupFilter('bnk', this)">🟣 BNK48 (36)</span>
-          <span class="filter-chip" data-filter="cgm" onclick="setGroupFilter('cgm', this)">🟢 CGM48 (22)</span>
-          <span class="filter-chip" data-filter="b1-20" onclick="setGroupFilter('b1-20', this)">📍 บูธ 1-20</span>
-          <span class="filter-chip" data-filter="b21-40" onclick="setGroupFilter('b21-40', this)">📍 บูธ 21-40</span>
-          <span class="filter-chip" data-filter="b41-58" onclick="setGroupFilter('b41-58', this)">📍 บูธ 41-58</span>
-        </div>
-
-        <div class="search-wrapper">
-          <input class="inp" id="planSearchInput" placeholder="🔍 ค้นหาชื่อเมมเบอร์ หรือ เลขบูธ (เช่น Hoop, Paeyah, 39)..." oninput="renderPlanView()">
-          <button class="search-clear" id="searchClearPlan" onclick="document.getElementById('planSearchInput').value='';renderPlanView()">✕</button>
-        </div>
-
-        <div class="plan-container">
-          <!-- Directory -->
-          <div class="card" style="padding:14px">
-            <b style="display:block;font-size:0.88rem;margin-bottom:10px;color:var(--ac)">📋 รายชื่อเมมเบอร์ (1–58)</b>
-            <div id="planDirectoryList" class="plan-directory"></div>
-          </div>
-
-          <!-- Visual Map -->
-          <div class="hall-wrapper">
-            <div class="hall-stage">STAGE</div>
-            <div class="hall-layout-grid">
-              <div class="hall-aisle">
-                <div id="booths-1-5"></div>
-                <div class="hall-entrance-gap">⇄ ทางเข้า</div>
-                <div id="booths-6-12"></div>
-              </div>
-              <div class="hall-center-island">
-                <div class="hall-aisle" id="booths-13-21"></div>
-                <div class="hall-aisle" id="booths-22-30"></div>
-              </div>
-              <div class="hall-aisle" id="booths-31-48"></div>
-            </div>
-            <div class="hall-bottom-row" id="booths-49-58"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Column: DIRECT LIVE SCHEDULE BASKET ON FIRST PAGE -->
-      <div>
-        <div id="firstPageCartArea" class="card" style="position:sticky;top:70px">
-          <div id="printHeaderFirstPage" class="hid" style="text-align:center;font-weight:900;color:var(--hl);margin-bottom:12px">
-            MY FAN FESTIVAL 2026 SCHEDULE
-          </div>
-
-          <div style="display:flex;justify-content:space-between;align-items:center" class="np">
-            <b style="font-size:1.05rem;display:flex;align-items:center;gap:6px">🛒 ตารางงานของคุณ</b>
-            <button class="btn sm danger" onclick="clearCart()">ล้างตาราง</button>
-          </div>
-
-          <div id="firstPageCartItemList" style="max-height:52vh;overflow-y:auto;margin-top:10px;padding-right:4px"></div>
-
-          <div id="firstPageCartSummary" class="hid" style="margin-top:14px;border-top:1px dashed var(--bd);padding-top:12px">
-            <div class="stat" style="text-align:center;margin-bottom:12px;padding:10px 14px">
-              <span>กิจกรรมที่เลือก</span>
-              <b id="firstPageCartTotal" style="font-size:1.8rem;color:var(--ac)">0 รอบ</b>
-            </div>
-
-            <div class="row np" style="margin-bottom:0;display:flex;gap:6px">
-              <button class="btn p" style="flex:1" onclick="downloadCartImage('firstPageCartArea')">📷 บันทึกรูป</button>
-              <button class="btn" style="flex:1" onclick="copyScheduleLink()">🔗 แชร์ลิงก์</button>
-              <button class="btn" style="flex:1" onclick="printCart('printHeaderFirstPage')">🖨️ พิมพ์</button>
-            </div>
-          </div>
-        </div>
-      </div>
+<main class="wrap">
+  <section id="p-calc">
+    <input id="q1" class="search" placeholder="ค้นหาชื่อเมมเบอร์..." autocomplete="off">
+    <div id="chips" class="bar" hidden></div>
+    <div class="bar" id="totals" hidden>
+      <div class="stat"><small>ยอดเงินรวม</small><b id="tPrice">0 บาท</b></div>
+      <div class="stat"><small>ตั๋ว/Letter Set ที่ต้องใช้</small><b id="tTix">0 ใบ</b></div>
     </div>
+    <div id="g1" class="grid"></div>
+    <div id="res"></div>
+    <div id="klabWrap" class="center" hidden><button class="btn" id="openKlab">สรุปยอด (แกลบ MODE)</button></div>
   </section>
 
-  <!-- 2. บด System -->
-  <section id="page-bod" class="pg">
-    <div class="card" style="border-left:4px solid var(--ac2)">
-      <h3 style="color:var(--ac2)">🤝 บด System (Booth Matching Checker)</h3>
-      <div class="card-subtitle">
-        ระบบช่วยตรวจสอบคิวงานที่ <b>"ตรงกันและเวลาเดียวกัน"</b> ของเมมเบอร์ที่คุณสนใจ (ทั้ง BNK48 และ CGM48)
-      </div>
-    </div>
-
-    <div class="filter-bar">
-      <span class="filter-chip on" data-filter="all" onclick="setBodGroupFilter('all', this)">ทั้งหมด (58)</span>
-      <span class="filter-chip" data-filter="bnk" onclick="setBodGroupFilter('bnk', this)">🟣 BNK48</span>
-      <span class="filter-chip" data-filter="cgm" onclick="setBodGroupFilter('cgm', this)">🟢 CGM48</span>
-      <span class="filter-chip" data-filter="b1-20" onclick="setBodGroupFilter('b1-20', this)">📍 บูธ 1-20</span>
-      <span class="filter-chip" data-filter="b21-40" onclick="setBodGroupFilter('b21-40', this)">📍 บูธ 21-40</span>
-      <span class="filter-chip" data-filter="b41-58" onclick="setBodGroupFilter('b41-58', this)">📍 บูธ 41-58</span>
-    </div>
-
-    <div class="search-wrapper">
-      <input class="inp" id="bodSearchInput" placeholder="🔍 ค้นหาเมมเบอร์..." oninput="onSearchInput('bodMemberGrid','bodSearchInput','searchClearBod',1)">
-      <button class="search-clear" id="searchClearBod" onclick="clearSearch('bodMemberGrid','bodSearchInput','searchClearBod',1)">✕</button>
-    </div>
-
-    <div id="bodMemberGrid" class="plan-directory" style="max-height:220px;overflow-y:auto;padding-right:4px"></div>
-    
-    <div id="bodSelBar" class="card hid" style="margin-top:14px;padding:12px 16px"><span id="bodSelChips"></span></div>
-    <div id="bodResults" style="margin-top:14px"></div>
+  <section id="p-bod" hidden>
+    <div class="note">เช็กให้ 2 อย่าง: (1) เมมเบอร์ที่เลือกอยู่<b> บูธเดียวกันและรอบเวลาเดียวกัน </b>ไปรอบเดียวได้หลายคน (2) กิจกรรม<b> ชนเวลากัน </b>ระหว่างบูธ/รอบ — Round Table นับถึงเวลา Lane Close</div>
+    <input id="q2" class="search" placeholder="ค้นหาชื่อเมมเบอร์..." autocomplete="off">
+    <div id="g2" class="grid scroll"></div>
+    <div id="bodRes"></div>
   </section>
 
-  <!-- 3. รายละเอียดกิจกรรม -->
-  <section id="page-activities" class="pg">
-    <div id="actGrid" style="display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))"></div>
+  <section id="p-sched" hidden>
+    <div id="schedBox"></div>
   </section>
 
-  <!-- 4. สถิติรวม -->
-  <section id="page-summary" class="pg">
-    <div id="summaryContent"></div>
-  </section>
-
-  <!-- 5. ตารางงานส่วนตัว -->
-  <section id="page-schedule" class="pg">
-    <div class="two">
-      <div>
-        <div class="card" style="border-left:4px solid var(--ac)">
-          <h3 style="color:var(--ac)">📅 จัดตารางงานส่วนตัว</h3>
-          <div class="card-subtitle">
-            กดเลือกเมมเบอร์เพื่อดูตารางเวลาและกดใส่ตะกร้าตารางงานของคุณ
-          </div>
-        </div>
-
-        <div class="search-wrapper">
-          <input class="inp" id="schedSearchInput" placeholder="🔍 ค้นหาชื่อเมมเบอร์..." oninput="renderScheduleGrid()">
-        </div>
-
-        <div id="schedMemberGrid" class="plan-directory"></div>
-      </div>
-
-      <div>
-        <div id="cartArea" class="card" style="position:sticky;top:70px">
-          <div id="printHeader" class="hid" style="text-align:center;font-weight:900;color:var(--hl);margin-bottom:12px">
-            MY FAN FESTIVAL 2026 SCHEDULE
-          </div>
-
-          <div style="display:flex;justify-content:space-between;align-items:center" class="np">
-            <b style="font-size:1.05rem;display:flex;align-items:center;gap:6px">🛒 ตารางงานของคุณ</b>
-            <button class="btn sm danger" onclick="clearCart()">ล้างตาราง</button>
-          </div>
-
-          <div id="cartItemList" style="max-height:55vh;overflow-y:auto;margin-top:10px;padding-right:4px"></div>
-
-          <div id="cartSummary" class="hid" style="margin-top:14px;border-top:1px dashed var(--bd);padding-top:12px">
-            <div class="stat" style="text-align:center;margin-bottom:12px">
-              <span>กิจกรรมที่เลือก</span>
-              <b id="cartTotal" style="font-size:1.8rem;color:var(--ac)">0 รอบ</b>
-            </div>
-
-            <div class="row np" style="margin-bottom:0;display:flex;gap:6px">
-              <button class="btn p" style="flex:1" onclick="downloadCartImage('cartArea')">📷 บันทึกรูป</button>
-              <button class="btn" style="flex:1" onclick="copyScheduleLink()">🔗 แชร์ลิงก์</button>
-              <button class="btn" style="flex:1" onclick="printCart('printHeader')">🖨️ พิมพ์</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <section id="p-stats" hidden>
+    <div id="statBox"></div>
   </section>
 </main>
 
-<button class="floating-cart-btn" id="floatingCartBtn" onclick="scrollToCart()">
-  🛒 ตารางงานของคุณ <span id="floatCartCount">0</span>
-</button>
-
-<div id="toast"></div>
-
-<!-- Member Schedule Modal Drawer -->
-<div id="modal">
-  <div class="card">
-    <button class="btn x" onclick="closeModal()">✕</button>
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-      <div id="modalBoothPill" class="dir-num" style="width:36px;height:36px;font-size:1rem;background:var(--ac);color:#fff"></div>
-      <div>
-        <h3 id="modalName" style="margin:0;color:var(--ac)"></h3>
-        <span id="modalSubGroup" class="group-tag"></span>
-      </div>
-    </div>
-    <div id="modalList"></div>
+<div id="modal"><div class="mc" id="cap">
+  <div id="sharedBanner" class="note" hidden>ลิงก์แชร์ — กำลังดูผลสรุปของคนอื่น</div>
+  <div style="font-size:1.6rem;font-weight:800;color:var(--gold)">แกลบ MODE</div>
+  <div class="big" id="kTotal">0฿</div>
+  <div class="list" id="kList"></div>
+  <div class="two"><div><b id="kMama">0</b><small>มาม่า (ซอง)</small></div><div><b id="kTix">0</b><small>ตั๋วรวม (ใบ)</small></div></div>
+  <div id="kMsg" style="font-style:italic;color:var(--gold-hi);font-size:.85rem"></div>
+  <div class="acts" data-html2canvas-ignore>
+    <button class="btn" id="bSave">บันทึกรูป</button>
+    <button class="btn alt" id="bLink">คัดลอกลิงก์</button>
+    <button class="btn alt" id="bClose">ปิด</button>
   </div>
-</div>
+  <div id="toast"></div>
+</div></div>
 
 <script>
-/* DATASET & CONSTANTS */
-const ACT = [
-  { k: 'appeal', s: 'Appeal Speech (Main Stage)', n: 'กิจกรรมแสดงสปีชบนเวทีหลัก', icon: '🎤' },
-  { k: 'booth', s: 'Booth Visits', n: 'เมมเบอร์เยี่ยมชมบูธแฟนคลับ', icon: '🎪' },
-  { k: 'hitouch', s: 'Group Hi-Touch', n: 'ใช้บัตรซื้อจากเข็มกลัดในงาน', icon: '🤝' },
-  { k: 'hachi', s: 'Hachi Cha', n: 'กิจกรรมเต็ม 1 ชม. ไม่สลับกลุ่ม', icon: '🍵' },
-  { k: 'merch', s: 'Merchandise', n: 'ประจำบูธสินค้าเต็ม 1 ชม.', icon: '🛍️' }
-];
-
-const DAYS = ['3 Oct', '4 Oct'];
-
-const RAW = {
-'3 Oct':[
-['11:00','12:00','Praifa,Luksorn,Blythe,Rose|Mirin,Nana,Chifa,Wawa|Fame,Namphet,Lewlew,Satangpound,Lookked,Inkcha,Grape|Emma,Emmy,Tara,Punpon|Hoop,Saonoi,Shenae,Mail'],
-['12:00','13:00','Tara,Ploen,Mirin,Cartoon|Lookked,Shenae,Blythe,Marine||Jingjing,Mayji,Pancake,Rose|Satangpound,Nall,Lingling,Proud'],
-['13:00','14:00','Proud,Lookked,Mail,Shenae|Ploen,Tara,Niya,L|Yoghurt,Blythe,Nall,Arlee,Wawa,Chifa,Valentine|Praifa,Nisha,Hongyok,Neen|Nana,Luksorn,Prae,Khowjow'],
-['14:00','15:00','Marine,Emma,Wawa,Yoghurt|Cartoon,Luksorn,Fame,Mail||Galeya,Patt,Sindy,Prae,Ploen|Emmy,Niya,Khaimook,Jew,Jingjing'],
-['15:00','16:00','L,Chifa,Fame,Niya|Rose,Praifa,Emma,Proud|Lingling,Cartoon,Nammonn,Khaimook,Palmmy,Micha,Pancake,Mayji|Janry,Ginna,Luksorn,Praew|Mint,Yoghurt,Marine,Wawa']],
-'4 Oct':[
-['11:00','12:00','Palmmy,Nall,Punpon,Lewlew,Inkcha|Nisha,Hoop,Galeya,Grape,Ginna|Marine,Else,Jingjing,Tara,Mail,Niya,Praifa|Micha,Lingling,Mirin,Mint|Hongyok,Fame,Rose,Neen'],
-['12:00','13:00','Jew,Nana,Mint,Valentine,Else|Mayji,Lewlew,Nall,Monet,Neen||Khowjow,Wawa,Inkcha,Grape|Praifa,Micha,Janry,Nisha'],
-['13:00','14:00','Ginna,Jingjing,Neen,Hongyok|Micha,Pancake,Berry,Else|Jew,Shenae,Nana,Janry,Emma,Ploen,Kwan|Khaimook,Cartoon,Lookked,Proud|Valentine,Monet,Patt,Inkcha'],
-['14:00','15:00','Janry,Nammonn,Hoop,Emmy|Namphet,Mint,Punpon,Jingjing||Nall,Nana,L,Arlee,Palmmy|Lewlew,Ginna,Lookked,Kwan,Mayji'],
-['15:00','16:00','Lingling,Micha,Khaimook,Sindy|Satangpound,Palmmy,Prae,Nammonn|Neen,Punpon,Emmy,Patt,Monet,Nisha,Berry|Niya,Else,Jew,Fame|Tara,Chifa,Praew,Mirin'],
-['16:00','17:00','Satangpound,Khowjow,Praew,Berry|Valentine,Patt,Saonoi,Hongyok||Blythe,Monet,Namphet,Marine|Cartoon,Else,Punpon,Sindy'],
-['17:00','18:00','Namphet,Monet,Nisha,Mayji|Praew,Sindy,Arlee,Jew|Khowjow,Luksorn,Prae,Saonoi,L,Ginna,Proud,Galeya|Mail,Satangpound,Hoop,Kwan|Ploen,Emma,Pancake,Nammonn'],
-['18:00','19:00','Patt,Galeya,Kwan,Pancake|Khowjow,Emmy,Janry,Lingling||Lewlew,Valentine,Yoghurt,Saonoi|Grape,Arlee,Blythe,Berry'],
-['19:00','20:00','Grape,Prae,Saonoi,Arlee|Khaimook,Inkcha,Yoghurt,Kwan|Rose,Hongyok,Sindy,Praew,Hoop,Mirin,Mint|Chifa,Shenae,Nammonn,Berry|Namphet,Palmmy,Galeya,L']]
+/* ============ CONFIG (แก้ราคา/ค่าต่าง ๆ ที่นี่) ============ */
+const CONFIG = {
+  mamaPrice: 6, // บาทต่อซอง
+  booths: {
+    AP: { name: 'Appreciation Event', t: 0, price: 0 },     // ไม่ต้องใช้บัตร
+    HH: { name: 'Heart to Heart Event', t: 1, price: 250 }, // ต้องใช้ Letter Set (ราคาตัวอย่าง — แก้ได้)
+    HC: { name: 'Hachi Cha', t: 1, price: 250 },            // ราคาตัวอย่าง — แก้ได้
+    MC: { name: 'Merchandise', t: 1, price: 250 }           // ราคาตัวอย่าง — แก้ได้
+  }
 };
 
-const B = "Nall,Neen,Arlee,L,Grape,Satangpound,Lewlew,Punpon,Lingling,Patt,Micha,Mint,Mail,Else,Shenae,Nammonn,Pancake,Monet,Praew,Luksorn,Cartoon,Emma,Palmmy,Chifa,Lookked,Ginna,Jingjing,Khaimook,Marine,Janry,Berry,Galeya,Mayji,Praifa,Emmy,Blythe,Mirin,Wawa,Hoop,Sindy,Inkcha,Nisha,Jew,Tara,Nana,Namphet,Kwan,Hongyok,Saonoi,Rose,Niya,Khowjow,Proud,Yoghurt,Fame,Ploen,Prae,Valentine".split(',');
+/* ============ DATA: 15 NOV 2026 ============ */
+const HC = [
+  ["11:00-12:00","Praifa,Sindy,Valentine,Jew,Khowjow"],
+  ["12:30-13:30","Nisha,Kwan,Else,Niya,Galeya"],
+  ["14:00-15:00","Lingling,Neen,Nana,Shenae"],
+  ["15:30-16:30","Yoghurt,Marine,Blythe,Praew,Nall"],
+  ["17:00-18:00","Jingjing,Lookked,Lewlew,Tara,Fame,Satangpound"],
+  ["18:30-19:30","Mail,Grape,Berry"]
+];
+const MC = [
+  ["11:00-12:00","Emma,Mint,Chifa,L,Mirin"],
+  ["12:30-13:30","Patt,Inkcha,Micha,Monet,Emmy"],
+  ["14:00-15:00","Palmmy,Wawa,Cartoon,Arlee,Luksorn"],
+  ["15:30-16:30","Pancake,Rose,Hoop,Janry,Mayji"],
+  ["17:00-18:00","Hongyok,Namphet,Ginna,Ploen,Punpon,Prae,Khaimook"],
+  ["18:30-19:30","Nammonn,Saonoi,Proud"]
+];
+// [ช่วงเวลากิจกรรม, Lane Close]
+const ROUNDS = [
+  ["10:30-11:15","11:00"],["11:30-12:15","12:00"],["12:30-13:15","13:00"],["13:30-14:15","14:00"],["14:30-15:15","15:00"],
+  ["15:30-16:30","16:15"],["16:30-17:30","17:15"],["17:30-18:30","18:15"],["18:30-19:30","19:15"],["19:30-20:30","20:15"]
+];
+// Lane 1-12, Round 1-5 (Round 6-10 ใช้ชุดเดียวกัน ยกเว้น OVERRIDE ด้านล่าง)
+const LANES = [
+  "Berry,Arlee,Emma,,Yoghurt","Patt,Niya,Hoop,Khaimook,Hongyok","Else,Galeya,Praifa,Mint,Nammonn",
+  "Inkcha,Nisha,Sindy,Satangpound,Pancake","Lingling,Grape,Shenae,Tara,Blythe","Micha,Proud,Valentine,Mayji,Praew",
+  "Monet,Luksorn,Chifa,Lewlew,Janry","Palmmy,Mail,Jew,Nall,Rose","Neen,,Khowjow,Lookked,Namphet",
+  "Saonoi,Wawa,Nana,Marine,Ginna","Emmy,Fame,L,Prae,Punpon","Cartoon,Kwan,Mirin,Jingjing,Ploen"
+].map(s => s.split(','));
+const OVERRIDE = { "0-8": "Fame", "10-6": "" }; // "laneIndex-roundIndex"
 
-const CGM_SET = new Set("Satangpound,Lewlew,Punpon,Lingling,Else,Shenae,Emma,Chifa,Lookked,Ginna,Jingjing,Praifa,Nisha,Tara,Nana,Namphet,Kwan,Hongyok,Saonoi,Ploen,Prae,Valentine".split(','));
-const isCGM = m => CGM_SET.has(m);
-
-const DATA = {};
-ACT.forEach(a => DATA[a.k] = {});
-DAYS.forEach(d => {
-  ACT.forEach(a => DATA[a.k][d] = {});
-  RAW[d].forEach(([start, end, s]) => {
-    s.split('|').forEach((mList, idx) => {
-      if (mList) DATA[ACT[idx].k][d][start + '-' + end] = mList.split(',');
-    });
+/* ============ BUILD SLOTS ============ */
+const tm = s => { const [a, b] = s.split(':'); return +a * 60 + +b; };
+const SLOTS = [];
+const LANE_GRID = []; // [lane][round] = name
+function addGroup(type, rows) {
+  rows.forEach(([time, names], i) => {
+    const [a, b] = time.split('-');
+    SLOTS.push({ id: type + (i + 1), b: type, label: CONFIG.booths[type].name, time, s: tm(a), e: tm(b), m: names.split(',') });
   });
+}
+addGroup('HC', HC); addGroup('MC', MC);
+LANES.forEach((row, li) => {
+  LANE_GRID[li] = [];
+  for (let ri = 0; ri < 10; ri++) {
+    const k = li + '-' + ri;
+    const name = k in OVERRIDE ? OVERRIDE[k] : row[ri % 5];
+    LANE_GRID[li][ri] = name;
+    if (!name) continue;
+    const [time, close] = ROUNDS[ri];
+    const type = ri < 5 ? 'AP' : 'HH';
+    SLOTS.push({ id: `R${ri + 1}-L${li + 1}`, b: type, label: `Round ${ri + 1} · Lane ${li + 1}`, time, s: tm(time.split('-')[0]), e: tm(close), m: [name] });
+  }
 });
+const MEMBERS = [...new Set(SLOTS.flatMap(s => s.m))].sort((a, b) => a.localeCompare(b));
+const slotsOf = m => SLOTS.filter(s => s.m.includes(m)).sort((a, b) => a.s - b.s);
 
-/* STATE */
+/* ============ STATE ============ */
 const $ = id => document.getElementById(id);
-const ALL = B.slice();
-const bn = m => B.indexOf(m) + 1;
-let selected = new Set();
-let planGroupFilter = 'all';
-let bodGroupFilter = 'all';
-let cart = new Set();
-let activeMember = '';
+let sel = new Set(), cnt = {};
+const key = (sid, m) => sid + '|' + m;
+const getc = k => (k in cnt ? cnt[k] : 1);
+const names = { HC: 'Hachi Cha', MC: 'Merch', AP: 'Appreciation', HH: 'Heart to Heart' };
 
-function acts(m, days = DAYS) {
-  const r = [];
-  ACT.forEach(a => days.forEach(d => {
-    Object.entries(DATA[a.k][d]).forEach(([t, arr]) => {
-      if (arr.includes(m)) r.push({ a, d, t });
-    });
-  }));
-  return r.sort((x, y) => DAYS.indexOf(x.d) - DAYS.indexOf(y.d) || x.t.localeCompare(y.t));
+function items() {
+  const out = [];
+  [...sel].sort().forEach(m => slotsOf(m).forEach(s => out.push({ m, s, k: key(s.id, m), c: getc(key(s.id, m)) })));
+  return out;
+}
+function totals() {
+  let price = 0, tix = 0;
+  items().forEach(i => { const b = CONFIG.booths[i.s.b]; price += i.c * b.price; tix += i.c * b.t; });
+  return { price, tix };
 }
 
-const byDay = list => list.reduce((o, x) => ((o[x.d] = o[x.d] || []).push(x), o), {});
-
-function showToast(msg) {
-  const t = $('toast');
-  t.innerHTML = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2400);
-}
-
-function showPage(p, btn) {
-  document.querySelectorAll('.pg').forEach(e => e.classList.remove('on'));
-  document.querySelectorAll('.nb').forEach(e => e.classList.remove('on'));
-  $('page-' + p).classList.add('on');
-  if (btn) btn.classList.add('on');
-
-  if (p === 'plan') { renderPlanView(); }
-  if (p === 'bod') { chips('bodMemberGrid', 'bodSearchInput', 1); renderBod(); }
-  if (p === 'activities') { renderActivities(); }
-  if (p === 'summary') { renderSummary(); }
-  if (p === 'schedule') { renderScheduleGrid(); renderCart(); }
-}
-
-function setGroupFilter(filter, el) {
-  planGroupFilter = filter;
-  el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('on'));
-  el.classList.add('on');
-  renderPlanView();
-}
-
-function setBodGroupFilter(filter, el) {
-  bodGroupFilter = filter;
-  el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('on'));
-  el.classList.add('on');
-  chips('bodMemberGrid', 'bodSearchInput', 1);
-}
-
-function filterMembers(m, q, filterType) {
-  const num = bn(m);
-  const matchesSearch = !q || m.toLowerCase().includes(q) || num.toString() === q;
-  if (!matchesSearch) return false;
-
-  if (filterType === 'bnk') return !isCGM(m);
-  if (filterType === 'cgm') return isCGM(m);
-  if (filterType === 'b1-20') return num >= 1 && num <= 20;
-  if (filterType === 'b21-40') return num >= 21 && num <= 40;
-  if (filterType === 'b41-58') return num >= 41 && num <= 58;
-  return true;
-}
-
-/* INTERACTIVE PLAN VIEW */
-function renderPlanView() {
-  const q = ($('planSearchInput') ? $('planSearchInput').value : '').toLowerCase().trim();
-
-  // 1. Render Directory
-  const dirHtml = B.map((m, i) => {
-    if (!filterMembers(m, q, planGroupFilter)) return '';
-    const num = i + 1;
-    const cgm = isCGM(m);
-
-    return `<div class="dir-item ${cgm ? 'teal' : ''}" onclick="openModal('${m}')">
-      <div class="dir-num">${num}</div>
-      <span class="dir-name">${m}</span>
-    </div>`;
-  }).join('');
-  $('planDirectoryList').innerHTML = dirHtml || `<div class="empty" style="grid-column:1/-1">ไม่พบเมมเบอร์</div>`;
-
-  // 2. Render Hall Layout Booth Pills
-  const makeBoothPill = (num, arrow = '') => {
-    const m = B[num - 1];
-    if (!m) return '';
-    const cgm = isCGM(m);
-    const visible = filterMembers(m, q, planGroupFilter);
-    
-    return `<div class="booth-pill ${cgm ? 'cgm' : ''} ${visible ? '' : 'hid'}" 
-      onclick="openModal('${m}')">
-      <span>${arrow} ${num}</span>
-    </div>`;
-  };
-
-  $('booths-1-5').innerHTML = [1,2,3,4,5].map(n => makeBoothPill(n, '▶')).join('');
-  $('booths-6-12').innerHTML = [6,7,8,9,10,11,12].map(n => makeBoothPill(n, '▶')).join('');
-  $('booths-13-21').innerHTML = [13,14,15,16,17,18,19,20,21].map(n => makeBoothPill(n, '◀')).join('');
-  $('booths-22-30').innerHTML = [22,23,24,25,26,27,28,29,30].map(n => makeBoothPill(n, '▶')).join('');
-  $('booths-31-48').innerHTML = [31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48].map(n => makeBoothPill(n, '◀')).join('');
-  $('booths-49-58').innerHTML = [49,50,51,52,53,54,55,56,57,58].map(n => makeBoothPill(n, '▲')).join('');
-}
-
-/* MODAL DRAWER */
-function openModal(m) {
-  activeMember = m;
-  const bNo = bn(m);
-  const cgm = isCGM(m);
-
-  $('modalBoothPill').textContent = '#' + bNo;
-  $('modalName').textContent = m;
-  $('modalSubGroup').textContent = cgm ? '🟢 CGM48 (สีเขียว)' : '🟣 BNK48 (สีม่วง)';
-  $('modalSubGroup').className = `group-tag ${cgm ? 'cgm' : 'bnk'}`;
-
-  const g = byDay(acts(m));
-
-  $('modalList').innerHTML = DAYS.map(d => g[d] ? 
-    `<div style="font-size:0.82rem;font-weight:800;color:var(--ac);margin:14px 0 6px">📅 วัน${d}</div>` + 
-    g[d].map(x => {
-      const id = [m, x.a.k, x.d, x.t].join('|');
-      const on = cart.has(id);
-      return `<div class="slot" style="border-left:3px solid ${on ? 'var(--ok)' : 'var(--ac)'}">
-        <div>
-          <span class="act-badge ${x.a.k}">${x.a.icon} ${x.a.s}</span><br>
-          <small style="font-weight:700">⏰ เวลา ${x.t} น.</small>
-        </div>
-        <button class="btn sm ${on ? '' : 'p'}" onclick="toggleCart('${id}')">
-          ${on ? '✓ ในตาราง' : '+ เลือก'}
-        </button>
-      </div>`;
-    }).join('') : '<div class="empty">ไม่มีกิจกรรมในวันนี้</div>'
-  ).join('');
-
-  $('modal').style.display = 'flex';
-}
-
-function closeModal() {
-  $('modal').style.display = 'none';
-}
-
-/* BOD MATCHING */
-function onSearchInput(gid, iid, cid, small) {
-  const val = $(iid).value;
-  $(cid).classList.toggle('show', val.length > 0);
-  chips(gid, iid, small);
-}
-
-function clearSearch(gid, iid, cid, small) {
-  $(iid).value = '';
-  $(cid).classList.remove('show');
-  chips(gid, iid, small);
-}
-
-function chips(gid, iid, small) {
-  const q = $(iid).value.toLowerCase().trim();
-  const filtered = ALL.filter(m => filterMembers(m, q, bodGroupFilter));
-
-  $(gid).innerHTML = filtered.map(m =>
-    `<div class="dir-item ${isCGM(m) ? 'teal' : ''} ${selected.has(m) ? 'selected-active' : ''}" onclick="toggleMember('${m}')">
-      <div class="dir-num">${bn(m)}</div>
-      <span class="dir-name">${m}</span>
-    </div>`
-  ).join('') || `<div class="empty" style="grid-column:1/-1">ไม่พบเมมเบอร์</div>`;
-}
-
-function toggleMember(m) {
-  selected.has(m) ? selected.delete(m) : selected.add(m);
+/* ============ UI ============ */
+function toggle(m) { sel.has(m) ? sel.delete(m) : sel.add(m); refresh(); }
+function adj(k, d) {
+  if (d === 'z') cnt[k] = getc(k) === 0 ? 1 : 0;
+  else cnt[k] = Math.max(0, Math.min(9, getc(k) + d));
   refresh();
 }
-
-function refresh() {
-  chips('bodMemberGrid', 'bodSearchInput', 1);
-  const list = [...selected].sort();
-  const html = list.map(m => `<span class="tag" style="border-color:var(--ac);color:var(--fg)"><b>${m}</b> (${isCGM(m) ? 'CGM' : 'BNK'} · #${bn(m)}) <i style="cursor:pointer" onclick="toggleMember('${m}')">×</i></span>`).join(' ');
-  
-  $('bodSelChips').innerHTML = html;
-  $('bodSelBar').classList.toggle('hid', !list.length);
-  renderBod();
+function drawGrid(gid, qid) {
+  const q = $(qid).value.trim().toLowerCase();
+  $(gid).innerHTML = MEMBERS.filter(m => m.toLowerCase().includes(q))
+    .map(m => `<button class="chip ${sel.has(m) ? 'on' : ''}" onclick="toggle('${m}')">${m}</button>`).join('');
 }
-
+function slotRow(i) {
+  const b = CONFIG.booths[i.s.b];
+  return `<div class="slot ${i.c === 0 ? 'zero' : ''}">
+    <div><span class="tag ${i.s.b}">${names[i.s.b]}</span><b>${i.s.label}</b><div class="t">${i.s.time} · ${b.price ? b.price + ' บาท' : 'ไม่ใช้บัตร'}</div></div>
+    <div class="ctl"><button onclick="adj('${i.k}',-1)">−</button><b>${i.c}</b><button onclick="adj('${i.k}',1)">+</button><button class="z" onclick="adj('${i.k}','z')" title="ข้ามรอบนี้">✕</button></div></div>`;
+}
+function renderCalc() {
+  const all = items(), t = totals(), has = sel.size > 0;
+  $('chips').hidden = !has; $('totals').hidden = !has; $('klabWrap').hidden = !has;
+  $('chips').innerHTML = [...sel].sort().map(m => `<button class="chip on" onclick="toggle('${m}')">${m} ✕</button>`).join('') +
+    `<button class="btn alt" onclick="sel.clear();refresh()">ล้างทั้งหมด</button>`;
+  $('tPrice').textContent = t.price.toLocaleString() + ' บาท';
+  $('tTix').textContent = t.tix + ' ใบ';
+  $('res').innerHTML = [...sel].sort().map(m =>
+    `<div class="card"><h3>${m}</h3>${all.filter(i => i.m === m).map(slotRow).join('')}</div>`).join('');
+}
 function renderBod() {
-  const el = $('bodResults');
-  if (!selected.size) {
-    el.innerHTML = '<div class="card empty">กรุณาเลือกเมมเบอร์ด้านบน เพื่อตรวจสอบคิวงานที่ตรงกันและเวลาเดียวกัน</div>';
-    return;
-  }
-
-  let html = '';
-  DAYS.forEach(d => {
-    const slots = {};
-    selected.forEach(m => acts(m, [d]).forEach(x => {
-      const k = x.t + ' @ ' + x.a.s;
-      (slots[k] = slots[k] || []).push(m);
-    }));
-
-    const cf = Object.entries(slots).filter(([, ms]) => ms.length > 1).sort();
-    if (!cf.length) return;
-
-    html += `<div class="card">
-      <h3 style="color:var(--ac2)">📅 วันที่ ${d}</h3>
-      <div style="font-size:0.8rem;color:var(--mut);margin-top:2px">พบกิจกรรมเดียวกันและเวลาตรงกัน ดังนี้:</div>`;
-
-    cf.forEach(([k, ms]) => {
-      const [t, a] = k.split(' @ ');
-      const actObj = ACT.find(x => x.s === a);
-      html += `<div class="cf">
-        <div style="display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:0.85rem;margin-bottom:6px">
-          <span>⏰ เวลา ${t} น.</span>
-          <span class="act-badge ${actObj ? actObj.k : ''}">${actObj ? actObj.icon : ''} ${a}</span>
-        </div>
-        <div>
-          ${ms.sort().map(n => `<span class="tag" style="border-color:var(--ac);color:var(--fg)"><b>${n}</b> (${isCGM(n) ? 'CGM' : 'BNK'} · #${bn(n)})</span>`).join('')}
-        </div>
-      </div>`;
-    });
-
-    html += '</div>';
+  const act = items().filter(i => i.c > 0);
+  if (!sel.size) { $('bodRes').innerHTML = '<div class="note">เลือกเมมเบอร์ด้านบนเพื่อเริ่มตรวจสอบ</div>'; return; }
+  let h = '';
+  // (1) บูธ+เวลาเดียวกัน
+  const shared = SLOTS.filter(s => (s.b === 'HC' || s.b === 'MC') && s.m.filter(x => sel.has(x)).length > 1);
+  shared.forEach(s => {
+    const who = s.m.filter(x => sel.has(x));
+    h += `<div class="card good"><b>ไปรอบเดียวได้: ${who.join(' + ')}</b><div class="t" style="color:var(--mute)">${s.label} · ${s.time}</div></div>`;
   });
-
-  el.innerHTML = html || `<div class="card empty" style="color:var(--ok);font-weight:700">
-    ✓ ไม่พบเมมเบอร์ที่คุณเลือกที่มีกิจกรรมและเวลาตรงกัน (ไม่มีคิวชนกัน)
-  </div>`;
-}
-
-function renderActivities() {
-  $('actGrid').innerHTML = ACT.map(a => {
-    const rows = DAYS.map(d => {
-      const s = Object.entries(DATA[a.k][d]);
-      const totalP = s.reduce((n, [, x]) => n + x.length, 0);
-      return `<div class="slot">
-        <span style="font-weight:700">📅 ${d}</span>
-        <span class="act-badge ${a.k}">${s.length} รอบ · รวม ${totalP} คิว</span>
-      </div>`;
-    }).join('');
-
-    return `<div class="card" style="border-top:3px solid var(--ac);margin:0">
-      <h3><span>${a.icon} ${a.s}</span></h3>
-      <p style="font-size:0.8rem;color:var(--mut);margin:4px 0 10px">${a.n}</p>
-      ${rows}
-    </div>`;
-  }).join('');
-}
-
-function renderSummary() {
-  const st = ALL.map(m => ({ m, l: acts(m) })).sort((a, b) => b.l.length - a.l.length);
-  const max = st[0].l.length || 1;
-  const total = st.reduce((n, x) => n + x.l.length, 0);
-
-  let html = `<div class="card" style="text-align:center;margin-bottom:16px">
-    <span style="font-size:0.8rem;color:var(--mut);font-weight:700">จำนวนคิวกิจกรรมทั้งหมดในงาน</span>
-    <b style="display:block;font-size:2.8rem;color:var(--ac);margin:2px 0">${total}</b>
-    <span style="font-size:0.85rem;color:var(--mut)">เมมเบอร์เข้าร่วมทั้งหมด ${st.length} คน (BNK48 36 คน · CGM48 22 คน)</span>
-  </div>`;
-
-  st.forEach((x, i) => {
-    const rankClass = i === 0 ? 'top1' : (i === 1 ? 'top2' : (i === 2 ? 'top3' : ''));
-    const rankBadge = i === 0 ? '👑' : (i === 1 ? '🥈' : (i === 2 ? '🥉' : i + 1));
-    const g = byDay(x.l);
-    const cgm = isCGM(x.m);
-
-    const det = DAYS.map(d => g[d] ? `<div style="font-size:0.8rem;font-weight:800;color:var(--ac);margin:10px 0 4px">📅 วัน${d}</div>` + g[d].map(y =>
-      `<div class="slot">
-        <span>⏰ ${y.t}</span>
-        <span class="act-badge ${y.a.k}">${y.a.icon} ${y.a.s}</span>
-      </div>`
-    ).join('') : '').join('');
-
-    html += `<div class="card" style="padding:14px 18px;margin-bottom:10px" onclick="this.classList.toggle('open')">
-      <div style="display:flex;align-items:center;gap:12px;cursor:pointer">
-        <div class="dir-num" style="width:30px;height:30px;font-size:0.8rem">${rankBadge}</div>
-        <div style="flex:1">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <b>${x.m} <span class="group-tag ${cgm ? 'cgm' : 'bnk'}">${cgm ? 'CGM48' : 'BNK48'}</span> <small style="color:var(--mut)">📍 บูธ #${bn(x.m)}</small></b>
-            <b style="color:var(--ac2);font-size:0.88rem">${x.l.length} คิว <span style="font-size:0.75rem;color:var(--mut)">▼</span></b>
-          </div>
-          <div style="height:8px;border-radius:8px;background:var(--bd);overflow:hidden;margin-top:4px">
-            <i style="display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--ac2));width:${(x.l.length / max) * 100}%"></i>
-          </div>
-        </div>
-      </div>
-      <div class="det">${det}</div>
-    </div>`;
-  });
-
-  $('summaryContent').innerHTML = html;
-}
-
-function renderScheduleGrid() {
-  const q = $('schedSearchInput').value.toLowerCase().trim();
-  $('schedMemberGrid').innerHTML = ALL.filter(m => m.toLowerCase().includes(q)).map(m =>
-    `<div class="dir-item ${isCGM(m) ? 'teal' : ''}" onclick="openModal('${m}')">
-      <div class="dir-num">${bn(m)}</div>
-      <span class="dir-name">${m}</span>
-    </div>`
-  ).join('');
-}
-
-function toggleCart(id) {
-  cart.has(id) ? cart.delete(id) : cart.add(id);
-  renderCart();
-  openModal(activeMember);
-}
-
-function removeFromCart(id) {
-  cart.delete(id);
-  renderCart();
-  if ($('modal').style.display === 'flex') openModal(activeMember);
-}
-
-function clearCart() {
-  if (!cart.size) return;
-  cart.clear();
-  renderCart();
-  if ($('modal').style.display === 'flex') openModal(activeMember);
-  showToast('ล้างตารางงานเรียบร้อยแล้ว');
-}
-
-/* RENDER CART ON BOTH FIRST PAGE & SCHEDULE PAGE SIMULTANEOUSLY */
-function renderCart() {
-  const elPage1 = $('firstPageCartItemList');
-  const elSched = $('cartItemList');
-  
-  $('firstPageCartSummary').classList.toggle('hid', !cart.size);
-  $('cartSummary').classList.toggle('hid', !cart.size);
-  $('floatCartCount').textContent = cart.size;
-  $('floatingCartBtn').classList.toggle('show', cart.size > 0);
-
-  if (!cart.size) {
-    const emptyHtml = '<div class="empty" style="padding:20px">ยังไม่มีกิจกรรมในตาราง<br><small>กดเลือกเมมเบอร์หรือตำแหน่งบูธด้านซ้ายเพื่อเลือกกิจกรรมใส่ตาราง</small></div>';
-    elPage1.innerHTML = emptyHtml;
-    elSched.innerHTML = emptyHtml;
-    return;
-  }
-
-  const items = [...cart].map(id => {
-    const [m, k, d, t] = id.split('|');
-    return { id, m, a: ACT.find(x => x.k === k), d, t };
-  });
-
-  const g = byDay(items);
-  const cartHtml = DAYS.map(d => g[d] ? `<div style="font-size:0.8rem;font-weight:800;color:var(--ac);margin:10px 0 4px">📅 วัน${d}</div>` + g[d].sort((x, y) => x.t.localeCompare(y.t)).map(x =>
-    `<div class="slot" style="border-left:3px solid var(--ac)">
-      <div>
-        <span class="act-badge ${x.a.k}">${x.a.icon} ${x.a.s}</span><br>
-        <b style="font-size:0.88rem">${x.m}</b> <span class="group-tag ${isCGM(x.m) ? 'cgm' : 'bnk'}">${isCGM(x.m) ? 'CGM' : 'BNK'}</span> <small>📍 บูธ #${bn(x.m)} · ⏰ ${x.t} น.</small>
-      </div>
-      <button class="btn sm np danger" onclick="removeFromCart('${x.id}')">✕</button>
-    </div>`
-  ).join('') : '').join('');
-
-  elPage1.innerHTML = cartHtml;
-  elSched.innerHTML = cartHtml;
-
-  $('firstPageCartTotal').textContent = cart.size + ' รอบ';
-  $('cartTotal').textContent = cart.size + ' รอบ';
-}
-
-function scrollToCart() {
-  const target = document.getElementById('firstPageCartArea');
-  if (target) target.scrollIntoView({ behavior: 'smooth' });
-}
-
-async function downloadCartImage(targetId = 'firstPageCartArea') {
-  if (!cart.size) return;
-  const area = $(targetId) || $('firstPageCartArea') || $('cartArea');
-  const printHeader = area.querySelector('.hid') || $('printHeaderFirstPage') || $('printHeader');
-  
-  if (printHeader) printHeader.classList.remove('hid');
-  const list = area.querySelector('#firstPageCartItemList') || area.querySelector('#cartItemList');
-  const mh = list ? list.style.maxHeight : '';
-  if (list) list.style.maxHeight = 'none';
-
-  try {
-    const c = await html2canvas(area, {
-      scale: 2,
-      backgroundColor: document.body.classList.contains('light-theme') ? '#f1f5f9' : '#0f172a',
-      ignoreElements: e => e.classList && e.classList.contains('np')
-    });
-    const a = document.createElement('a');
-    a.download = 'my-fanfestival-2026-schedule.png';
-    a.href = c.toDataURL('image/png');
-    a.click();
-    showToast('ดาวน์โหลดรูปภาพตารางงานสำเร็จ');
-  } catch (e) {
-    showToast('ไม่สามารถสร้างรูปภาพได้');
-  } finally {
-    if (printHeader) printHeader.classList.add('hid');
-    if (list) list.style.maxHeight = mh;
-  }
-}
-
-function printCart(headerId = 'printHeaderFirstPage') {
-  const header = $(headerId) || $('printHeaderFirstPage') || $('printHeader');
-  if (header) header.classList.remove('hid');
-  window.print();
-  if (header) header.classList.add('hid');
-}
-
-function copyScheduleLink() {
-  const p = new URLSearchParams();
-  p.set('timetable', JSON.stringify([...cart]));
-  p.set('share', '3');
-  const url = location.origin + location.pathname + '?' + p.toString();
-  
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(() => showToast('คัดลอกลิงก์ตารางงานเรียบร้อยแล้ว')).catch(() => prompt('คัดลอกลิงก์นี้:', url));
-  } else {
-    prompt('คัดลอกลิงก์นี้:', url);
-  }
-}
-
-function loadStateFromURL() {
-  try {
-    const p = new URLSearchParams(location.search);
-    const t = p.get('timetable');
-    if (t) {
-      const a = JSON.parse(t);
-      if (Array.isArray(a)) cart = new Set(a);
+  // (2) ชนเวลา
+  const seen = new Set(); let conflicts = 0;
+  act.forEach(a => act.forEach(b => {
+    if (a.s.id >= b.s.id || a.s.id === b.s.id) return;
+    if (a.s.s < b.s.e && b.s.s < a.s.e) {
+      const id = a.k + '~' + b.k; if (seen.has(id)) return; seen.add(id); conflicts++;
+      h += `<div class="card warn"><b>ชนเวลา</b><div style="margin-top:6px">${a.m} — ${a.s.label} (${a.s.time}) <span class="tag ${a.s.b}">${names[a.s.b]}</span></div>
+      <div>${b.m} — ${b.s.label} (${b.s.time}) <span class="tag ${b.s.b}">${names[b.s.b]}</span></div></div>`;
     }
-  } catch (e) {
-    console.warn(e);
-  }
+  }));
+  if (!conflicts) h = '<div class="card good"><b>ไม่พบกิจกรรมที่ชนเวลากัน</b></div>' + h;
+  $('bodRes').innerHTML = h;
+}
+function renderSched() {
+  const mine = sel;
+  const td = (n, cls) => `<td class="${cls} ${mine.has(n) ? 'me' : ''}">${n}</td>`;
+  const hcmc = (rows, title) => `<h2>${title}</h2><div class="tbl"><table><tr><th>เวลา</th><th>เมมเบอร์</th></tr>` +
+    rows.map(([t, n]) => `<tr><td class="lane">${t}</td><td>${n.split(',').map(x => `<span class="${mine.has(x) ? 'me' : ''}" style="${mine.has(x) ? 'color:var(--gold-hi);font-weight:800' : ''}">${x}</span>`).join(' / ')}</td></tr>`).join('') + '</table></div>';
+  let rt = '<h2>Round Table</h2><div class="note">Round 1–5 = Appreciation (ไม่ต้องใช้บัตร) · Round 6–10 = Heart to Heart (ต้องใช้ Letter Set) · Senbatsu Round 20:45–21:15 (Rank 1–12) · บริหารการใช้บัตรด้วยตัวเอง</div><div class="tbl"><table><tr><th></th>' +
+    ROUNDS.map((r, i) => `<th class="${i < 5 ? 'ap' : 'hh'}">R${i + 1}<br>${r[0]}<br>close ${r[1]}</th>`).join('') + '</tr>' +
+    LANE_GRID.map((row, li) => `<tr><td class="lane">Lane ${li + 1}</td>${row.map((n, ri) => td(n || '—', ri < 5 ? 'ap' : 'hh')).join('')}</tr>`).join('') + '</table></div>';
+  $('schedBox').innerHTML = hcmc(HC, 'Hachi Cha') + hcmc(MC, 'Merchandise') + rt +
+    '<div class="note">ทุกรอบกิจกรรม Hachi Cha / Merchandise จะสลับฝั่งเมมเบอร์ทุก 30 นาที · ตารางอาจเปลี่ยนแปลงโดยไม่แจ้งล่วงหน้า</div>';
+}
+function renderStats() {
+  const rows = MEMBERS.map(m => ({ m, s: slotsOf(m) })).sort((a, b) => b.s.length - a.s.length || a.m.localeCompare(b.m));
+  const max = rows[0].s.length;
+  $('statBox').innerHTML = `<div class="hero"><b>${MEMBERS.length}</b>เมมเบอร์ทั้งหมดในงาน · ${SLOTS.length} ช่วงกิจกรรม</div>` +
+    rows.map((r, i) => `<div class="card" style="padding:0" onclick="this.classList.toggle('open')">
+      <div class="row"><div class="n ${i < 3 ? 'top' : ''}">${i + 1}</div><b style="min-width:92px">${r.m}</b>
+      <div class="bar2"><i style="width:${r.s.length / max * 100}%"></i></div><span>${r.s.length}</span></div>
+      <div class="detail">${r.s.map(s => `<div>${s.time} · ${names[s.b]} · ${s.label}</div>`).join('')}</div></div>`).join('');
+}
+function refresh() {
+  drawGrid('g1', 'q1'); drawGrid('g2', 'q2');
+  renderCalc(); renderBod(); renderSched();
 }
 
-function applyTheme(isLight) {
-  document.body.classList.toggle('light-theme', isLight);
-  $('themeBtn').textContent = isLight ? '🌙 ธีมเข้ม' : '☀️ ธีมสว่าง';
-}
+/* ============ NAV ============ */
+document.querySelectorAll('nav button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('nav button').forEach(x => x.classList.toggle('on', x === b));
+  ['calc', 'bod', 'sched', 'stats'].forEach(p => $('p-' + p).hidden = p !== b.dataset.p);
+  if (b.dataset.p === 'sched') renderSched();
+});
+$('q1').oninput = () => drawGrid('g1', 'q1');
+$('q2').oninput = () => drawGrid('g2', 'q2');
 
-function toggleTheme() {
-  const isLight = !document.body.classList.contains('light-theme');
-  applyTheme(isLight);
-  try { localStorage.setItem('theme', isLight ? 'light' : 'dark'); } catch (e) {}
+/* ============ KLAB MODE ============ */
+function toast(t) { $('toast').textContent = t; setTimeout(() => $('toast').textContent = '', 2200); }
+function openKlab(shared) {
+  const act = items().filter(i => i.c > 0), t = totals();
+  $('kTotal').textContent = t.price.toLocaleString() + '฿';
+  $('kList').innerHTML = act.map(i => `<div><span>${i.m} · ${i.s.label}</span><span>${i.c}x</span></div>`).join('') || '<div>ไม่มีรายการ</div>';
+  $('kMama').textContent = Math.floor(t.price / CONFIG.mamaPrice).toLocaleString();
+  $('kTix').textContent = t.tix;
+  $('kMsg').textContent = t.price === 0 ? 'รอบนี้ฟรี สบายกระเป๋า' : t.price < 2000 ? 'ยังพอไหว กินมาม่าได้อีกหลายซอง' : t.price < 6000 ? 'เริ่มหนักแล้ว เตรียมมาม่าไว้เลย' : 'แกลบ MODE เต็มรูปแบบ ขอให้เดินทางปลอดภัย';
+  $('sharedBanner').hidden = !shared;
+  $('modal').classList.add('show');
 }
-
-(function() {
-  let isLight = false;
-  try { isLight = localStorage.getItem('theme') === 'light'; } catch (e) {}
-  applyTheme(isLight);
-  renderPlanView();
-  renderActivities();
-  loadStateFromURL();
-  renderCart();
-})();
-</script>
-</body>
-</html>
+$('openKlab').onclick = () => openKlab(false);
+$('bClose').onclick = () => $('modal').classList.remove('show');
+$('bSave').onclick = async () => {
+  if (typeof html2canvas === 'undefined') return toast('โหลดตัวสร้างรูปไม่สำเร็จ ลองแคปหน้าจอแทน');
+  try {
+    const c = await html2canvas($('cap'), { backgroundColor: '#17130c', scale: 2 });
+    const a = document.createElement('a'); a.download = 'klab-mode.png'; a.href = c.toDataURL('image/png'); a.click();
+    toast('บันทึกรูปแล้ว');
+  } catch (e) { toast('บันทึกรูปไม่สำเร็จ'); }
+};
+$('bLink').onclick = async () => {
+  const c = {}; Object.keys(cnt).forEach(k => { if (cnt[k] !== 1) c[k] = cnt[k]; });
+  const code = btoa(unescape(encodeURIComponent(JSON.stringify({ s: [...sel], c }))));
+  const url = location.href.split('#')[0] + '#s=' + code;
+  try { await navigator.clipboard.writeText(url); toast('คัดลอกลิงก์แล้ว'); }
+  catch (e) { prompt('คัดลอกลิงก์นี้', url); }
+};
+function loadShared() {
+  const m = location.hash.match(/^#s=(.+)$/); if (!m) return;
+  try {
+    const d = JSON.p
